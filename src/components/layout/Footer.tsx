@@ -32,8 +32,8 @@ export function Footer() {
               </div>
             </div>
             <p className="mt-5 max-w-md text-sm leading-relaxed text-cream/70">
-              Distribuimos mercancía femenina a todo el país. Paga seguro con Mercado Pago o recibe
-              tu pedido a contraentrega donde estés.
+              Belleza y bienestar con envíos a toda Colombia desde la Sábana Occidental. Paga
+              con Mercado Pago (1 producto) o recibe tu pedido a contraentrega.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <a
@@ -102,18 +102,21 @@ export function Footer() {
                   <Mail className="size-3.5" /> {SITE.email}
                 </a>
               </li>
+              <li className="inline-flex items-center gap-2">
+                <MessageCircle className="size-3.5" /> WhatsApp {SITE.phoneDisplay}
+              </li>
               <li className="inline-flex items-start gap-2">
-                <MapPin className="mt-0.5 size-3.5 shrink-0" /> Envíos a todo Colombia
+                <MapPin className="mt-0.5 size-3.5 shrink-0" /> {SITE.region} · Envíos a todo Colombia
               </li>
               <li className="text-cream/55">Contraentrega disponible</li>
-              <li className="text-cream/55">Cambios por talla en 7 días</li>
+              <li className="text-cream/55">Cambios en 7 días</li>
             </ul>
           </div>
         </div>
 
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 text-xs text-cream/50 sm:flex-row">
           <p>© {year} Lun & Lou. Todos los derechos reservados.</p>
-          <p>Pagos procesados por Mercado Pago · Hecho con ♥ en Colombia</p>
+          <p>Pagos: Mercado Pago o contraentrega · Hecho con ♥ en Colombia</p>
         </div>
       </div>
     </footer>

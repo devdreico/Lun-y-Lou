@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { ChevronRight, Heart, Package, RotateCcw, ShieldCheck, Star, Truck } from 'lucide-react'
-import { lazy, Suspense, useState } from 'react'
+import { useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import { ProductActions } from '../components/product/ProductActions'
 import { ProductCard } from '../components/product/ProductCard'
@@ -9,16 +9,11 @@ import { getProductBySlug, products } from '../data/products'
 import { formatCOP } from '../lib/format'
 import { CATEGORIES_LABEL, WHATSAPP_URL } from '../lib/constants'
 
-const ProductPanels3D = lazy(() =>
-  import('../components/three/ProductPanels3D').then((m) => ({ default: m.ProductPanels3D })),
-)
-
 export function ProductDetailPage() {
   const { slug } = useParams<{ slug: string }>()
   const product = slug ? getProductBySlug(slug) : undefined
   const [activeImg, setActiveImg] = useState(0)
   const [wishlist, setWishlist] = useState(false)
-  const [view3d, setView3d] = useState(true)
 
   if (!product) return <Navigate to="/productos" replace />
 
@@ -53,27 +48,7 @@ export function ProductDetailPage() {
           className="space-y-4"
         >
           <div className="glass grain relative overflow-hidden rounded-[2rem] p-3">
-            <div className="mb-3 flex items-center justify-between px-1">
-              <div className="flex gap-2">
-                <button
-                  type="button"
-                  onClick={() => setView3d(false)}
-                  className={`rounded-full px-3 py-1.5 text-xs font-semibold transition ${
-                    !view3d ? 'bg-rose text-white shadow-rose' : 'bg-white/60 text-ink/60'
-                  }`}
-                >
-                  Fotos
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setView3d(true)}
-                  className={`rounded-full px-3 py-1.5 text-xs font-semibold transition ${
-                    view3d ? 'bg-rose text-white shadow-rose' : 'bg-white/60 text-ink/60'
-                  }`}
-                >
-                  Vista 3D
-                </button>
-              </div>
+            <div className="mb-3 flex items-center justify-end px-1">
               <button
                 type="button"
                 onClick={() => setWishlist((v) => !v)}
@@ -87,47 +62,33 @@ export function ProductDetailPage() {
             </div>
 
             <div className="relative aspect-[4/5] overflow-hidden rounded-[1.5rem] bg-gradient-to-br from-cream-dark to-white">
-              {view3d ? (
-                <Suspense
-                  fallback={
-                    <div className="grid h-full w-full place-items-center text-sm text-ink/50">
-                      Cargando escena 3D…
-                    </div>
-                  }
-                >
-                  <ProductPanels3D product={product} />
-                </Suspense>
-              ) : (
-                <motion.img
-                  key={activeImg}
-                  initial={{ opacity: 0, scale: 1.04 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.45 }}
-                  src={product.images[activeImg]?.src}
-                  alt={product.images[activeImg]?.alt ?? product.name}
-                  className="h-full w-full object-cover"
-                />
-              )}
+              <motion.img
+                key={activeImg}
+                initial={{ opacity: 0, scale: 1.04 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.45 }}
+                src={product.images[activeImg]?.src}
+                alt={product.images[activeImg]?.alt ?? product.name}
+                className="h-full w-full object-cover"
+              />
             </div>
 
-            {!view3d && (
-              <div className="mt-3 flex gap-2 overflow-x-auto hide-scrollbar px-1 pb-1">
-                {product.images.map((img, i) => (
-                  <button
-                    key={img.src}
-                    type="button"
-                    onClick={() => setActiveImg(i)}
-                    className={`size-16 shrink-0 overflow-hidden rounded-xl transition-all duration-300 ${
-                      activeImg === i
-                        ? 'ring-2 ring-rose ring-offset-2 ring-offset-cream scale-105'
-                        : 'opacity-70 hover:opacity-100 hover:scale-105'
-                    }`}
-                  >
-                    <img src={img.src} alt="" className="h-full w-full object-cover" />
-                  </button>
-                ))}
-              </div>
-            )}
+            <div className="mt-3 flex gap-2 overflow-x-auto hide-scrollbar px-1 pb-1">
+              {product.images.map((img, i) => (
+                <button
+                  key={img.src}
+                  type="button"
+                  onClick={() => setActiveImg(i)}
+                  className={`size-16 shrink-0 overflow-hidden rounded-xl transition-all duration-300 ${
+                    activeImg === i
+                      ? 'ring-2 ring-rose ring-offset-2 ring-offset-cream scale-105'
+                      : 'opacity-70 hover:opacity-100 hover:scale-105'
+                  }`}
+                >
+                  <img src={img.src} alt="" className="h-full w-full object-cover" />
+                </button>
+              ))}
+            </div>
           </div>
 
           <div className="grid grid-cols-3 gap-3">
@@ -210,8 +171,8 @@ export function ProductDetailPage() {
           <div className="flex items-start gap-3 text-xs text-ink/50">
             <Package className="mt-0.5 size-4 shrink-0 text-rose" />
             <p>
-              Despacho en 24–72 horas hábiles según ciudad. Incluye empaque regalo opcional al
-              confirmar el pedido.
+              Despacho en 24–72 horas hábiles según ciudad. Envíos a toda Colombia desde la
+              Sábana Occidental.
             </p>
           </div>
         </motion.div>
@@ -220,7 +181,7 @@ export function ProductDetailPage() {
       <section className="mt-24">
         <SectionHeading
           eyebrow="También te puede gustar"
-          title="Segue explorando"
+          title="Sigue explorando"
         />
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {relatedList.map((p, i) => (

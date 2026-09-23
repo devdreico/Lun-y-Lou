@@ -9,6 +9,7 @@ export function CartPage() {
   const { items, updateQuantity, removeItem, clearCart } = useCart()
   const total = selectTotal(items)
   const count = selectCount(items)
+  const multi = items.length > 1 || count > 1
 
   return (
     <div className="mx-auto min-h-[70vh] max-w-5xl px-4 pb-24 pt-32 sm:px-6">
@@ -22,8 +23,9 @@ export function CartPage() {
         </p>
         <h1 className="mt-2 font-display text-4xl font-semibold md:text-5xl">Carrito</h1>
         <p className="mt-2 text-ink/55">
-          {count} artículo{count === 1 ? '' : 's'} · Paga por producto con Mercado Pago o
-          finaliza todo a contraentrega
+          {multi
+            ? `${count} productos · Pedidos con varios productos solo a contraentrega`
+            : `${count} producto · Puedes pagar con Mercado Pago o pedir a contraentrega`}
         </p>
       </motion.header>
 
@@ -39,7 +41,8 @@ export function CartPage() {
           <div>
             <p className="font-display text-2xl font-semibold">Tu carrito está vacío</p>
             <p className="mt-2 max-w-sm text-ink/55">
-              Agrega tus favoritas y decídete por Mercado Pago o contraentrega.
+              Agrega un producto y paga con Mercado Pago, o arma tu carrito y pídelo a
+              contraentrega.
             </p>
           </div>
           <LinkButton to="/productos" size="lg">
@@ -122,7 +125,7 @@ export function CartPage() {
                           <span className="font-semibold">
                             {formatCOP(item.price * item.quantity)}
                           </span>
-                          {item.mpPaymentUrl ? (
+                          {!multi && item.mpPaymentUrl ? (
                             <a
                               href={item.mpPaymentUrl}
                               target="_blank"
@@ -131,9 +134,7 @@ export function CartPage() {
                             >
                               Pagar MP <ExternalLink className="size-3" />
                             </a>
-                          ) : (
-                            <span className="text-[10px] text-ink/40">MP pendiente</span>
-                          )}
+                          ) : null}
                         </div>
                       </div>
                     </div>
@@ -180,11 +181,12 @@ export function CartPage() {
 
             <div className="mt-6 grid gap-2">
               <LinkButton to="/checkout" size="lg" className="w-full">
-                Finalizar pedido contraentrega
+                Finalizar pedido a contraentrega
               </LinkButton>
               <p className="text-center text-[11px] leading-relaxed text-cream/50">
-                Para pagar con Mercado Pago usa el botón de cada línea de producto (link único
-                por artículo).
+                {multi
+                  ? 'Los pedidos con varios productos se piden a contraentrega. Para pagar con Mercado Pago, compra un producto a la vez desde su ficha.'
+                  : 'Con 1 producto puedes pagar con Mercado Pago desde la ficha o continuar a contraentrega.'}
               </p>
             </div>
           </motion.aside>

@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { ExternalLink, ShieldCheck, Truck } from 'lucide-react'
+import { ExternalLink, ShieldCheck, Truck, Banknote } from 'lucide-react'
 import { formatCOP } from '../../lib/format'
 import type { Product } from '../../types'
 import { useCart } from '../../store/cart'
@@ -13,6 +14,7 @@ interface Props {
 
 export function ProductActions({ product }: Props) {
   const addItem = useCart((s) => s.addItem)
+  const navigate = useNavigate()
   const [size, setSize] = useState(
     product.sizes[Math.min(1, product.sizes.length - 1)] ?? product.sizes[0],
   )
@@ -33,6 +35,12 @@ export function ProductActions({ product }: Props) {
   const handleAdd = () => {
     addItem(product, { size, color, quantity: qty })
     toast({ title: 'Agregado al carrito', message: `${product.name} · ${size}` })
+  }
+
+  /** Individual a contraentrega: agrega y va al checkout. */
+  const handleContraentrega = () => {
+    addItem(product, { size, color, quantity: qty })
+    navigate('/checkout')
   }
 
   return (
@@ -113,10 +121,6 @@ export function ProductActions({ product }: Props) {
       </div>
 
       <div className="grid gap-3">
-        <Button size="lg" onClick={handleAdd} className="w-full">
-          Agregar al carrito · {formatCOP(product.price * qty)}
-        </Button>
-
         {hasMpLink ? (
           <a
             href={mpHref}
@@ -124,20 +128,27 @@ export function ProductActions({ product }: Props) {
             rel="noreferrer"
             className="btn-dark w-full"
           >
-            <ShieldCheck className="size-4" /> Pagar ahora con Mercado Pago
+            <ShieldCheck className="size-4" /> Pagar con Mercado Pago · {formatCOP(product.price * qty)}
             <ExternalLink className="size-3.5 opacity-70" />
           </a>
-        ) : (
-          <div className="rounded-2xl border border-dashed border-ink/15 bg-white/40 px-4 py-3 text-center text-xs leading-relaxed text-ink/55">
-            Link de Mercado Pago pendiente de configurar en{' '}
-            <code className="rounded bg-ink/8 px-1.5 py-0.5">products.ts → mpPaymentUrl</code>
-            . Mientras tanto, puedes pedir a contraentrega desde el carrito.
-          </div>
-        )}
+        ) : null}
+
+        <Button size="lg" onClick={handleContraentrega} className="w-full">
+          <Banknote className="size-4" /> Pedir a contraentrega · {formatCOP(product.price * qty)}
+        </Button>
+
+        <Button variant="ghost" onClick={handleAdd} className="w-full">
+          Agregar al carrito
+        </Button>
+
+        <p className="text-center text-[11px] leading-relaxed text-ink/50">
+          {hasMpLink
+            ? 'MP = pago inmediato (1 producto). Contraentrega = pagas en efectivo al recibir. Carrito con varios productos: solo contraentrega.'
+            : 'Contraentrega: pagas en efectivo al recibir. Envíos a toda Colombia.'}
+        </p>
 
         <p className="flex items-center justify-center gap-2 text-xs text-ink/50">
-          <Truck className="size-3.5 text-forest" /> Envíos a toda Colombia · Contraentrega
-          disponible
+          <Truck className="size-3.5 text-forest" /> Envíos a toda Colombia · Sábana Occidental
         </p>
       </div>
     </div>

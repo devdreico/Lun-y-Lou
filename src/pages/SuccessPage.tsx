@@ -51,7 +51,7 @@ export function SuccessPage() {
       >
         {state.name ? `Gracias, ${state.name.split(' ')[0]}. ` : 'Gracias. '}
         Te contactaremos pronto para coordinar el despacho a contraentrega
-        {state.city ? ` hacia ${state.city}` : ''}.
+        {state.city ? ` hacia ${state.city}` : ''} en toda Colombia.
       </motion.p>
 
       {state.demo && (

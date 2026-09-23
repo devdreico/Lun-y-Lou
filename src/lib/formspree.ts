@@ -8,6 +8,11 @@ export function isFormspreeConfigured(): boolean {
   return Boolean(id && id !== DEMO_ID)
 }
 
+/**
+ * Pedido a contraentrega → texto plano indexado a Formspree.
+ * - individual: 1 línea de producto (origen ficha o carrito con 1 ítem)
+ * - carrito: 2+ productos → solo contraentrega
+ */
 export function buildOrderPayload(
   items: CartItem[],
   customer: CheckoutFormData,
@@ -22,11 +27,18 @@ export function buildOrderPayload(
     .join('\n')
 
   const total = items.reduce((sum, i) => sum + i.price * i.quantity, 0)
+  const count = items.reduce((n, i) => n + i.quantity, 0)
+  const isMulti = items.length > 1 || count > 1
+  const origen = isMulti ? 'Carrito (varios productos)' : 'Ficha de producto (individual)'
 
   return {
     _subject: `Nuevo pedido contraentrega — ${customer.fullName}`,
     _language: 'es',
-    tipo_pedido: 'Contraentrega (pago al recibir)',
+    tipo_pedido: isMulti
+      ? 'Contraentrega — carrito (varios productos)'
+      : 'Contraentrega — individual (1 producto)',
+    metodo_pago: 'Contraentrega (efectivo al recibir)',
+    origen,
     nombre: customer.fullName,
     telefono: customer.phone,
     email: customer.email,
@@ -36,8 +48,12 @@ export function buildOrderPayload(
     notas: customer.notes || '—',
     productos: lines,
     total: formatCOP(total),
-    cantidad_productos: String(items.reduce((n, i) => n + i.quantity, 0)),
+    cantidad_productos: String(count),
     fecha: new Date().toLocaleString('es-CO', { timeZone: 'America/Bogota' }),
+    nota_pago:
+      items.length === 1
+        ? 'Producto individual: también puede pagarse con Mercado Pago desde la ficha.'
+        : 'Carrito con varios productos: solo contraentrega (MP individual por producto en su ficha).',
   }
 }
 

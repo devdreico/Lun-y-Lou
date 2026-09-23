@@ -83,7 +83,8 @@ export function CheckoutPage() {
           Finaliza tu pedido
         </h1>
         <p className="mx-auto mt-3 max-w-lg text-ink/60">
-          Pagas en efectivo al recibir. Te confirmamos por WhatsApp el despacho a tu ciudad.
+          Pagas en efectivo al recibir. Te confirmamos por WhatsApp el despacho a tu ciudad en
+          toda Colombia.
         </p>
       </motion.header>
 
@@ -138,7 +139,7 @@ export function CheckoutPage() {
               <span className="grid size-8 place-items-center rounded-full bg-forest text-xs font-bold text-cream">
                 2
               </span>
-              <h2 className="font-display text-xl font-semibold">Entrega en Colombia</h2>
+              <h2 className="font-display text-xl font-semibold">Entrega en toda Colombia</h2>
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">
@@ -221,15 +222,17 @@ export function CheckoutPage() {
               <p className="flex items-start gap-2">
                 <Banknote className="mt-0.5 size-4 shrink-0 text-forest" />
                 <span>
-                  Al confirmar enviamos tu pedido a nuestro equipo (vía Formspree). Coordinamos
-                  el despacho y pagas en <strong>efectivo</strong> cuando recibas el paquete.
+                  Al confirmar enviamos tu pedido en <strong>texto plano</strong> a nuestro
+                  equipo (Formspree). Coordinamos el despacho y pagas en{' '}
+                  <strong>efectivo</strong> cuando recibas el paquete.
                 </span>
               </p>
               <p className="mt-2 flex items-start gap-2 text-ink/55">
                 <ShieldCheck className="mt-0.5 size-4 shrink-0 text-rose" />
                 <span>
-                  ¿Prefieres tarjeta o Nequi? Cada producto tiene su link único de{' '}
-                  <strong>Mercado Pago</strong> en la ficha o en el carrito.
+                  ¿Prefieres tarjeta o Nequi? En la ficha de cada producto puedes pagar con{' '}
+                  <strong>Mercado Pago</strong> (solo compras de 1 producto). Varios
+                  productos en carrito: solo contraentrega.
                 </span>
               </p>
             </div>

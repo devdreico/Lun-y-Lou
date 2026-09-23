@@ -2,9 +2,12 @@ export const SITE = {
   name: 'Lun & Lou',
   tagline: 'Belleza y bienestar con alma',
   description:
-    'Tienda e-commerce de productos de belleza y bienestar femenino con envíos a toda Colombia. Paga con Mercado Pago o pide a contraentrega.',
-  whatsapp: (import.meta.env.VITE_WHATSAPP as string) || '573001234567',
-  email: 'hola@lunylou.com',
+    'Tienda de belleza y bienestar con envíos a toda Colombia. Paga con Mercado Pago (producto individual) o pide a contraentrega.',
+  whatsapp: (import.meta.env.VITE_WHATSAPP as string) || '573144572008',
+  phoneDisplay: '314 457 2008',
+  email: 'inbox@lunylou.com',
+  region: 'Sábana Occidental',
+  regionFull: 'Sábana Occidental, Colombia',
   instagram: 'https://instagram.com/lunylou',
   tiktok: 'https://tiktok.com/@lunylou',
 } as const

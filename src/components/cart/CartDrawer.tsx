@@ -10,6 +10,9 @@ export function CartDrawer() {
   const { items, isOpen, setOpen, updateQuantity, removeItem, clearCart } = useCart()
   const count = selectCount(items)
   const total = selectTotal(items)
+  const multi = items.length > 1 || count > 1
+  const singleMp =
+    !multi && items.length === 1 && Boolean(items[0]?.mpPaymentUrl)
 
   return (
     <AnimatePresence>
@@ -142,13 +145,17 @@ export function CartDrawer() {
                     })}
                   </AnimatePresence>
 
-                  {items.some((i) => i.mpPaymentUrl) && (
+                  {multi ? (
                     <div className="rounded-2xl border border-dashed border-rose/30 bg-rose/5 p-3 text-xs text-ink/65">
-                      ¿Prefieres pagar ahora? Usa el botón{' '}
-                      <strong>Mercado Pago</strong> en cada producto de la ficha o en el carrito
-                      completo con contraentrega al finalizar.
+                      Varios productos: este pedido se finaliza <strong>solo a contraentrega</strong>.
+                      Para pagar con Mercado Pago, compra un producto a la vez desde su ficha.
                     </div>
-                  )}
+                  ) : singleMp ? (
+                    <div className="rounded-2xl border border-dashed border-rose/30 bg-rose/5 p-3 text-xs text-ink/65">
+                      1 producto: puedes pagar ya con <strong>Mercado Pago</strong> o pedir a
+                      contraentrega.
+                    </div>
+                  ) : null}
                 </div>
 
                 <footer className="space-y-3 border-t border-ink/8 px-5 py-4">
@@ -159,7 +166,7 @@ export function CartDrawer() {
                     </span>
                   </div>
                   <p className="text-xs text-ink/45">
-                    Envío se coordina al confirmar. Contraentrega disponible en todo Colombia.
+                    Envío se coordina al confirmar. Contraentrega en toda Colombia.
                   </p>
 
                   <div className="grid gap-2">
@@ -172,14 +179,14 @@ export function CartDrawer() {
                       Pedir a contraentrega
                     </LinkButton>
 
-                    {items.length === 1 && items[0].mpPaymentUrl && (
+                    {singleMp && (
                       <a
                         href={items[0].mpPaymentUrl}
                         target="_blank"
                         rel="noreferrer"
                         className="btn-dark w-full"
                       >
-                        Pagar este producto con Mercado Pago
+                        Pagar con Mercado Pago
                       </a>
                     )}
 

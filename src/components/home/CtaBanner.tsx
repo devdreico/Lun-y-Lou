@@ -25,8 +25,9 @@ export function CtaBanner() {
             <span className="italic text-gradient-rose">a toda Colombia</span>
           </h2>
           <p className="mt-4 text-sm leading-relaxed text-cream/70 md:text-base">
-            Compra con Mercado Pago o pide a contraentrega. En Lun & Lou cada prenda tiene su
-            link único de pago y su pedido listo para ti.
+            Compra un producto con Mercado Pago o pide a contraentrega. En Lun & Lou cada
+            producto tiene su link de pago y los pedidos de varios artículos se coordinan a
+            contraentrega.
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <LinkButton to="/productos" size="lg" className="group">
