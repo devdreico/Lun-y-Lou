@@ -123,28 +123,31 @@ function CameraRig() {
 
 export function HeroScene() {
   return (
-    <div className="absolute inset-0" aria-hidden>
+    <div className="absolute inset-0 h-full w-full" aria-hidden>
       <Canvas
         dpr={[1, 1.75]}
-        camera={{ position: [0, 0, 5.5], fov: 42 }}
+        camera={{ position: [0, 0, 5.2], fov: 45 }}
         gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
         frameloop="always"
+        style={{ width: '100%', height: '100%' }}
       >
         <Suspense fallback={null}>
-          <ambientLight intensity={0.55} />
-          <directionalLight position={[4, 6, 4]} intensity={1.1} color="#FFF5EE" />
-          <pointLight position={[-4, -2, 2]} intensity={1.4} color="#C93F5F" />
-          <pointLight position={[3, -3, -2]} intensity={0.9} color="#D4A574" />
+          <ambientLight intensity={0.65} />
+          <directionalLight position={[4, 6, 4]} intensity={1.15} color="#FFF5EE" />
+          <pointLight position={[-4, -2, 2]} intensity={1.5} color="#C93F5F" />
+          <pointLight position={[3, -3, -2]} intensity={1} color="#D4A574" />
+          <pointLight position={[0, 3, 2]} intensity={0.6} color="#F6F1E8" />
 
-          <GlassOrb position={[-2.2, 0.9, 0]} scale={0.85} color="#C93F5F" distort={0.4} />
-          <GlassOrb position={[2.4, -0.6, -0.4]} scale={1.1} color="#2E4A3D" distort={0.3} />
-          <GlassOrb position={[1.6, 1.4, -1]} scale={0.55} color="#D4A574" distort={0.45} />
-          <GlassOrb position={[-1.4, -1.3, 0.4]} scale={0.45} color="#E86A86" distort={0.5} />
+          <GlassOrb position={[-1.9, 0.7, 0]} scale={0.72} color="#C93F5F" distort={0.4} />
+          <GlassOrb position={[2.1, -0.5, -0.3]} scale={0.95} color="#2E4A3D" distort={0.3} />
+          <GlassOrb position={[1.4, 1.2, -0.8]} scale={0.48} color="#D4A574" distort={0.45} />
+          <GlassOrb position={[-1.2, -1.1, 0.3]} scale={0.4} color="#E86A86" distort={0.5} />
+          <GlassOrb position={[0.1, 0.15, -1.2]} scale={0.55} color="#F8D5DE" distort={0.35} />
 
           <Ribbon />
           <Diamonds />
 
-          <Sparkles count={80} scale={[6, 4, 3]} size={2.5} speed={0.35} color="#F0D9BC" opacity={0.7} />
+          <Sparkles count={110} scale={[7, 5, 3]} size={2.8} speed={0.4} color="#F0D9BC" opacity={0.85} />
           <CameraRig />
         </Suspense>
       </Canvas>

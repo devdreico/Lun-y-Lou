@@ -80,43 +80,25 @@ export function Hero() {
         </div>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.92 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-          className="relative mx-auto w-full max-w-lg lg:max-w-none"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.1, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+          className="relative mx-auto h-[340px] w-full max-w-lg sm:h-[420px] lg:h-[560px] lg:max-w-none"
+          aria-hidden
         >
-          <div className="glass grain relative aspect-square overflow-hidden rounded-[2.5rem] p-2 shadow-glass-lg">
-            <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent" />
-            <div className="relative h-full w-full overflow-hidden rounded-[2rem] bg-gradient-to-br from-rose/20 via-cream to-forest/15">
-              <Suspense
-                fallback={
-                  <div className="grid h-full w-full place-items-center">
-                    <div className="size-16 animate-spin rounded-full border-[3px] border-rose/30 border-t-rose" />
-                  </div>
-                }
-              >
-                <HeroScene />
-              </Suspense>
+          <div className="pointer-events-none absolute left-1/2 top-1/2 h-[90%] w-[90%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(201,63,95,0.22),transparent_65%)] blur-2xl" />
+          <div className="pointer-events-none absolute right-0 bottom-0 h-[70%] w-[70%] rounded-full bg-[radial-gradient(circle,rgba(46,74,61,0.18),transparent_65%)] blur-2xl" />
 
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 flex items-end justify-between p-5">
-                <div className="glass rounded-2xl px-4 py-3">
-                  <p className="text-[10px] uppercase tracking-[0.25em] text-ink/50">Desde</p>
-                  <p className="font-display text-xl font-semibold text-ink">$59.900</p>
+          <div className="absolute inset-0">
+            <Suspense
+              fallback={
+                <div className="grid h-full w-full place-items-center">
+                  <div className="size-16 animate-spin rounded-full border-[3px] border-rose/30 border-t-rose" />
                 </div>
-                <div className="glass rounded-full px-4 py-2.5 text-xs font-semibold text-forest-dark">
-                  3D · Live
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="glass absolute -left-3 top-8 hidden rounded-2xl px-4 py-3 text-sm shadow-glass animate-float sm:block">
-            <p className="font-semibold text-ink">Envíos a 1.100+ ciudades</p>
-            <p className="text-xs text-ink/50">Todo Colombia</p>
-          </div>
-          <div className="glass absolute -right-2 bottom-16 hidden rounded-2xl px-4 py-3 text-sm shadow-glass animate-float-slow sm:block">
-            <p className="font-semibold text-ink">Pago flexible</p>
-            <p className="text-xs text-ink/50">MP o contraentrega</p>
+              }
+            >
+              <HeroScene />
+            </Suspense>
           </div>
         </motion.div>
       </div>
