@@ -38,7 +38,7 @@ export function SuccessPage() {
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.15 }}
-        className="mt-8 font-display text-4xl font-semibold"
+        className="mt-8 font-display text-3xl font-semibold sm:text-4xl"
       >
         ¡Pedido recibido!
       </motion.h1>

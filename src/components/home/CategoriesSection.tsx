@@ -6,12 +6,12 @@ import { SectionHeading } from '../ui/SectionHeading'
 
 export function CategoriesSection() {
   return (
-    <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
+    <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20">
       <SectionHeading
         eyebrow="Categorías"
         title={
           <>
-            Encuentra tu <span className="text-gradient-forest italic">próximo look</span>
+            Cuida <span className="text-gradient-forest italic">piel, cabello y cuerpo</span>
           </>
         }
         description="Tecnología beauty para rostro, cabello y cuerpo — con envío a toda Colombia."
@@ -30,7 +30,7 @@ export function CategoriesSection() {
           >
             <Link
               to={`/productos?cat=${cat.slug}`}
-              className="glass grain flex h-full flex-col items-center justify-center gap-3 rounded-3xl p-6 text-center transition-colors duration-300 hover:border-rose/40"
+              className="glass grain flex h-full flex-col items-center justify-center gap-3 rounded-3xl p-4 text-center transition-colors duration-300 hover:border-rose/40 sm:p-6"
             >
               <span className="grid size-14 place-items-center rounded-2xl bg-gradient-to-br from-white/70 to-white/30 text-3xl shadow-inner">
                 {cat.emoji}

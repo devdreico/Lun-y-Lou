@@ -125,6 +125,21 @@
   box-shadow: var(--shadow-glass);
 }
 
+@media (max-width: 767px) {
+  .glass {
+    backdrop-filter: blur(8px) saturate(120%);
+    -webkit-backdrop-filter: blur(8px) saturate(120%);
+  }
+  .glass-dark {
+    backdrop-filter: blur(8px) saturate(120%);
+    -webkit-backdrop-filter: blur(8px) saturate(120%);
+  }
+  .glass-rose {
+    backdrop-filter: blur(8px) saturate(120%);
+    -webkit-backdrop-filter: blur(8px) saturate(120%);
+  }
+}
+
 @utility glass-dark {
   background: linear-gradient(
     135deg,
@@ -196,13 +211,18 @@
   cursor: pointer;
   text-decoration: none;
   border: none;
-  white-space: nowrap;
+  white-space: normal;
+  text-wrap: balance;
 }
 
 .btn-primary {
   color: #fff;
   background: linear-gradient(135deg, var(--color-rose), var(--color-rose-dark));
   box-shadow: var(--shadow-rose);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
 .btn-primary:hover {
@@ -220,6 +240,10 @@
   background: rgba(255, 255, 255, 0.5);
   border: 1px solid rgba(26, 21, 24, 0.1);
   backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
 .btn-ghost:hover {
@@ -237,6 +261,10 @@
   color: var(--color-cream);
   background: linear-gradient(135deg, var(--color-forest), var(--color-forest-dark));
   box-shadow: var(--shadow-forest);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
 .btn-dark:hover {
@@ -268,9 +296,17 @@
 }
 
 .btn-lg {
-  padding: 1rem 2rem;
-  font-size: 1.0625rem;
-  line-height: 1.5rem;
+  padding: 0.875rem 1.25rem;
+  font-size: 0.9375rem;
+  line-height: 1.375rem;
+}
+
+@media (min-width: 640px) {
+  .btn-lg {
+    padding: 1rem 2rem;
+    font-size: 1.0625rem;
+    line-height: 1.5rem;
+  }
 }
 
 /* Inputs */

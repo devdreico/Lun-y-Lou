@@ -64,7 +64,7 @@ export function CatalogPage() {
         <p className="text-xs font-semibold uppercase tracking-[0.25em] text-rose-dark">
           Catálogo
         </p>
-        <h1 className="mt-2 font-display text-4xl font-semibold md:text-5xl">
+        <h1 className="mt-2 font-display text-3xl font-semibold sm:text-4xl md:text-5xl">
           {activeCat
             ? (categoryList.find((c) => c.slug === activeCat)?.label ?? 'Productos')
             : 'Toda la tienda'}
@@ -83,7 +83,8 @@ export function CatalogPage() {
               type="search"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Buscar máscaras, cepillos, masajeadores…"
+              placeholder="Buscar productos…"
+              title="Buscar máscaras, cepillos, masajeadores…"
               className="input-glass !pl-11"
             />
             {query && (
@@ -98,7 +99,7 @@ export function CatalogPage() {
             )}
           </label>
 
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
             <div className="flex items-center gap-2 rounded-2xl border border-ink/10 bg-white/50 px-3 py-2">
               <SlidersHorizontal className="size-4 text-ink/45" />
               <select
@@ -114,7 +115,7 @@ export function CatalogPage() {
               </select>
             </div>
 
-            <div className="flex items-center gap-3 rounded-2xl border border-ink/10 bg-white/50 px-3 py-2 text-sm">
+            <div className="flex flex-1 items-center gap-3 rounded-2xl border border-ink/10 bg-white/50 px-3 py-2 text-sm sm:flex-none">
               <span className="text-ink/50">Hasta</span>
               <input
                 type="range"
@@ -123,7 +124,7 @@ export function CatalogPage() {
                 step={10000}
                 value={maxPrice}
                 onChange={(e) => setMaxPrice(Number(e.target.value))}
-                className="w-28 accent-rose"
+                className="min-w-0 flex-1 accent-rose sm:w-28 sm:flex-none"
                 aria-label="Precio máximo"
               />
               <span className="min-w-[72px] font-semibold text-ink">{formatCOP(maxPrice)}</span>
@@ -166,7 +167,7 @@ export function CatalogPage() {
           <p className="mt-2 text-ink/55">Prueba otra búsqueda o quita filtros.</p>
         </div>
       ) : (
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 xl:grid-cols-4">
           {filtered.map((p, i) => (
             <ProductCard key={p.id} product={p} index={i} />
           ))}

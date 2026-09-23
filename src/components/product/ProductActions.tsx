@@ -15,10 +15,6 @@ interface Props {
 export function ProductActions({ product }: Props) {
   const addItem = useCart((s) => s.addItem)
   const navigate = useNavigate()
-  const [size, setSize] = useState(
-    product.sizes[Math.min(1, product.sizes.length - 1)] ?? product.sizes[0],
-  )
-  const [color, setColor] = useState(product.colors[0]?.name ?? 'Único')
   const [qty, setQty] = useState(1)
 
   const hasMpLink = Boolean(product.mpPaymentUrl)
@@ -33,63 +29,18 @@ export function ProductActions({ product }: Props) {
   }, [product.mpPaymentUrl])
 
   const handleAdd = () => {
-    addItem(product, { size, color, quantity: qty })
-    toast({ title: 'Agregado al carrito', message: `${product.name} · ${size}` })
+    addItem(product, { quantity: qty })
+    toast({ title: 'Agregado al carrito', message: product.name })
   }
 
   /** Individual a contraentrega: agrega y va al checkout. */
   const handleContraentrega = () => {
-    addItem(product, { size, color, quantity: qty })
+    addItem(product, { quantity: qty })
     navigate('/checkout')
   }
 
   return (
-    <div className="space-y-6">
-      <div>
-        <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-ink/45">
-          Talla
-        </p>
-        <div className="flex flex-wrap gap-2">
-          {product.sizes.map((s) => (
-            <button
-              key={s}
-              type="button"
-              onClick={() => setSize(s)}
-              className={`min-w-11 rounded-xl px-3.5 py-2.5 text-sm font-semibold transition-all duration-300 ${
-                size === s
-                  ? 'bg-rose text-white shadow-rose scale-105'
-                  : 'glass text-ink/70 hover:border-rose/40 hover:text-ink active:scale-95'
-              }`}
-            >
-              {s}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <div>
-        <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-ink/45">
-          Color · <span className="text-ink/70">{color}</span>
-        </p>
-        <div className="flex flex-wrap gap-2.5">
-          {product.colors.map((c) => (
-            <button
-              key={c.name}
-              type="button"
-              onClick={() => setColor(c.name)}
-              title={c.name}
-              aria-label={c.name}
-              className={`relative size-10 rounded-full transition-all duration-300 ${
-                color === c.name
-                  ? 'scale-110 ring-2 ring-rose ring-offset-2 ring-offset-cream'
-                  : 'ring-1 ring-ink/15 hover:scale-105'
-              }`}
-              style={{ background: c.hex }}
-            />
-          ))}
-        </div>
-      </div>
-
+    <div className="space-y-5 sm:space-y-6">
       <div>
         <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-ink/45">
           Cantidad
@@ -98,7 +49,7 @@ export function ProductActions({ product }: Props) {
           <button
             type="button"
             onClick={() => setQty((q) => Math.max(1, q - 1))}
-            className="grid size-10 place-items-center rounded-full text-lg transition hover:bg-rose/10 active:scale-90"
+            className="grid size-11 place-items-center rounded-full text-lg transition hover:bg-rose/10 active:scale-90"
           >
             −
           </button>
@@ -113,7 +64,7 @@ export function ProductActions({ product }: Props) {
           <button
             type="button"
             onClick={() => setQty((q) => Math.min(20, q + 1))}
-            className="grid size-10 place-items-center rounded-full text-lg transition hover:bg-rose/10 active:scale-90"
+            className="grid size-11 place-items-center rounded-full text-lg transition hover:bg-rose/10 active:scale-90"
           >
             +
           </button>
@@ -126,18 +77,34 @@ export function ProductActions({ product }: Props) {
             href={mpHref}
             target="_blank"
             rel="noreferrer"
-            className="btn-dark w-full"
+            className="btn-dark btn-lg w-full text-center"
           >
-            <ShieldCheck className="size-4" /> Pagar con Mercado Pago · {formatCOP(product.price * qty)}
-            <ExternalLink className="size-3.5 opacity-70" />
+            <ShieldCheck className="size-4 shrink-0" />
+            <span className="min-w-0">
+              Pagar con Mercado Pago
+              <span className="mt-0.5 block text-xs font-medium opacity-80">
+                {formatCOP(product.price * qty)}
+              </span>
+            </span>
+            <ExternalLink className="size-3.5 shrink-0 opacity-70" />
           </a>
         ) : null}
 
-        <Button size="lg" onClick={handleContraentrega} className="w-full">
-          <Banknote className="size-4" /> Pedir a contraentrega · {formatCOP(product.price * qty)}
+        <Button
+          size="lg"
+          onClick={handleContraentrega}
+          className="w-full justify-center text-center"
+        >
+          <Banknote className="size-4 shrink-0" />
+          <span className="min-w-0">
+            Pedir a contraentrega
+            <span className="mt-0.5 block text-xs font-medium opacity-80">
+              {formatCOP(product.price * qty)}
+            </span>
+          </span>
         </Button>
 
-        <Button variant="ghost" onClick={handleAdd} className="w-full">
+        <Button variant="ghost" onClick={handleAdd} className="w-full justify-center">
           Agregar al carrito
         </Button>
 
@@ -147,8 +114,9 @@ export function ProductActions({ product }: Props) {
             : 'Contraentrega: pagas en efectivo al recibir. Envíos a toda Colombia.'}
         </p>
 
-        <p className="flex items-center justify-center gap-2 text-xs text-ink/50">
-          <Truck className="size-3.5 text-forest" /> Envíos a toda Colombia · Sábana Occidental
+        <p className="flex items-center justify-center gap-2 text-center text-xs text-ink/50">
+          <Truck className="size-3.5 shrink-0 text-forest" /> Envíos a toda Colombia · Sábana
+          Occidental
         </p>
       </div>
     </div>

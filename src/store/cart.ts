@@ -6,10 +6,7 @@ interface CartState {
   items: CartItem[]
   isOpen: boolean
   lastAddedId: string | null
-  addItem: (
-    product: Product,
-    opts: { size: string; color: string; quantity?: number },
-  ) => void
+  addItem: (product: Product, opts: { quantity?: number }) => void
   removeItem: (key: string) => void
   updateQuantity: (key: string, quantity: number) => void
   clearCart: () => void
@@ -17,10 +14,26 @@ interface CartState {
   markAdded: (id: string | null) => void
 }
 
-const itemKey = (i: Pick<CartItem, 'productId' | 'size' | 'color'>) =>
-  `${i.productId}__${i.size}__${i.color}`
+const itemKey = (i: Pick<CartItem, 'productId'>) => i.productId
 
 export const cartKey = itemKey
+
+/** Quita campos legacy size/color de carritos persistidos antes de este refactor. */
+const migrateLegacyItems = (raw: unknown): CartItem[] => {
+  if (!Array.isArray(raw)) return []
+  return raw.map((entry) => {
+    const i = entry as CartItem & { size?: string; color?: string }
+    return {
+      productId: i.productId,
+      slug: i.slug,
+      name: i.name,
+      price: i.price,
+      image: i.image,
+      quantity: i.quantity,
+      mpPaymentUrl: i.mpPaymentUrl,
+    }
+  })
+}
 
 export const useCart = create<CartState>()(
   persist(
@@ -29,9 +42,9 @@ export const useCart = create<CartState>()(
       isOpen: false,
       lastAddedId: null,
 
-      addItem: (product, { size, color, quantity = 1 }) =>
+      addItem: (product, { quantity = 1 }) =>
         set((state) => {
-          const key = itemKey({ productId: product.id, size, color })
+          const key = itemKey({ productId: product.id })
           const existing = state.items.find((i) => itemKey(i) === key)
 
           if (existing) {
@@ -52,8 +65,6 @@ export const useCart = create<CartState>()(
             name: product.name,
             price: product.price,
             image: product.images[0]?.src ?? '',
-            size,
-            color,
             quantity,
             mpPaymentUrl: product.mpPaymentUrl,
           }
@@ -85,6 +96,10 @@ export const useCart = create<CartState>()(
     {
       name: 'lunylou-cart',
       partialize: (s) => ({ items: s.items }),
+      migrate: (persisted) => {
+        const state = persisted as { items?: unknown }
+        return { items: migrateLegacyItems(state.items) } as CartState
+      },
     },
   ),
 )

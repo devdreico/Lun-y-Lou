@@ -122,13 +122,17 @@ function CameraRig() {
 }
 
 export function HeroScene() {
+  const prefersReducedMotion =
+    typeof window !== 'undefined' &&
+    window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+
   return (
     <div className="absolute inset-0 h-full w-full" aria-hidden>
       <Canvas
         dpr={[1, 1.75]}
         camera={{ position: [0, 0, 5.2], fov: 45 }}
         gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
-        frameloop="always"
+        frameloop={prefersReducedMotion ? 'demand' : 'always'}
         style={{ width: '100%', height: '100%' }}
       >
         <Suspense fallback={null}>

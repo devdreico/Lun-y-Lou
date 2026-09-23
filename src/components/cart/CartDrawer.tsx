@@ -110,9 +110,6 @@ export function CartDrawer() {
                                 <Trash2 className="size-4" />
                               </button>
                             </div>
-                            <p className="mt-0.5 text-xs text-ink/50">
-                              {item.size} · {item.color}
-                            </p>
                             <div className="mt-auto flex items-center justify-between gap-2 pt-2">
                               <div className="flex items-center rounded-full border border-ink/10 bg-white/70">
                                 <button
@@ -190,7 +187,7 @@ export function CartDrawer() {
                       </a>
                     )}
 
-                    <div className="grid grid-cols-2 gap-2">
+                    <div className="flex flex-col gap-2 sm:grid sm:grid-cols-2">
                       <Button
                         variant="ghost"
                         size="sm"

@@ -14,8 +14,6 @@ export interface Product {
   price: number
   compareAtPrice?: number
   category: Category
-  sizes: string[]
-  colors: { name: string; hex: string }[]
   images: ProductImage[]
   /** Link único de pago Mercado Pago (dashboard → Link de pago) */
   mpPaymentUrl: string
@@ -30,8 +28,6 @@ export interface CartItem {
   name: string
   price: number
   image: string
-  size: string
-  color: string
   quantity: number
   mpPaymentUrl: string
 }

@@ -21,7 +21,7 @@ export function CartPage() {
         <p className="text-xs font-semibold uppercase tracking-[0.25em] text-rose-dark">
           Tu selección
         </p>
-        <h1 className="mt-2 font-display text-4xl font-semibold md:text-5xl">Carrito</h1>
+        <h1 className="mt-2 font-display text-3xl font-semibold sm:text-4xl md:text-5xl">Carrito</h1>
         <p className="mt-2 text-ink/55">
           {multi
             ? `${count} productos · Pedidos con varios productos solo a contraentrega`
@@ -80,13 +80,10 @@ export function CartPage() {
                         <div>
                           <Link
                             to={`/producto/${item.slug}`}
-                            className="font-display text-lg font-semibold leading-snug hover:text-rose-dark"
+                            className="font-display text-base font-semibold leading-snug hover:text-rose-dark sm:text-lg"
                           >
                             {item.name}
                           </Link>
-                          <p className="mt-1 text-xs text-ink/50">
-                            Talla {item.size} · {item.color}
-                          </p>
                         </div>
                         <button
                           type="button"
@@ -157,7 +154,7 @@ export function CartPage() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="glass-dark grain h-fit rounded-3xl p-6 text-cream lg:sticky lg:top-28"
+            className="glass-dark grain h-fit rounded-3xl p-5 text-cream sm:p-6 lg:sticky lg:top-28"
           >
             <h2 className="font-display text-xl font-semibold">Resumen</h2>
             <div className="mt-5 space-y-3 text-sm">
@@ -180,8 +177,15 @@ export function CartPage() {
             </div>
 
             <div className="mt-6 grid gap-2">
-              <LinkButton to="/checkout" size="lg" className="w-full">
-                Finalizar pedido a contraentrega
+              <LinkButton
+                to="/checkout"
+                size="lg"
+                className="w-full justify-center text-center"
+              >
+                Finalizar pedido
+                <span className="mt-0.5 block w-full text-center text-xs font-medium opacity-80">
+                  Contraentrega · {formatCOP(total)}
+                </span>
               </LinkButton>
               <p className="text-center text-[11px] leading-relaxed text-cream/50">
                 {multi

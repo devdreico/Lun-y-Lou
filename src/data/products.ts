@@ -20,8 +20,6 @@ export const products: Product[] = [
       'Máscara de tratamiento facial con 7 colores de luz (LED) para distintas rutinas de cuidado: luminosidad, calma y renovación. Diseño ligero, recargable y fácil de usar en casa o al viajar.',
     price: 190000,
     category: 'facial',
-    sizes: ['Único'],
-    colors: [{ name: 'Blanco', hex: '#F6F1E8' }],
     images: [
       { src: '/img/products/mascara-tratamiento-facial-7-colores.webp', alt: 'Máscara Tratamiento Facial 7 Colores' },
       { src: '/img/products/mascara-tratamiento-facial-7-colores-2.webp', alt: 'Máscara facial vista 2' },
@@ -42,8 +40,6 @@ export const products: Product[] = [
       'Masajeador capilar eléctrico con puntas suaves y vibro-masaje para desestresar el cuero cabelludo, activar la circulación y potenciar la sensación de bienestar en tu lavado.',
     price: 55900,
     category: 'cabello',
-    sizes: ['Único'],
-    colors: [{ name: 'Rosa', hex: '#E86A86' }],
     images: [
       { src: '/img/products/masajeador-capilar-electrico.webp', alt: 'Masajeador Capilar Eléctrico' },
       { src: '/img/products/masajeador-capilar-electrico-2.webp', alt: 'Masajeador capilar vista 2' },
@@ -64,8 +60,6 @@ export const products: Product[] = [
     price: 27900,
     compareAtPrice: 34900,
     category: 'cabello',
-    sizes: ['Único'],
-    colors: [{ name: 'Negro', hex: '#1A1518' }],
     images: [
       { src: '/img/products/plancha-viajera-mini-cabello.webp', alt: 'Plancha Viajera Mini para Cabello' },
       { src: '/img/products/plancha-viajera-mini-cabello-2.webp', alt: 'Plancha mini vista 2' },
@@ -83,8 +77,6 @@ export const products: Product[] = [
       'Cepillo facial para limpieza y exfoliación suave, con Natural Shine de obsequio. Ideal para rutina diaria, preparar la piel y potenciar el brillo natural del rostro.',
     price: 26000,
     category: 'facial',
-    sizes: ['Único'],
-    colors: [{ name: 'Rosa', hex: '#F8D5DE' }],
     images: [
       { src: '/img/products/cepillo-facial-natural-shine.webp', alt: 'Cepillo Facial + Natural Shine' },
       { src: '/img/products/cepillo-facial-natural-shine-2.webp', alt: 'Cepillo facial vista 2' },
@@ -104,8 +96,6 @@ export const products: Product[] = [
     price: 60000,
     compareAtPrice: 75000,
     category: 'corporal',
-    sizes: ['Único'],
-    colors: [{ name: 'Blanco', hex: '#FAF7F2' }],
     images: [
       { src: '/img/products/masajeador-anticelulitis-ultrasonido.webp', alt: 'Masajeador Anticelulitis Ultrasonido' },
       { src: '/img/products/masajeador-anticelulitis-ultrasonido-2.webp', alt: 'Masajeador anticelulitis vista 2' },
@@ -127,8 +117,6 @@ export const products: Product[] = [
       'Cepillo secador multifunción 5 en 1 con boquillas intercambiables para secar, peinar, dar volumen y ondular. Potencia uniforme y acabado de salón sin complicarte la mañana.',
     price: 46900,
     category: 'cabello',
-    sizes: ['Único'],
-    colors: [{ name: 'Rosa', hex: '#C93F5F' }],
     images: [
       { src: '/img/products/cepillo-secador-5-en-1.webp', alt: 'Cepillo Secador 5 en 1' },
     ],
@@ -145,8 +133,6 @@ export const products: Product[] = [
       'Pistola de masaje mini con punzos suaves y varios niveles de intensidad. Perfecta para hombros, espalda y piernas después del gym o de un día largo frente al computador.',
     price: 40900,
     category: 'corporal',
-    sizes: ['Único'],
-    colors: [{ name: 'Negro', hex: '#1A1518' }],
     images: [
       { src: '/img/products/mini-pistola-masajeadora-muscular.webp', alt: 'Mini Pistola Masajeadora Muscular' },
     ],
@@ -162,8 +148,6 @@ export const products: Product[] = [
       'Rizador portátil con diseño en espiral para lograr rizos y ondas con un movimiento simple. Compacto, ideal para maletas, oficina o cambios de look al instante.',
     price: 32900,
     category: 'cabello',
-    sizes: ['Único'],
-    colors: [{ name: 'Rosa', hex: '#E86A86' }],
     images: [
       { src: '/img/products/rizador-pelo-portatil-espiral.webp', alt: 'Rizador de Pelo Portátil en Espiral' },
     ],
@@ -179,8 +163,6 @@ export const products: Product[] = [
       'Rodillo facial de jade para masajear rostro y cuello con movimientos ascendentes. Ayuda a desinflamar, relajar la musculatura facial y sellar tus productos de skincare.',
     price: 31000,
     category: 'facial',
-    sizes: ['Único'],
-    colors: [{ name: 'Jade', hex: '#4A7360' }],
     images: [
       { src: '/img/products/masajeador-rodillo-jade-facial.webp', alt: 'Masajeador Rodillo de Jade Facial' },
       { src: '/img/products/masajeador-rodillo-jade-facial-2.webp', alt: 'Rodillo de jade vista 2' },
@@ -202,8 +184,6 @@ export const products: Product[] = [
     price: 63900,
     compareAtPrice: 79900,
     category: 'corporal',
-    sizes: ['Único'],
-    colors: [{ name: 'Blanco', hex: '#F0E6D8' }],
     images: [
       { src: '/img/products/maquina-depiladora-laser-ipl-110v.webp', alt: 'Máquina Depiladora Láser IPL 110V' },
     ],

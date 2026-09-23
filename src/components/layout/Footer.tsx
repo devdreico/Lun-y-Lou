@@ -18,8 +18,8 @@ export function Footer() {
       />
 
       <div className="relative mx-auto max-w-7xl px-4 pb-10 pt-16 sm:px-6">
-        <div className="grid gap-10 md:grid-cols-4">
-          <div className="md:col-span-2">
+        <div className="grid grid-cols-2 gap-8 md:grid-cols-4 md:gap-10">
+          <div className="col-span-2 md:col-span-2">
             <div className="flex items-center gap-3">
               <span className="grid size-12 place-items-center overflow-hidden rounded-full bg-white/10 ring-1 ring-white/20">
                 <img src="/logo.png" alt="Lun & Lou" className="size-9 object-contain" />

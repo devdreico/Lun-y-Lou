@@ -7,7 +7,7 @@ import { SectionHeading } from '../ui/SectionHeading'
 
 export function FeaturedSection() {
   return (
-    <section className="relative overflow-hidden py-20">
+    <section className="relative overflow-hidden py-14 sm:py-20">
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-rose/30 to-transparent" />
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="flex flex-wrap items-end justify-between gap-6">
@@ -16,10 +16,10 @@ export function FeaturedSection() {
             eyebrow="Destacados"
             title={
               <>
-                Piezas que <span className="text-gradient-rose italic">amarán</span> nuestras clientas
+                Lo más <span className="text-gradient-rose italic">pedido</span> de la tienda
               </>
             }
-            description="Selección curada de la temporada — stock limitado."
+            description="Tecnología beauty real, con stock listo para despacho nacional."
           />
           <Link
             to="/productos"
@@ -30,7 +30,7 @@ export function FeaturedSection() {
           </Link>
         </div>
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-12 grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
           {featuredProducts.slice(0, 4).map((p, i) => (
             <ProductCard key={p.id} product={p} index={i} />
           ))}
@@ -75,7 +75,7 @@ export function PerksSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.1, duration: 0.55 }}
-            className="glass grain relative overflow-hidden rounded-3xl p-6 transition hover:-translate-y-1.5 hover:shadow-glass-lg"
+            className="glass grain relative overflow-hidden rounded-3xl p-5 transition hover:-translate-y-1.5 hover:shadow-glass-lg sm:p-6"
           >
             <div
               className={`pointer-events-none absolute -right-8 -top-8 size-32 rounded-full bg-gradient-to-br ${perk.ring} to-transparent blur-2xl`}

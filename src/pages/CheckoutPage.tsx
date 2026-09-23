@@ -79,7 +79,7 @@ export function CheckoutPage() {
         <p className="text-xs font-semibold uppercase tracking-[0.25em] text-rose-dark">
           Contraentrega
         </p>
-        <h1 className="mt-2 font-display text-4xl font-semibold md:text-5xl">
+        <h1 className="mt-2 font-display text-3xl font-semibold text-balance sm:text-4xl md:text-5xl">
           Finaliza tu pedido
         </h1>
         <p className="mx-auto mt-3 max-w-lg text-ink/60">
@@ -94,7 +94,7 @@ export function CheckoutPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.05 }}
           onSubmit={handleSubmit(onSubmit)}
-          className="glass grain space-y-8 rounded-[2rem] p-6 md:p-8"
+          className="glass grain space-y-8 rounded-[2rem] p-4 sm:p-6 md:p-8"
           noValidate
         >
           <section className="space-y-4">
@@ -237,13 +237,23 @@ export function CheckoutPage() {
               </p>
             </div>
 
-            <Button type="submit" size="lg" loading={sending} className="w-full">
+            <Button
+              type="submit"
+              size="lg"
+              loading={sending}
+              className="w-full justify-center text-center"
+            >
               {sending ? (
                 <>
                   <Loader2 className="size-4 animate-spin" /> Enviando pedido…
                 </>
               ) : (
-                <>Confirmar pedido · {formatCOP(total)}</>
+                <span className="min-w-0">
+                  Confirmar pedido
+                  <span className="mt-0.5 block text-xs font-medium opacity-80">
+                    {formatCOP(total)}
+                  </span>
+                </span>
               )}
             </Button>
 
@@ -257,19 +267,19 @@ export function CheckoutPage() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.12 }}
-          className="glass grain h-fit rounded-[2rem] p-6 lg:sticky lg:top-28"
+          className="glass grain h-fit rounded-[2rem] p-5 sm:p-6 lg:sticky lg:top-28"
         >
           <h2 className="font-display text-xl font-semibold">Tu pedido</h2>
           <ul className="mt-4 space-y-3">
             {items.map((item) => (
-              <li key={`${item.productId}-${item.size}-${item.color}`} className="flex gap-3">
+              <li key={item.productId} className="flex gap-3">
                 <div className="size-14 shrink-0 overflow-hidden rounded-xl bg-cream-dark">
                   <img src={item.image} alt="" className="h-full w-full object-cover" />
                 </div>
                 <div className="min-w-0 flex-1">
                   <p className="truncate text-sm font-semibold">{item.name}</p>
                   <p className="text-xs text-ink/50">
-                    {item.quantity}× · {item.size} · {item.color}
+                    {item.quantity}×
                   </p>
                 </div>
                 <p className="text-sm font-semibold">{formatCOP(item.price * item.quantity)}</p>
@@ -286,7 +296,7 @@ export function CheckoutPage() {
               <span>Envío</span>
               <span>Coordinado</span>
             </div>
-            <div className="flex items-end justify-between pt-2">
+            <div className="flex flex-col gap-1 pt-2 sm:flex-row sm:items-end sm:justify-between">
               <span className="font-medium">Total a pagar al recibir</span>
               <span className="font-display text-2xl font-semibold text-gradient-rose">
                 {formatCOP(total)}

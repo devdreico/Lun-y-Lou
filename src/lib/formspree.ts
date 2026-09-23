@@ -20,9 +20,7 @@ export function buildOrderPayload(
   const lines = items
     .map(
       (i) =>
-        `• ${i.quantity}x ${i.name} — Talla ${i.size} — ${i.color} — ${formatCOP(
-          i.price * i.quantity,
-        )}`,
+        `• ${i.quantity}x ${i.name} — ${formatCOP(i.price * i.quantity)}`,
     )
     .join('\n')
 

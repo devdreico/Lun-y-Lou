@@ -11,14 +11,14 @@ export function CtaBanner() {
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="glass-dark grain relative overflow-hidden rounded-[2.5rem] px-6 py-14 text-center md:py-20"
+        className="glass-dark grain relative overflow-hidden rounded-[2rem] px-5 py-12 text-center sm:px-6 sm:py-14 md:rounded-[2.5rem] md:py-20"
       >
         <div className="absolute -left-20 -top-20 size-64 rounded-full bg-rose/35 blur-3xl" />
         <div className="absolute -bottom-24 -right-10 size-72 rounded-full bg-gold/25 blur-3xl" />
 
         <div className="relative mx-auto max-w-2xl">
           <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-gold-light ring-1 ring-white/15">
-            <Heart className="size-3.5" /> Hecho para brillar
+            <Heart className="size-3.5" /> Envíos a toda Colombia
           </span>
           <h2 className="mt-5 font-display text-3xl font-semibold leading-tight text-cream md:text-5xl">
             Tu estilo merece llegar{' '}

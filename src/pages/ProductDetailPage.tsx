@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { ChevronRight, Heart, Package, RotateCcw, ShieldCheck, Star, Truck } from 'lucide-react'
+import { ChevronRight, Heart, Package, RotateCcw, ShieldCheck, Truck } from 'lucide-react'
 import { useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import { ProductActions } from '../components/product/ProductActions'
@@ -31,12 +31,12 @@ export function ProductDetailPage() {
         <Link to="/productos" className="transition hover:text-rose-dark">
           Tienda
         </Link>
-        <ChevronRight className="size-3.5" />
-        <Link to={`/productos?cat=${product.category}`} className="transition hover:text-rose-dark">
+        <ChevronRight className="size-3.5 hidden sm:block" />
+        <Link to={`/productos?cat=${product.category}`} className="hidden transition hover:text-rose-dark sm:block">
           {CATEGORIES_LABEL[product.category]}
         </Link>
         <ChevronRight className="size-3.5" />
-        <span className="text-ink/75">{product.name}</span>
+        <span className="min-w-0 truncate text-ink/75">{product.name}</span>
       </nav>
 
       <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
@@ -79,10 +79,10 @@ export function ProductDetailPage() {
                   key={img.src}
                   type="button"
                   onClick={() => setActiveImg(i)}
-                  className={`size-16 shrink-0 overflow-hidden rounded-xl transition-all duration-300 ${
+                  className={`size-14 shrink-0 overflow-hidden rounded-xl transition-all duration-300 sm:size-16 ${
                     activeImg === i
-                      ? 'ring-2 ring-rose ring-offset-2 ring-offset-cream scale-105'
-                      : 'opacity-70 hover:opacity-100 hover:scale-105'
+                      ? 'ring-2 ring-rose ring-offset-2 ring-offset-cream sm:scale-105'
+                      : 'opacity-70 hover:opacity-100 sm:hover:scale-105'
                   }`}
                 >
                   <img src={img.src} alt="" className="h-full w-full object-cover" />
@@ -91,7 +91,7 @@ export function ProductDetailPage() {
             </div>
           </div>
 
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 gap-2 sm:grid-cols-3 sm:gap-3">
             {[
               { icon: Truck, t: 'Envío nacional' },
               { icon: RotateCcw, t: 'Cambios 7 días' },
@@ -99,10 +99,10 @@ export function ProductDetailPage() {
             ].map((f) => (
               <div
                 key={f.t}
-                className="glass flex flex-col items-center gap-1.5 rounded-2xl px-2 py-3 text-center"
+                className="glass flex flex-row items-center gap-3 rounded-2xl px-3 py-3 text-left sm:flex-col sm:items-center sm:gap-1.5 sm:px-2 sm:text-center"
               >
-                <f.icon className="size-4 text-forest" />
-                <span className="text-[11px] font-medium text-ink/65">{f.t}</span>
+                <f.icon className="size-4 shrink-0 text-forest" />
+                <span className="text-[11px] font-medium text-ink/65 sm:text-center">{f.t}</span>
               </div>
             ))}
           </div>
@@ -125,12 +125,9 @@ export function ProductDetailPage() {
               <span className="rounded-full bg-forest/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-forest">
                 {CATEGORIES_LABEL[product.category]}
               </span>
-              <span className="inline-flex items-center gap-1 rounded-full bg-gold/15 px-2.5 py-1 text-[11px] font-semibold text-gold-dark">
-                <Star className="size-3 fill-gold text-gold" /> 4.9 (128)
-              </span>
             </div>
 
-            <h1 className="mt-3 font-display text-3xl font-semibold leading-tight md:text-4xl">
+            <h1 className="mt-3 font-display text-2xl font-semibold leading-tight sm:text-3xl md:text-4xl">
               {product.name}
             </h1>
             <p className="mt-1 text-ink/55 italic">{product.tagline}</p>
@@ -150,7 +147,7 @@ export function ProductDetailPage() {
             </div>
           </div>
 
-          <div className="glass grain rounded-3xl p-5">
+          <div className="glass grain rounded-3xl p-4 sm:p-5">
             <p className="text-sm leading-relaxed text-ink/70">{product.description}</p>
           </div>
 
@@ -183,7 +180,7 @@ export function ProductDetailPage() {
           eyebrow="También te puede gustar"
           title="Sigue explorando"
         />
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-10 grid grid-cols-2 gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {relatedList.map((p, i) => (
             <ProductCard key={p.id} product={p} index={i} />
           ))}

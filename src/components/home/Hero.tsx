@@ -29,7 +29,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 32 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.75, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-5 font-display text-4xl font-semibold leading-[1.05] text-balance sm:text-5xl md:text-6xl lg:text-7xl"
+            className="mt-5 font-display text-3xl font-semibold leading-[1.05] text-balance sm:text-5xl md:text-6xl lg:text-7xl"
           >
             Belleza y bienestar{' '}
             <span className="text-gradient-rose italic">que se siente</span>{' '}
@@ -83,7 +83,7 @@ export function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1.1, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-          className="relative mx-auto h-[340px] w-full max-w-lg sm:h-[420px] lg:h-[560px] lg:max-w-none"
+          className="relative mx-auto h-[clamp(240px,70vw,340px)] w-full max-w-lg sm:h-[420px] lg:h-[560px] lg:max-w-none"
           aria-hidden
         >
           <div className="pointer-events-none absolute left-1/2 top-1/2 h-[90%] w-[90%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(201,63,95,0.22),transparent_65%)] blur-2xl" />
@@ -103,16 +103,18 @@ export function Hero() {
         </motion.div>
       </div>
 
-      <div className="relative mx-auto mt-16 max-w-7xl px-4 sm:px-6">
-        <div className="glass grain flex flex-wrap items-center justify-between gap-4 rounded-3xl px-6 py-5">
+      <div className="relative mx-auto mt-10 max-w-7xl px-4 sm:mt-16 sm:px-6">
+        <div className="glass grain flex flex-wrap items-center justify-between gap-3 rounded-3xl px-4 py-4 sm:gap-4 sm:px-6 sm:py-5">
           {[
-            { k: '10K+', v: 'Clientas felices' },
-            { k: '4.9★', v: 'Satisfacción' },
-            { k: '24-72h', v: 'Despacho promedio' },
-            { k: '100%', v: 'Compra protegida' },
+            { k: '24–72h', v: 'Despacho según ciudad' },
+            { k: 'MP', v: 'Pago individual seguro' },
+            { k: 'Efectivo', v: 'Contraentrega' },
+            { k: 'Nacional', v: 'Envíos a toda Colombia' },
           ].map((s) => (
-            <div key={s.k} className="flex-1 text-center min-w-[120px]">
-              <p className="font-display text-2xl font-semibold text-gradient-rose">{s.k}</p>
+            <div key={s.k} className="flex-1 text-center min-w-[100px] sm:min-w-[120px]">
+              <p className="font-display text-xl font-semibold text-gradient-rose sm:text-2xl">
+                {s.k}
+              </p>
               <p className="text-xs text-ink/55">{s.v}</p>
             </div>
           ))}
