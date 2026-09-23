@@ -2,6 +2,10 @@
 
 E-commerce glassmorphism con React + Vite + Tailwind + animaciones 3D.
 
+Catálogo real de belleza/bienestar (10 productos, precios COP). Imágenes reales optimizadas a WebP en `public/img/products/`. Links de Mercado Pago pendientes en `mpPaymentUrl`.
+
+Los zips originales viven en `IMG REAL/` (fuente local, ignorados por git).
+
 ## Stack
 
 - React 19 + TypeScript + Vite
@@ -27,7 +31,7 @@ npm run preview  # previsualizar build
 1. Copia `.env.example` a `.env`.
 2. Crea un formulario en [Formspree](https://formspree.io) y pon su ID en `VITE_FORMSPREE_ID`.
 3. En `src/data/products.ts`, llena `mpPaymentUrl` con el link único de pago de Mercado Pago de cada producto (Panel MP → cobrar con link, o Checkout Pro).
-4. Reemplaza las imágenes SVG placeholder en `public/img/products/` por fotos reales (misma ruta o actualiza `images` en cada producto).
+4. Imágenes reales ya integradas (WebP ≤1400px). Para reemplazar: actualiza archivos en `public/img/products/` o las rutas `images` en `products.ts`.
 
 ## Flujos de venta
 

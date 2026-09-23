@@ -1,14 +1,4 @@
-export type Category =
-  | 'vestidos'
-  | 'tops'
-  | 'pantalones'
-  | 'bolsos'
-  | 'accesorios'
-  | 'calzado'
-  | 'conjuntos'
-  | 'chaquetas'
-  | 'faldas'
-  | 'gafas'
+export type Category = 'facial' | 'cabello' | 'corporal'
 
 export interface ProductImage {
   src: string

@@ -83,7 +83,7 @@ export function CatalogPage() {
               type="search"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Buscar vestidos, bolsos, tacones…"
+              placeholder="Buscar máscaras, cepillos, masajeadores…"
               className="input-glass !pl-11"
             />
             {query && (

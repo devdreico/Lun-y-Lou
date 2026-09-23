@@ -14,7 +14,7 @@ export function CategoriesSection() {
             Encuentra tu <span className="text-gradient-forest italic">próximo look</span>
           </>
         }
-        description="Desde vestidos de noche hasta accesorios que transforman un outfit básico."
+        description="Tecnología beauty para rostro, cabello y cuerpo — con envío a toda Colombia."
       />
 
       <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">

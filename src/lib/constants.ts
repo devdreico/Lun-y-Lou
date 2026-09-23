@@ -1,8 +1,8 @@
 export const SITE = {
   name: 'Lun & Lou',
-  tagline: 'Moda femenina con alma',
+  tagline: 'Belleza y bienestar con alma',
   description:
-    'Tienda e-commerce de productos femeninos con envíos a toda Colombia. Paga con Mercado Pago o pide a contraentrega.',
+    'Tienda e-commerce de productos de belleza y bienestar femenino con envíos a toda Colombia. Paga con Mercado Pago o pide a contraentrega.',
   whatsapp: (import.meta.env.VITE_WHATSAPP as string) || '573001234567',
   email: 'hola@lunylou.com',
   instagram: 'https://instagram.com/lunylou',
@@ -12,14 +12,7 @@ export const SITE = {
 export const WHATSAPP_URL = `https://wa.me/${SITE.whatsapp}`
 
 export const CATEGORIES_LABEL: Record<string, string> = {
-  vestidos: 'Vestidos',
-  tops: 'Tops',
-  pantalones: 'Pantalones',
-  bolsos: 'Bolsos',
-  accesorios: 'Accesorios',
-  calzado: 'Calzado',
-  conjuntos: 'Conjuntos',
-  chaquetas: 'Chaquetas',
-  faldas: 'Faldas',
-  gafas: 'Gafas',
+  facial: 'Facial',
+  cabello: 'Cabello',
+  corporal: 'Corporal',
 }

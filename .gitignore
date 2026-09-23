@@ -15,6 +15,9 @@ dist-ssr
 .env.*
 !.env.example
 
+# Fuente de imágenes (zips) — no commitear
+IMG REAL/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

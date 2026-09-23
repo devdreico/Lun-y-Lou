@@ -27,7 +27,7 @@ export function Footer() {
               <div>
                 <p className="font-display text-2xl font-semibold">Lun & Lou</p>
                 <p className="text-xs uppercase tracking-[0.3em] text-cream/55">
-                  Moda femenina · Colombia
+                  Belleza y bienestar · Colombia
                 </p>
               </div>
             </div>
@@ -72,13 +72,18 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link to="/productos?cat=vestidos" className="transition hover:text-rose-light">
-                  Vestidos
+                <Link to="/productos?cat=facial" className="transition hover:text-rose-light">
+                  Facial
                 </Link>
               </li>
               <li>
-                <Link to="/productos?cat=bolsos" className="transition hover:text-rose-light">
-                  Bolsos
+                <Link to="/productos?cat=cabello" className="transition hover:text-rose-light">
+                  Cabello
+                </Link>
+              </li>
+              <li>
+                <Link to="/productos?cat=corporal" className="transition hover:text-rose-light">
+                  Corporal
                 </Link>
               </li>
               <li>

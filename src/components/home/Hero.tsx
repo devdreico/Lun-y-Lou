@@ -31,7 +31,7 @@ export function Hero() {
             transition={{ duration: 0.75, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
             className="mt-5 font-display text-4xl font-semibold leading-[1.05] text-balance sm:text-5xl md:text-6xl lg:text-7xl"
           >
-            Moda femenina{' '}
+            Belleza y bienestar{' '}
             <span className="text-gradient-rose italic">que se siente</span>{' '}
             como tú
           </motion.h1>
@@ -42,7 +42,7 @@ export function Hero() {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-ink/65 md:text-lg lg:mx-0"
           >
-            Lun & Lou lleva estilo, calidad y entrega a toda Colombia. Paga seguro con Mercado
+            Lun & Lou lleva tecnología beauty, estilo y entrega a toda Colombia. Paga seguro con Mercado
             Pago o recibe tu pedido a contraentrega.
           </motion.p>
 
@@ -56,8 +56,8 @@ export function Hero() {
               Explorar tienda
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
             </LinkButton>
-            <LinkButton to="/productos?cat=vestidos" variant="ghost" size="lg">
-              Ver vestidos
+            <LinkButton to="/productos?cat=facial" variant="ghost" size="lg">
+              Ver cuidado facial
             </LinkButton>
           </motion.div>
 
