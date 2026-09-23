@@ -1,4 +1,4 @@
-# Lun y Lou
+# Lun & Lou
 
 E-commerce glassmorphism con React + Vite + Tailwind + animaciones 3D.
 

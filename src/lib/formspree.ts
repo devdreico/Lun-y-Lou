@@ -48,7 +48,7 @@ export async function submitOrder(
 
   if (!isFormspreeConfigured()) {
     await new Promise((r) => setTimeout(r, 1400))
-    console.info('[Lun y Lou] Modo demo — pedido no enviado. Configura VITE_FORMSPREE_ID.', payload)
+    console.info('[Lun & Lou] Modo demo — pedido no enviado. Configura VITE_FORMSPREE_ID.', payload)
     return { ok: true, demo: true }
   }
 

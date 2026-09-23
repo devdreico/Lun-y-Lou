@@ -48,7 +48,7 @@ export function Navbar() {
                 : 'border border-transparent bg-transparent'
             }`}
           >
-            <Link to="/" className="group flex items-center gap-3" aria-label="Lun y Lou inicio">
+            <Link to="/" className="group flex items-center gap-3" aria-label="Lun & Lou inicio">
               <span className="relative grid size-11 place-items-center overflow-hidden rounded-full bg-gradient-to-br from-rose to-rose-dark text-white shadow-rose transition-transform duration-500 group-hover:scale-105 group-hover:rotate-[-8deg]">
                 <img
                   src="/logo.png"
@@ -58,7 +58,7 @@ export function Navbar() {
               </span>
               <span className="flex flex-col leading-none">
                 <span className="font-display text-xl font-semibold tracking-tight text-ink">
-                  Lun <span className="text-gradient-rose italic">y</span> Lou
+                  Lun <span className="text-gradient-rose italic">&</span> Lou
                 </span>
                 <span className="text-[10px] uppercase tracking-[0.28em] text-ink/50">
                   Colombia

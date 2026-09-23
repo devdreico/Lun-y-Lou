@@ -42,7 +42,7 @@ export function Hero() {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-ink/65 md:text-lg lg:mx-0"
           >
-            Lun y Lou lleva estilo, calidad y entrega a toda Colombia. Paga seguro con Mercado
+            Lun & Lou lleva estilo, calidad y entrega a toda Colombia. Paga seguro con Mercado
             Pago o recibe tu pedido a contraentrega.
           </motion.p>
 

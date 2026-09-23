@@ -1,5 +1,5 @@
 export const SITE = {
-  name: 'Lun y Lou',
+  name: 'Lun & Lou',
   tagline: 'Moda femenina con alma',
   description:
     'Tienda e-commerce de productos femeninos con envíos a toda Colombia. Paga con Mercado Pago o pide a contraentrega.',

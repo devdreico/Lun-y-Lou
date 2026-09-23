@@ -26,7 +26,7 @@
     <text x="0" y="30" font-size="140" text-anchor="middle" dominant-baseline="middle">👖</text>
   </g>
   <text x="400" y="700" font-family="Georgia, serif" font-size="42" fill="#ffffff" text-anchor="middle" font-weight="600">Jeans Wide Leg Nova</text>
-  <text x="400" y="755" font-family="system-ui,sans-serif" font-size="22" fill="#ffffff" fill-opacity="0.85" text-anchor="middle" letter-spacing="6">LUN Y LOU</text>
+  <text x="400" y="755" font-family="system-ui,sans-serif" font-size="22" fill="#ffffff" fill-opacity="0.85" text-anchor="middle" letter-spacing="6">LUN &amp; LOU</text>
   <rect x="48" y="48" width="180" height="52" rx="26" fill="#ffffff" fill-opacity="0.35" stroke="#ffffff" stroke-opacity="0.6"/>
   <text x="138" y="81" font-family="system-ui,sans-serif" font-size="16" fill="#2E4A3D" text-anchor="middle" font-weight="700" letter-spacing="2">LOOK 1</text>
   <rect width="800" height="1000" filter="url(#grain)"/>

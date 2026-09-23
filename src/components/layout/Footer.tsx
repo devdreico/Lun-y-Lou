@@ -22,10 +22,10 @@ export function Footer() {
           <div className="md:col-span-2">
             <div className="flex items-center gap-3">
               <span className="grid size-12 place-items-center overflow-hidden rounded-full bg-white/10 ring-1 ring-white/20">
-                <img src="/logo.png" alt="Lun y Lou" className="size-9 object-contain" />
+                <img src="/logo.png" alt="Lun & Lou" className="size-9 object-contain" />
               </span>
               <div>
-                <p className="font-display text-2xl font-semibold">Lun y Lou</p>
+                <p className="font-display text-2xl font-semibold">Lun & Lou</p>
                 <p className="text-xs uppercase tracking-[0.3em] text-cream/55">
                   Moda femenina · Colombia
                 </p>
@@ -107,7 +107,7 @@ export function Footer() {
         </div>
 
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 text-xs text-cream/50 sm:flex-row">
-          <p>© {year} Lun y Lou. Todos los derechos reservados.</p>
+          <p>© {year} Lun & Lou. Todos los derechos reservados.</p>
           <p>Pagos procesados por Mercado Pago · Hecho con ♥ en Colombia</p>
         </div>
       </div>
