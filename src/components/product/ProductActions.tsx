@@ -1,12 +1,13 @@
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { ExternalLink, ShieldCheck, Truck, Banknote } from 'lucide-react'
+import { ShieldCheck, Truck, Banknote } from 'lucide-react'
 import { formatCOP } from '../../lib/format'
 import type { Product } from '../../types'
 import { useCart } from '../../store/cart'
 import { Button } from '../ui/Button'
 import { toast } from '../../lib/toast'
+import { saveOrderConfirm } from '../../lib/orderConfirm'
 
 interface Props {
   product: Product
@@ -18,15 +19,6 @@ export function ProductActions({ product }: Props) {
   const [qty, setQty] = useState(1)
 
   const hasMpLink = Boolean(product.mpPaymentUrl)
-  const mpHref = useMemo(() => {
-    if (!product.mpPaymentUrl) return '#'
-    try {
-      const url = new URL(product.mpPaymentUrl)
-      return url.toString()
-    } catch {
-      return product.mpPaymentUrl
-    }
-  }, [product.mpPaymentUrl])
 
   const handleAdd = () => {
     addItem(product, { quantity: qty })
@@ -37,6 +29,28 @@ export function ProductActions({ product }: Props) {
   const handleContraentrega = () => {
     addItem(product, { quantity: qty })
     navigate('/checkout')
+  }
+
+  /** Pago MP: pantalla de confirmación antes de salir a Mercado Pago. */
+  const handleMp = () => {
+    if (!product.mpPaymentUrl) return
+    const order = {
+      method: 'mp' as const,
+      items: [
+        {
+          productId: product.id,
+          name: product.name,
+          quantity: qty,
+          price: product.price,
+          image: product.images[0]?.src ?? '',
+        },
+      ],
+      total: product.price * qty,
+      mpUrl: product.mpPaymentUrl,
+      createdAt: new Date().toISOString(),
+    }
+    saveOrderConfirm(order)
+    navigate('/pedido-exitoso', { state: order })
   }
 
   return (
@@ -73,11 +87,11 @@ export function ProductActions({ product }: Props) {
 
       <div className="grid gap-3">
         {hasMpLink ? (
-          <a
-            href={mpHref}
-            target="_blank"
-            rel="noreferrer"
-            className="btn-dark btn-lg w-full text-center"
+          <Button
+            size="lg"
+            onClick={handleMp}
+            variant="dark"
+            className="w-full justify-center text-center"
           >
             <ShieldCheck className="size-4 shrink-0" />
             <span className="min-w-0">
@@ -86,8 +100,7 @@ export function ProductActions({ product }: Props) {
                 {formatCOP(product.price * qty)}
               </span>
             </span>
-            <ExternalLink className="size-3.5 shrink-0 opacity-70" />
-          </a>
+          </Button>
         ) : null}
 
         <Button

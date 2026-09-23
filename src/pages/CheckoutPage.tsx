@@ -11,6 +11,7 @@ import { citiesOf, departmentNames } from '../data/colombia'
 import { buildOrderPayload, submitOrder } from '../lib/formspree'
 import { formatCOP } from '../lib/format'
 import { selectTotal, useCart } from '../store/cart'
+import { saveOrderConfirm } from '../lib/orderConfirm'
 import type { CheckoutFormData } from '../types'
 
 const schema = z.object({
@@ -32,6 +33,7 @@ export function CheckoutPage() {
   const clearCart = useCart((s) => s.clearCart)
   const total = selectTotal(items)
   const [sending, setSending] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
   const navigate = useNavigate()
 
   const {
@@ -47,7 +49,7 @@ export function CheckoutPage() {
   const department = watch('department')
   const cities = useMemo(() => citiesOf(department), [department])
 
-  if (items.length === 0 && !sending) {
+  if (items.length === 0 && !sending && !submitted) {
     return <Navigate to="/carrito" replace />
   }
 
@@ -58,10 +60,27 @@ export function CheckoutPage() {
     setSending(false)
 
     if (result.ok) {
+      const order = {
+        method: 'contraentrega' as const,
+        demo: result.demo,
+        name: data.fullName,
+        phone: data.phone,
+        city: data.city,
+        address: data.address,
+        items: items.map((i) => ({
+          productId: i.productId,
+          name: i.name,
+          quantity: i.quantity,
+          price: i.price,
+          image: i.image,
+        })),
+        total,
+        createdAt: new Date().toISOString(),
+      }
+      saveOrderConfirm(order)
+      setSubmitted(true)
+      navigate('/pedido-exitoso', { state: order, replace: true })
       clearCart()
-      navigate('/pedido-exitoso', {
-        state: { demo: result.demo, name: data.fullName, city: data.city },
-      })
     } else {
       toast({ title: 'No se pudo enviar', message: result.error })
     }

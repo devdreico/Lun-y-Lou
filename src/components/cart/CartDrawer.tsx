@@ -1,18 +1,43 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { Minus, Plus, ShoppingBag, Trash2, X } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { cartKey, selectCount, selectTotal, useCart } from '../../store/cart'
 import { formatCOP } from '../../lib/format'
 import { Button, LinkButton } from '../ui/Button'
 import { WHATSAPP_URL } from '../../lib/constants'
+import { saveOrderConfirm } from '../../lib/orderConfirm'
 
 export function CartDrawer() {
   const { items, isOpen, setOpen, updateQuantity, removeItem, clearCart } = useCart()
+  const navigate = useNavigate()
   const count = selectCount(items)
   const total = selectTotal(items)
   const multi = items.length > 1 || count > 1
   const singleMp =
     !multi && items.length === 1 && Boolean(items[0]?.mpPaymentUrl)
+
+  const handleMp = () => {
+    if (!singleMp || !items[0]) return
+    const item = items[0]
+    const order = {
+      method: 'mp' as const,
+      items: [
+        {
+          productId: item.productId,
+          name: item.name,
+          quantity: item.quantity,
+          price: item.price,
+          image: item.image,
+        },
+      ],
+      total: item.price * item.quantity,
+      mpUrl: item.mpPaymentUrl,
+      createdAt: new Date().toISOString(),
+    }
+    saveOrderConfirm(order)
+    setOpen(false)
+    navigate('/pedido-exitoso', { state: order })
+  }
 
   return (
     <AnimatePresence>
@@ -177,14 +202,13 @@ export function CartDrawer() {
                     </LinkButton>
 
                     {singleMp && (
-                      <a
-                        href={items[0].mpPaymentUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="btn-dark w-full"
+                      <button
+                        type="button"
+                        onClick={handleMp}
+                        className="btn-dark btn-lg w-full justify-center"
                       >
                         Pagar con Mercado Pago
-                      </a>
+                      </button>
                     )}
 
                     <div className="flex flex-col gap-2 sm:grid sm:grid-cols-2">

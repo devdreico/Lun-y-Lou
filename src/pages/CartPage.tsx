@@ -1,15 +1,39 @@
 import { AnimatePresence, motion } from 'framer-motion'
-import { ExternalLink, Minus, Plus, ShoppingBag, Trash2 } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { Minus, Plus, ShoppingBag, Trash2 } from 'lucide-react'
+import { Link, useNavigate } from 'react-router-dom'
 import { Button, LinkButton } from '../components/ui/Button'
 import { formatCOP } from '../lib/format'
 import { cartKey, selectCount, selectTotal, useCart } from '../store/cart'
+import { saveOrderConfirm } from '../lib/orderConfirm'
 
 export function CartPage() {
   const { items, updateQuantity, removeItem, clearCart } = useCart()
+  const navigate = useNavigate()
   const total = selectTotal(items)
   const count = selectCount(items)
   const multi = items.length > 1 || count > 1
+
+  const handleMp = () => {
+    if (multi || !items[0]?.mpPaymentUrl) return
+    const item = items[0]
+    const order = {
+      method: 'mp' as const,
+      items: [
+        {
+          productId: item.productId,
+          name: item.name,
+          quantity: item.quantity,
+          price: item.price,
+          image: item.image,
+        },
+      ],
+      total: item.price * item.quantity,
+      mpUrl: item.mpPaymentUrl,
+      createdAt: new Date().toISOString(),
+    }
+    saveOrderConfirm(order)
+    navigate('/pedido-exitoso', { state: order })
+  }
 
   return (
     <div className="mx-auto min-h-[70vh] max-w-5xl px-4 pb-24 pt-32 sm:px-6">
@@ -122,14 +146,13 @@ export function CartPage() {
                             {formatCOP(item.price * item.quantity)}
                           </span>
                           {!multi && item.mpPaymentUrl ? (
-                            <a
-                              href={item.mpPaymentUrl}
-                              target="_blank"
-                              rel="noreferrer"
+                            <button
+                              type="button"
+                              onClick={handleMp}
                               className="btn-dark btn-sm"
                             >
-                              Pagar MP <ExternalLink className="size-3" />
-                            </a>
+                              Pagar MP
+                            </button>
                           ) : null}
                         </div>
                       </div>
