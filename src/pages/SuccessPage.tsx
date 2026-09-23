@@ -49,9 +49,9 @@ export function SuccessPage() {
         transition={{ delay: 0.25 }}
         className="mt-3 text-ink/60"
       >
-        {state.name ? `Gracias, ${state.name.split(' ')[0]}. ` : 'Gracias. '}
-        Te contactaremos pronto para coordinar el despacho a contraentrega
-        {state.city ? ` hacia ${state.city}` : ''} en toda Colombia.
+        {state.name ? `${state.name.split(' ')[0]}, ` : ''}recibimos tu pedido
+        {state.city ? ` para ${state.city}` : ''}. Te escribimos por WhatsApp para coordinar el
+        despacho y el pago en efectivo al recibir.
       </motion.p>
 
       {state.demo && (
@@ -73,13 +73,13 @@ export function SuccessPage() {
       >
         <div className="space-y-3 text-sm text-ink/70">
           <p className="flex items-center gap-2">
-            <Package className="size-4 text-rose" /> Empacamos tu pedido con cuidado
+            <Package className="size-4 text-rose" /> Preparamos el paquete
           </p>
           <p className="flex items-center gap-2">
-            <MessageCircle className="size-4 text-forest" /> Coordinamos horario por WhatsApp
+            <MessageCircle className="size-4 text-forest" /> Coordinamos fecha por WhatsApp
           </p>
           <p className="flex items-center gap-2">
-            <Home className="size-4 text-gold" /> Pagas en efectivo al recibir en tu puerta
+            <Home className="size-4 text-gold" /> Pagas en efectivo al recibir
           </p>
         </div>
       </motion.div>

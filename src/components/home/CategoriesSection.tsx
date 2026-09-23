@@ -11,10 +11,10 @@ export function CategoriesSection() {
         eyebrow="Categorías"
         title={
           <>
-            Cuida <span className="text-gradient-forest italic">piel, cabello y cuerpo</span>
+            Rostro, cabello <span className="text-gradient-forest italic">y cuerpo</span>
           </>
         }
-        description="Tecnología beauty para rostro, cabello y cuerpo — con envío a toda Colombia."
+        description="Tres categorías. Elige la zona y revisa precio, stock y formas de pago."
       />
 
       <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">

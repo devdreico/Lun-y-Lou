@@ -1,8 +1,8 @@
 export const SITE = {
   name: 'Lun & Lou',
-  tagline: 'Belleza y bienestar con alma',
+  tagline: 'Dispositivos para el cuidado en casa',
   description:
-    'Tienda de belleza y bienestar con envíos a toda Colombia. Paga con Mercado Pago (producto individual) o pide a contraentrega.',
+    'Máscaras LED, masajeadores, secadores y más. Envíos a toda Colombia. Mercado Pago o contraentrega.',
   whatsapp: (import.meta.env.VITE_WHATSAPP as string) || '573144572008',
   phoneDisplay: '314 457 2008',
   email: 'inbox@lunylou.com',

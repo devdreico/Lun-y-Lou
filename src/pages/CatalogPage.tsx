@@ -67,11 +67,11 @@ export function CatalogPage() {
         <h1 className="mt-2 font-display text-3xl font-semibold sm:text-4xl md:text-5xl">
           {activeCat
             ? (categoryList.find((c) => c.slug === activeCat)?.label ?? 'Productos')
-            : 'Toda la tienda'}
+            : 'Todos los productos'}
         </h1>
         <p className="mt-3 max-w-xl text-ink/60">
-          {filtered.length} producto{filtered.length === 1 ? '' : 's'} disponibles · Envíos a todo
-          Colombia
+          {filtered.length} producto{filtered.length === 1 ? '' : 's'} en pantalla · Envíos a
+          todo Colombia
         </p>
       </motion.header>
 
@@ -164,7 +164,7 @@ export function CatalogPage() {
       {filtered.length === 0 ? (
         <div className="glass grain rounded-3xl py-20 text-center">
           <p className="font-display text-2xl font-semibold">Sin resultados</p>
-          <p className="mt-2 text-ink/55">Prueba otra búsqueda o quita filtros.</p>
+          <p className="mt-2 text-ink/55">Quita la búsqueda o cambia de categoría.</p>
         </div>
       ) : (
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 xl:grid-cols-4">

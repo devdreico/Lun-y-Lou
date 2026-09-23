@@ -27,13 +27,14 @@ export function Footer() {
               <div>
                 <p className="font-display text-2xl font-semibold">Lun & Lou</p>
                 <p className="text-xs uppercase tracking-[0.3em] text-cream/55">
-                  Belleza y bienestar · Colombia
+                  Cuidado personal · Colombia
                 </p>
               </div>
             </div>
             <p className="mt-5 max-w-md text-sm leading-relaxed text-cream/70">
-              Belleza y bienestar con envíos a toda Colombia desde la Sábana Occidental. Paga
-              con Mercado Pago (1 producto) o recibe tu pedido a contraentrega.
+              Dispositivos para rostro, cabello y cuerpo. Envíos a toda Colombia desde la Sábana
+              Occidental. Un producto con Mercado Pago o contraentrega; varios productos solo a
+              contraentrega.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <a
@@ -108,7 +109,7 @@ export function Footer() {
               <li className="inline-flex items-start gap-2">
                 <MapPin className="mt-0.5 size-3.5 shrink-0" /> {SITE.region} · Envíos a todo Colombia
               </li>
-              <li className="text-cream/55">Contraentrega disponible</li>
+              <li className="text-cream/55">Contraentrega: pago en efectivo al recibir</li>
               <li className="text-cream/55">Cambios en 7 días</li>
             </ul>
           </div>
@@ -116,7 +117,7 @@ export function Footer() {
 
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 text-xs text-cream/50 sm:flex-row">
           <p>© {year} Lun & Lou. Todos los derechos reservados.</p>
-          <p>Pagos: Mercado Pago o contraentrega · Hecho con ♥ en Colombia</p>
+          <p>Pagos: Mercado Pago o contraentrega · Sábana Occidental, Colombia</p>
         </div>
       </div>
     </footer>

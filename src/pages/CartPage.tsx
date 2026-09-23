@@ -19,7 +19,7 @@ export function CartPage() {
         className="mb-10"
       >
         <p className="text-xs font-semibold uppercase tracking-[0.25em] text-rose-dark">
-          Tu selección
+          Carrito de compra
         </p>
         <h1 className="mt-2 font-display text-3xl font-semibold sm:text-4xl md:text-5xl">Carrito</h1>
         <p className="mt-2 text-ink/55">
@@ -41,12 +41,11 @@ export function CartPage() {
           <div>
             <p className="font-display text-2xl font-semibold">Tu carrito está vacío</p>
             <p className="mt-2 max-w-sm text-ink/55">
-              Agrega un producto y paga con Mercado Pago, o arma tu carrito y pídelo a
-              contraentrega.
+              Carrito vacío. Agrega un producto desde el catálogo.
             </p>
           </div>
           <LinkButton to="/productos" size="lg">
-            Explorar productos
+            Ver productos
           </LinkButton>
         </motion.div>
       ) : (

@@ -177,8 +177,8 @@ export function ProductDetailPage() {
 
       <section className="mt-24">
         <SectionHeading
-          eyebrow="También te puede gustar"
-          title="Sigue explorando"
+          eyebrow="Más de esta categoría"
+          title="Otros productos"
         />
         <div className="mt-10 grid grid-cols-2 gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {relatedList.map((p, i) => (

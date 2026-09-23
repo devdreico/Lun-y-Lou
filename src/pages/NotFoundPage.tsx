@@ -18,7 +18,7 @@ export function NotFoundPage() {
         <p className="font-display text-7xl font-semibold text-gradient-rose">404</p>
         <h1 className="mt-3 font-display text-3xl font-semibold">Página no encontrada</h1>
         <p className="mt-3 text-ink/60">
-          Esta dirección no existe o el producto cambió. Vuelve a la tienda y sigue explorando.
+          Esta URL no existe o el producto ya no está publicado. Vuelve al catálogo.
         </p>
         <div className="mt-7 flex flex-wrap justify-center gap-3">
           <LinkButton to="/">Ir al inicio</LinkButton>

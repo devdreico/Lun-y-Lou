@@ -15,9 +15,9 @@ export const products: Product[] = [
     id: 'p01',
     slug: 'mascara-tratamiento-facial-7-colores',
     name: 'Máscara Tratamiento Facial 7 Colores',
-    tagline: 'Luz LED para rutina facial en casa',
+    tagline: '7 colores de luz LED, recargable',
     description:
-      'Máscara de tratamiento facial con 7 colores de luz (LED) para distintas rutinas de cuidado: luminosidad, calma y renovación. Diseño ligero, recargable y fácil de usar en casa o al viajar.',
+      'Máscara facial con 7 colores LED para usar en casa. Ligera, recargable y fácil de poner mientras descansas o ves televisión.',
     price: 190000,
     category: 'facial',
     images: [
@@ -28,16 +28,16 @@ export const products: Product[] = [
     ],
     mpPaymentUrl: 'https://mpago.li/2mpq2z4',
     featured: true,
-    badge: 'Top ventas',
+    badge: 'Destacado',
     stock: 15,
   },
   {
     id: 'p02',
     slug: 'masajeador-capilar-electrico',
     name: 'Masajeador Capilar Eléctrico',
-    tagline: 'Relaja el cuero cabelludo en minutos',
+    tagline: 'Vibro-masaje con puntas suaves',
     description:
-      'Masajeador capilar eléctrico con puntas suaves y vibro-masaje para desestresar el cuero cabelludo, activar la circulación y potenciar la sensación de bienestar en tu lavado.',
+      'Masajeador eléctrico para el cuero cabelludo. Se usa al lavarte el cabello o seco: puntas suaves y vibración para masajear el scalp.',
     price: 55900,
     category: 'cabello',
     images: [
@@ -54,9 +54,9 @@ export const products: Product[] = [
     id: 'p03',
     slug: 'plancha-viajera-mini-cabello',
     name: 'Plancha Viajera Mini para Cabello',
-    tagline: 'Estilo compacto que cabe en cualquier bolso',
+    tagline: 'Plancha mini de cerámica para viaje',
     description:
-      'Plancha mini de cerámica para alisar, definir y tocar puntas al viajar. Tamaño portátil, calentamiento rápido y acabado suave sin apagar el brillo natural del cabello.',
+      'Plancha de pelo pequeña con placa de cerámica. Calienta rápido y cabe en bolso o maleta para alisar o tocar puntas fuera de casa.',
     price: 27900,
     compareAtPrice: 34900,
     category: 'cabello',
@@ -72,9 +72,9 @@ export const products: Product[] = [
     id: 'p04',
     slug: 'cepillo-facial-natural-shine',
     name: 'Cepillo Facial + Natural Shine de Obsequio',
-    tagline: 'Limpieza profunda con regalo incluido',
+    tagline: 'Exfoliador facial + Natural Shine de obsequio',
     description:
-      'Cepillo facial para limpieza y exfoliación suave, con Natural Shine de obsequio. Ideal para rutina diaria, preparar la piel y potenciar el brillo natural del rostro.',
+      'Cepillo para limpiar y exfoliar el rostro en el lavado diario. Incluye Natural Shine de obsequio en la misma compra.',
     price: 26000,
     category: 'facial',
     images: [
@@ -90,9 +90,9 @@ export const products: Product[] = [
     id: 'p05',
     slug: 'masajeador-anticelulitis-ultrasonido',
     name: 'Masajeador Anticelulitis Ultrasonido',
-    tagline: 'Tecnología ultrasónica para el cuerpo',
+    tagline: 'Ultrasonido y vibración para cuerpo',
     description:
-      'Masajeador corporal con ultrasonido y vibración para sesiones de masaje en abdomen, piernas y brazos. Ayuda a relajar la piel y a acompañar tu ritual de cuidado corporal en casa.',
+      'Masajeador corporal con ultrasonido y vibración. Se usa en abdomen, piernas y brazos en sesiones cortas en casa.',
     price: 60000,
     compareAtPrice: 75000,
     category: 'corporal',
@@ -112,9 +112,9 @@ export const products: Product[] = [
     id: 'p06',
     slug: 'cepillo-secador-5-en-1',
     name: 'Cepillo Secador 5 en 1',
-    tagline: 'Secado, volumen y rizos en un solo accesorio',
+    tagline: '5 boquillas: seca, peina y ondula',
     description:
-      'Cepillo secador multifunción 5 en 1 con boquillas intercambiables para secar, peinar, dar volumen y ondular. Potencia uniforme y acabado de salón sin complicarte la mañana.',
+      'Cepillo secador con 5 boquillas intercambiables para secar el pelo, dar volumen y hacer ondas sin pasar dos aparatos.',
     price: 46900,
     category: 'cabello',
     images: [
@@ -128,9 +128,9 @@ export const products: Product[] = [
     id: 'p07',
     slug: 'mini-pistola-masajeadora-muscular',
     name: 'Mini Pistola Masajeadora Muscular',
-    tagline: 'Percusión portátil para sobrecarga muscular',
+    tagline: 'Masaje de percusión, tamaño mini',
     description:
-      'Pistola de masaje mini con punzos suaves y varios niveles de intensidad. Perfecta para hombros, espalda y piernas después del gym o de un día largo frente al computador.',
+      'Pistola de masaje pequeña con varios niveles de intensidad. Para hombros, espalda y piernas después de entrenar o de estar sentado mucho rato.',
     price: 40900,
     category: 'corporal',
     images: [
@@ -143,9 +143,9 @@ export const products: Product[] = [
     id: 'p08',
     slug: 'rizador-pelo-portatil-espiral',
     name: 'Rizador de Pelo Portátil en Espiral',
-    tagline: 'Rizos definidos donde sea que estés',
+    tagline: 'Rizador espiral, tamaño portátil',
     description:
-      'Rizador portátil con diseño en espiral para lograr rizos y ondas con un movimiento simple. Compacto, ideal para maletas, oficina o cambios de look al instante.',
+      'Rizador en espiral para hacer rizos y ondas con un movimiento. Cabe en maleta; sirve en casa, oficina o de viaje.',
     price: 32900,
     category: 'cabello',
     images: [
@@ -158,9 +158,9 @@ export const products: Product[] = [
     id: 'p09',
     slug: 'masajeador-rodillo-jade-facial',
     name: 'Masajeador Rodillo de Jade Facial',
-    tagline: 'Frío natural + drenaje suave',
+    tagline: 'Rodillo de jade para rostro y cuello',
     description:
-      'Rodillo facial de jade para masajear rostro y cuello con movimientos ascendentes. Ayuda a desinflamar, relajar la musculatura facial y sellar tus productos de skincare.',
+      'Rodillo de jade frío. Se pasa de abajo hacia arriba en rostro y cuello después del sérum o la crema.',
     price: 31000,
     category: 'facial',
     images: [
@@ -178,9 +178,9 @@ export const products: Product[] = [
     id: 'p10',
     slug: 'maquina-depiladora-laser-ipl-110v',
     name: 'Máquina Depiladora Láser IPL 110V',
-    tagline: 'Depilación láser en casa, 110V',
+    tagline: 'IPL de 110V para rostro y cuerpo',
     description:
-      'Depiladora láser IPL de 110V con distintos niveles de intensidad para tratar rostro y cuerpo. Acompaña un plan de sesiones continuas con diseño ergonómico y uso domiciliario.',
+      'Depiladora IPL de 110V con varios niveles de intensidad. Para uso en casa en rostro y cuerpo; requiere sesiones seguidas.',
     price: 63900,
     compareAtPrice: 79900,
     category: 'corporal',

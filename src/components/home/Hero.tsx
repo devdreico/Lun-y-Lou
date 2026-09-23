@@ -22,7 +22,7 @@ export function Hero() {
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             className="inline-flex items-center gap-2 rounded-full border border-rose/25 bg-rose/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.22em] text-rose-dark"
           >
-            <Sparkles className="size-3.5" /> Nueva colección
+            <Sparkles className="size-3.5" /> 10 productos en catálogo
           </motion.div>
 
           <motion.h1
@@ -31,9 +31,9 @@ export function Hero() {
             transition={{ duration: 0.75, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
             className="mt-5 font-display text-3xl font-semibold leading-[1.05] text-balance sm:text-5xl md:text-6xl lg:text-7xl"
           >
-            Belleza y bienestar{' '}
-            <span className="text-gradient-rose italic">que se siente</span>{' '}
-            como tú
+            Máscaras LED, masajeadores{' '}
+            <span className="text-gradient-rose italic">y más para</span>{' '}
+            el cuidado en casa
           </motion.h1>
 
           <motion.p
@@ -42,8 +42,8 @@ export function Hero() {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-ink/65 md:text-lg lg:mx-0"
           >
-            Lun & Lou lleva tecnología beauty con envíos a toda Colombia desde la Sábana
-            Occidental. Paga con Mercado Pago (producto individual) o pide a contraentrega.
+            Dispositivos para rostro, cabello y cuerpo. Enviamos a toda Colombia desde la Sábana
+            Occidental. Un producto: Mercado Pago o contraentrega. Varios: solo contraentrega.
           </motion.p>
 
           <motion.div
@@ -53,11 +53,11 @@ export function Hero() {
             className="mt-8 flex flex-wrap items-center justify-center gap-3 lg:justify-start"
           >
             <LinkButton to="/productos" size="lg" className="group">
-              Explorar tienda
+              Ver productos
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
             </LinkButton>
             <LinkButton to="/productos?cat=facial" variant="ghost" size="lg">
-              Ver cuidado facial
+              Ver categoría facial
             </LinkButton>
           </motion.div>
 

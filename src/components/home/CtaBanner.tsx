@@ -18,16 +18,15 @@ export function CtaBanner() {
 
         <div className="relative mx-auto max-w-2xl">
           <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-gold-light ring-1 ring-white/15">
-            <Heart className="size-3.5" /> Envíos a toda Colombia
+            <Heart className="size-3.5" /> Envío a toda Colombia
           </span>
           <h2 className="mt-5 font-display text-3xl font-semibold leading-tight text-cream md:text-5xl">
-            Tu estilo merece llegar{' '}
-            <span className="italic text-gradient-rose">a toda Colombia</span>
+            Paga con Mercado Pago{' '}
+            <span className="italic text-gradient-rose">o al recibir</span>
           </h2>
           <p className="mt-4 text-sm leading-relaxed text-cream/70 md:text-base">
-            Compra un producto con Mercado Pago o pide a contraentrega. En Lun & Lou cada
-            producto tiene su link de pago y los pedidos de varios artículos se coordinan a
-            contraentrega.
+            Un producto: link de Mercado Pago en la ficha, o contraentrega en efectivo. Varios
+            productos en el carrito: solo contraentrega.
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <LinkButton to="/productos" size="lg" className="group">

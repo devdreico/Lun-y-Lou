@@ -16,10 +16,10 @@ export function FeaturedSection() {
             eyebrow="Destacados"
             title={
               <>
-                Lo más <span className="text-gradient-rose italic">pedido</span> de la tienda
+                Productos <span className="text-gradient-rose italic">destacados</span>
               </>
             }
-            description="Tecnología beauty real, con stock listo para despacho nacional."
+            description="En stock. Despacho en 24–72 horas a toda Colombia."
           />
           <Link
             to="/productos"
