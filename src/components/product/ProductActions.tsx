@@ -1,13 +1,12 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { ShieldCheck, Truck, Banknote } from 'lucide-react'
+import { Banknote, Clock, Truck } from 'lucide-react'
 import { formatCOP } from '../../lib/format'
 import type { Product } from '../../types'
 import { useCart } from '../../store/cart'
 import { Button } from '../ui/Button'
 import { toast } from '../../lib/toast'
-import { saveOrderConfirm } from '../../lib/orderConfirm'
 
 interface Props {
   product: Product
@@ -18,8 +17,6 @@ export function ProductActions({ product }: Props) {
   const navigate = useNavigate()
   const [qty, setQty] = useState(1)
 
-  const hasMpLink = Boolean(product.mpPaymentUrl)
-
   const handleAdd = () => {
     addItem(product, { quantity: qty })
     toast({ title: 'Agregado al carrito', message: product.name })
@@ -29,28 +26,6 @@ export function ProductActions({ product }: Props) {
   const handleContraentrega = () => {
     addItem(product, { quantity: qty })
     navigate('/checkout')
-  }
-
-  /** Pago MP: pantalla de confirmación antes de salir a Mercado Pago. */
-  const handleMp = () => {
-    if (!product.mpPaymentUrl) return
-    const order = {
-      method: 'mp' as const,
-      items: [
-        {
-          productId: product.id,
-          name: product.name,
-          quantity: qty,
-          price: product.price,
-          image: product.images[0]?.src ?? '',
-        },
-      ],
-      total: product.price * qty,
-      mpUrl: product.mpPaymentUrl,
-      createdAt: new Date().toISOString(),
-    }
-    saveOrderConfirm(order)
-    navigate('/pedido-exitoso', { state: order })
   }
 
   return (
@@ -86,23 +61,6 @@ export function ProductActions({ product }: Props) {
       </div>
 
       <div className="grid gap-3">
-        {hasMpLink ? (
-          <Button
-            size="lg"
-            onClick={handleMp}
-            variant="dark"
-            className="w-full justify-center text-center"
-          >
-            <ShieldCheck className="size-4 shrink-0" />
-            <span className="min-w-0">
-              Pagar con Mercado Pago
-              <span className="mt-0.5 block text-xs font-medium opacity-80">
-                {formatCOP(product.price * qty)}
-              </span>
-            </span>
-          </Button>
-        ) : null}
-
         <Button
           size="lg"
           onClick={handleContraentrega}
@@ -112,7 +70,7 @@ export function ProductActions({ product }: Props) {
           <span className="min-w-0">
             Pedir a contraentrega
             <span className="mt-0.5 block text-xs font-medium opacity-80">
-              {formatCOP(product.price * qty)}
+              {formatCOP(product.price * qty)} · pagas al recibir
             </span>
           </span>
         </Button>
@@ -121,15 +79,19 @@ export function ProductActions({ product }: Props) {
           Agregar al carrito
         </Button>
 
-        <p className="text-center text-[11px] leading-relaxed text-ink/50">
-          {hasMpLink
-            ? 'MP = pago inmediato (1 producto). Contraentrega = pagas en efectivo al recibir. Carrito con varios productos: solo contraentrega.'
-            : 'Contraentrega: pagas en efectivo al recibir. Envíos a toda Colombia.'}
-        </p>
+        <div className="space-y-1.5 rounded-2xl border border-forest/20 bg-forest/5 px-4 py-3 text-[11px] leading-relaxed text-ink/60">
+          <p className="flex items-center gap-2">
+            <Banknote className="size-3.5 shrink-0 text-forest" /> Pagas en efectivo al
+            recibir el paquete
+          </p>
+          <p className="flex items-center gap-2">
+            <Clock className="size-3.5 shrink-0 text-rose" /> Envío en 2 días a tu puerta
+          </p>
+        </div>
 
         <p className="flex items-center justify-center gap-2 text-center text-xs text-ink/50">
-          <Truck className="size-3.5 shrink-0 text-forest" /> Envíos a toda Colombia · Sábana
-          Occidental
+          <Truck className="size-3.5 shrink-0 text-forest" /> Envíos a toda Colombia ·
+          Sábana Occidental
         </p>
       </div>
     </div>

@@ -1,4 +1,4 @@
-export type OrderMethod = 'contraentrega' | 'mp'
+export type OrderMethod = 'contraentrega'
 
 export interface OrderConfirmItem {
   productId: string
@@ -17,7 +17,6 @@ export interface OrderConfirm {
   address?: string
   items: OrderConfirmItem[]
   total: number
-  mpUrl?: string
   createdAt: string
 }
 
@@ -48,31 +47,5 @@ export function clearOrderConfirm(): void {
     sessionStorage.removeItem(KEY)
   } catch {
     /* noop */
-  }
-}
-
-export function orderFromCart(
-  items: {
-    productId: string
-    name: string
-    quantity: number
-    price: number
-    image: string
-    mpPaymentUrl: string
-  }[],
-  extra: Partial<OrderConfirm> & { method: OrderMethod },
-): OrderConfirm {
-  const total = items.reduce((sum, i) => sum + i.price * i.quantity, 0)
-  return {
-    ...extra,
-    items: items.map((i) => ({
-      productId: i.productId,
-      name: i.name,
-      quantity: i.quantity,
-      price: i.price,
-      image: i.image,
-    })),
-    total,
-    createdAt: new Date().toISOString(),
   }
 }

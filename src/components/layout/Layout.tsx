@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { Footer } from './Footer'
 import { Navbar } from './Navbar'
 import { ScrollProgress } from './ScrollProgress'
+import { WhatsAppFab } from './WhatsAppFab'
 import { CartDrawer } from '../cart/CartDrawer'
 import { ToastHost } from '../ui/Toaster'
 
@@ -23,6 +24,7 @@ export function Layout() {
         </div>
       </main>
       <Footer />
+      <WhatsAppFab />
       <CartDrawer />
       <ToastHost />
     </div>

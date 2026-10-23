@@ -93,9 +93,9 @@ export function ProductDetailPage() {
 
           <div className="grid grid-cols-1 gap-2 sm:grid-cols-3 sm:gap-3">
             {[
-              { icon: Truck, t: 'Envío nacional' },
+              { icon: Truck, t: 'Envío en 2 días' },
               { icon: RotateCcw, t: 'Cambios 7 días' },
-              { icon: ShieldCheck, t: 'Compra segura' },
+              { icon: ShieldCheck, t: 'Contraentrega segura' },
             ].map((f) => (
               <div
                 key={f.t}
@@ -161,15 +161,15 @@ export function ProductDetailPage() {
               rel="noreferrer"
               className="text-forest underline underline-offset-4 hover:text-rose-dark"
             >
-              Escríbenos y coordinamos tu entrega a contraentrega →
+              Escríbenos al 314 457 2008 y coordinamos tu entrega a contraentrega →
             </a>
           </div>
 
           <div className="flex items-start gap-3 text-xs text-ink/50">
             <Package className="mt-0.5 size-4 shrink-0 text-rose" />
             <p>
-              Despacho en 24–72 horas hábiles según ciudad. Envíos a toda Colombia desde la
-              Sábana Occidental.
+              Envío en 2 días a tu puerta. Pagas en efectivo al recibir. Envíos a toda
+              Colombia desde la Sábana Occidental.
             </p>
           </div>
         </motion.div>

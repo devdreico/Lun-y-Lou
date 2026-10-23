@@ -1,4 +1,4 @@
-import { Camera, Mail, MapPin, MessageCircle, Music2 } from 'lucide-react'
+import { Camera, Clock, Mail, MapPin, MessageCircle, Music2 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { WHATSAPP_URL, SITE } from '../../lib/constants'
 
@@ -20,21 +20,21 @@ export function Footer() {
       <div className="relative mx-auto max-w-7xl px-4 pb-10 pt-16 sm:px-6">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4 md:gap-10">
           <div className="col-span-2 md:col-span-2">
-            <div className="flex items-center gap-3">
-              <span className="grid size-12 place-items-center overflow-hidden rounded-full bg-white/10 ring-1 ring-white/20">
-                <img src="/logo.png" alt="Lun & Lou" className="size-9 object-contain" />
+            <div className="flex items-center gap-4">
+              <span className="grid size-20 shrink-0 place-items-center overflow-hidden rounded-full bg-white/10 ring-2 ring-white/25 sm:size-24">
+                <img src="/logo.png" alt="Lun & Lou" className="size-16 object-contain sm:size-[4.5rem]" />
               </span>
               <div>
-                <p className="font-display text-2xl font-semibold">Lun & Lou</p>
-                <p className="text-xs uppercase tracking-[0.3em] text-cream/55">
-                  Cuidado personal · Colombia
+                <p className="font-display text-3xl font-semibold sm:text-4xl">Lun & Lou</p>
+                <p className="mt-1 text-[11px] uppercase tracking-[0.3em] text-gold-light">
+                  Glam de salón · En casa
                 </p>
               </div>
             </div>
             <p className="mt-5 max-w-md text-sm leading-relaxed text-cream/70">
-              Dispositivos para rostro, cabello y cuerpo. Envíos a toda Colombia desde la Sábana
-              Occidental. Un producto con Mercado Pago o contraentrega; varios productos solo a
-              contraentrega.
+              Dispositivos de belleza para rostro, cabello y cuerpo.{' '}
+              <strong className="text-cream">{SITE.shippingPromise}</strong> y pagas en
+              efectivo al recibir: así de simple, en toda Colombia.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <a
@@ -43,7 +43,7 @@ export function Footer() {
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm ring-1 ring-white/15 transition hover:bg-white/20 hover:ring-rose/40"
               >
-                <MessageCircle className="size-4" /> WhatsApp
+                <MessageCircle className="size-4" /> {SITE.phoneDisplay}
               </a>
               <a
                 href={SITE.instagram}
@@ -51,7 +51,7 @@ export function Footer() {
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm ring-1 ring-white/15 transition hover:bg-white/20 hover:ring-rose/40"
               >
-                <Camera className="size-4" /> Instagram
+                <Camera className="size-4" /> {SITE.instagramHandle}
               </a>
               <a
                 href={SITE.tiktok}
@@ -99,15 +99,25 @@ export function Footer() {
             <p className="font-display text-lg font-semibold">Ayuda</p>
             <ul className="mt-4 space-y-2 text-sm text-cream/70">
               <li>
+                <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 transition hover:text-rose-light">
+                  <MessageCircle className="size-3.5" /> WhatsApp {SITE.phoneDisplay}
+                </a>
+              </li>
+              <li>
                 <a href={`mailto:${SITE.email}`} className="inline-flex items-center gap-2 transition hover:text-rose-light">
                   <Mail className="size-3.5" /> {SITE.email}
                 </a>
               </li>
-              <li className="inline-flex items-center gap-2">
-                <MessageCircle className="size-3.5" /> WhatsApp {SITE.phoneDisplay}
+              <li>
+                <a href={SITE.instagram} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 transition hover:text-rose-light">
+                  <Camera className="size-3.5" /> Instagram {SITE.instagramHandle}
+                </a>
               </li>
               <li className="inline-flex items-start gap-2">
                 <MapPin className="mt-0.5 size-3.5 shrink-0" /> {SITE.region} · Envíos a todo Colombia
+              </li>
+              <li className="inline-flex items-center gap-2 text-gold-light">
+                <Clock className="size-3.5" /> Envío en 2 días a tu puerta
               </li>
               <li className="text-cream/55">Contraentrega: pago en efectivo al recibir</li>
               <li className="text-cream/55">Cambios en 7 días</li>
@@ -117,7 +127,7 @@ export function Footer() {
 
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 text-xs text-cream/50 sm:flex-row">
           <p>© {year} Lun & Lou. Todos los derechos reservados.</p>
-          <p>Pagos: Mercado Pago o contraentrega · Sábana Occidental, Colombia</p>
+          <p>Contraentrega · Envío en 2 días · {SITE.instagramHandle} · Sábana Occidental, Colombia</p>
         </div>
       </div>
     </footer>

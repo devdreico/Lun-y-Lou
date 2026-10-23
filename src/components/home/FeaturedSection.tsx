@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion'
-import { ArrowRight, CreditCard, PackageCheck, Wallet } from 'lucide-react'
+import { ArrowRight, Clock, MessageCircle, Sparkles } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { featuredProducts } from '../../data/products'
+import { SITE, WHATSAPP_URL } from '../../lib/constants'
 import { ProductCard } from '../product/ProductCard'
 import { SectionHeading } from '../ui/SectionHeading'
 
@@ -19,7 +20,7 @@ export function FeaturedSection() {
                 Productos <span className="text-gradient-rose italic">destacados</span>
               </>
             }
-            description="En stock. Despacho en 24–72 horas a toda Colombia."
+            description={`${SITE.shippingPromise}. Paga en efectivo al recibir.`}
           />
           <Link
             to="/productos"
@@ -30,7 +31,7 @@ export function FeaturedSection() {
           </Link>
         </div>
 
-        <div className="mt-12 grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
+        <div className="mt-10 grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
           {featuredProducts.slice(0, 4).map((p, i) => (
             <ProductCard key={p.id} product={p} index={i} />
           ))}
@@ -42,23 +43,23 @@ export function FeaturedSection() {
 
 const perks = [
   {
-    icon: CreditCard,
-    title: 'Mercado Pago',
-    text: 'Link de pago por producto. Tarjeta, PSE, Nequi y más — compras individuales.',
+    icon: Clock,
+    title: 'Envío en 2 días',
+    text: 'Despachamos a toda Colombia desde la Sábana Occidental. Tu paquete llega en 2 días a tu puerta.',
     accent: 'text-rose',
     ring: 'from-rose/25',
   },
   {
-    icon: Wallet,
+    icon: Sparkles,
     title: 'Contraentrega',
-    text: 'Paga en efectivo al recibir. Varios productos en el carrito: solo contraentrega.',
+    text: 'Sin tarjetas ni anticipos: ves el paquete y pagas en efectivo al recibir. Cero riesgo.',
     accent: 'text-gold',
     ring: 'from-gold/30',
   },
   {
-    icon: PackageCheck,
-    title: 'Envíos nacionales',
-    text: 'Despachamos a toda Colombia desde la Sábana Occidental con seguimiento.',
+    icon: MessageCircle,
+    title: 'Atención personal',
+    text: `Te atendemos por WhatsApp ${SITE.phoneDisplay} y ${SITE.instagramHandle}: una persona real, no un bot.`,
     accent: 'text-forest',
     ring: 'from-forest/25',
   },
@@ -66,7 +67,7 @@ const perks = [
 
 export function PerksSection() {
   return (
-    <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+    <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16">
       <div className="grid gap-5 md:grid-cols-3">
         {perks.map((perk, i) => (
           <motion.div
@@ -90,6 +91,36 @@ export function PerksSection() {
           </motion.div>
         ))}
       </div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.55 }}
+        className="glass-dark grain mt-6 flex flex-col items-center gap-4 rounded-3xl px-6 py-6 text-center sm:flex-row sm:justify-between sm:text-left"
+      >
+        <div className="flex items-center gap-4">
+          <span className="grid size-14 shrink-0 place-items-center overflow-hidden rounded-full bg-white/10 ring-1 ring-white/20">
+            <img src="/logo.png" alt="" className="size-11 object-contain" />
+          </span>
+          <div>
+            <p className="font-display text-lg font-semibold text-cream sm:text-xl">
+              Valor Lun &amp; Lou
+            </p>
+            <p className="mt-0.5 text-sm text-cream/65">
+              Belleza de calidad, precio honesto y entrega sin complicaciones.
+            </p>
+          </div>
+        </div>
+        <a
+          href={WHATSAPP_URL}
+          target="_blank"
+          rel="noreferrer"
+          className="btn-primary btn-sm shrink-0"
+        >
+          <MessageCircle className="size-4" /> Escribir ahora
+        </a>
+      </motion.div>
     </section>
   )
 }

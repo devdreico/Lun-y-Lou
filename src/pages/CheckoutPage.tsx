@@ -102,8 +102,7 @@ export function CheckoutPage() {
           Finaliza tu pedido
         </h1>
         <p className="mx-auto mt-3 max-w-lg text-ink/60">
-          Pagas en efectivo al recibir. Te confirmamos por WhatsApp el despacho a tu ciudad en
-          toda Colombia.
+          Pagas en efectivo al recibir. Envío en 2 días a tu puerta en toda Colombia.
         </p>
       </motion.header>
 
@@ -241,17 +240,16 @@ export function CheckoutPage() {
               <p className="flex items-start gap-2">
                 <Banknote className="mt-0.5 size-4 shrink-0 text-forest" />
                 <span>
-                  Al confirmar enviamos tu pedido en <strong>texto plano</strong> a nuestro
-                  equipo (Formspree). Coordinamos el despacho y pagas en{' '}
+                  Al confirmar enviamos tu pedido a nuestro equipo. Te escribimos por
+                  WhatsApp para coordinar el despacho y pagas en{' '}
                   <strong>efectivo</strong> cuando recibas el paquete.
                 </span>
               </p>
               <p className="mt-2 flex items-start gap-2 text-ink/55">
                 <ShieldCheck className="mt-0.5 size-4 shrink-0 text-rose" />
                 <span>
-                  ¿Prefieres tarjeta o Nequi? En la ficha de cada producto puedes pagar con{' '}
-                  <strong>Mercado Pago</strong> (solo compras de 1 producto). Varios
-                  productos en carrito: solo contraentrega.
+                  Sin anticipos ni datos de tarjeta. <strong>Envío en 2 días</strong> a tu
+                  puerta en toda Colombia.
                 </span>
               </p>
             </div>
@@ -313,7 +311,7 @@ export function CheckoutPage() {
             </div>
             <div className="flex justify-between text-ink/55">
               <span>Envío</span>
-              <span>Coordinado</span>
+              <span>2 días · se coordina</span>
             </div>
             <div className="flex flex-col gap-1 pt-2 sm:flex-row sm:items-end sm:justify-between">
               <span className="font-medium">Total a pagar al recibir</span>

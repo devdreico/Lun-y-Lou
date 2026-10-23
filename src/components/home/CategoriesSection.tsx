@@ -14,7 +14,7 @@ export function CategoriesSection() {
             Rostro, cabello <span className="text-gradient-forest italic">y cuerpo</span>
           </>
         }
-        description="Tres categorías. Elige la zona y revisa precio, stock y formas de pago."
+        description="Tres categorías. Elige la zona, arma tu carrito y paga en efectivo al recibir."
       />
 
       <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">

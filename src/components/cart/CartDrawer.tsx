@@ -1,43 +1,15 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { Minus, Plus, ShoppingBag, Trash2, X } from 'lucide-react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { cartKey, selectCount, selectTotal, useCart } from '../../store/cart'
 import { formatCOP } from '../../lib/format'
 import { Button, LinkButton } from '../ui/Button'
 import { WHATSAPP_URL } from '../../lib/constants'
-import { saveOrderConfirm } from '../../lib/orderConfirm'
 
 export function CartDrawer() {
   const { items, isOpen, setOpen, updateQuantity, removeItem, clearCart } = useCart()
-  const navigate = useNavigate()
   const count = selectCount(items)
   const total = selectTotal(items)
-  const multi = items.length > 1 || count > 1
-  const singleMp =
-    !multi && items.length === 1 && Boolean(items[0]?.mpPaymentUrl)
-
-  const handleMp = () => {
-    if (!singleMp || !items[0]) return
-    const item = items[0]
-    const order = {
-      method: 'mp' as const,
-      items: [
-        {
-          productId: item.productId,
-          name: item.name,
-          quantity: item.quantity,
-          price: item.price,
-          image: item.image,
-        },
-      ],
-      total: item.price * item.quantity,
-      mpUrl: item.mpPaymentUrl,
-      createdAt: new Date().toISOString(),
-    }
-    saveOrderConfirm(order)
-    setOpen(false)
-    navigate('/pedido-exitoso', { state: order })
-  }
 
   return (
     <AnimatePresence>
@@ -167,17 +139,10 @@ export function CartDrawer() {
                     })}
                   </AnimatePresence>
 
-                  {multi ? (
-                    <div className="rounded-2xl border border-dashed border-rose/30 bg-rose/5 p-3 text-xs text-ink/65">
-                      Varios productos: este pedido se finaliza <strong>solo a contraentrega</strong>.
-                      Para pagar con Mercado Pago, compra un producto a la vez desde su ficha.
-                    </div>
-                  ) : singleMp ? (
-                    <div className="rounded-2xl border border-dashed border-rose/30 bg-rose/5 p-3 text-xs text-ink/65">
-                      1 producto: puedes pagar ya con <strong>Mercado Pago</strong> o pedir a
-                      contraentrega.
-                    </div>
-                  ) : null}
+                  <div className="rounded-2xl border border-dashed border-rose/30 bg-rose/5 p-3 text-xs text-ink/65">
+                    Paga en <strong>efectivo al recibir</strong> · Envío en 2 días a tu
+                    puerta.
+                  </div>
                 </div>
 
                 <footer className="space-y-3 border-t border-ink/8 px-5 py-4">
@@ -200,16 +165,6 @@ export function CartDrawer() {
                     >
                       Pedir a contraentrega
                     </LinkButton>
-
-                    {singleMp && (
-                      <button
-                        type="button"
-                        onClick={handleMp}
-                        className="btn-dark btn-lg w-full justify-center"
-                      >
-                        Pagar con Mercado Pago
-                      </button>
-                    )}
 
                     <div className="flex flex-col gap-2 sm:grid sm:grid-cols-2">
                       <Button

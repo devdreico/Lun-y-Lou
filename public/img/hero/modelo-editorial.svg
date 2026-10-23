@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 750" fill="none" role="img" aria-label="Modelo con máscara LED facial — editorial Lun & Lou">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="600" y2="750" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2E4A3D"/>
+      <stop offset="0.55" stop-color="#1F3329"/>
+      <stop offset="1" stop-color="#1A1518"/>
+    </linearGradient>
+    <linearGradient id="skin" x1="220" y1="180" x2="400" y2="520" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F6E7DC"/>
+      <stop offset="1" stop-color="#E8CDB8"/>
+    </linearGradient>
+    <linearGradient id="hair" x1="180" y1="120" x2="430" y2="420" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#3A2C33"/>
+      <stop offset="0.5" stop-color="#2A1F26"/>
+      <stop offset="1" stop-color="#1A1518"/>
+    </linearGradient>
+    <linearGradient id="maskGlow" x1="230" y1="230" x2="390" y2="360" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E86A86"/>
+      <stop offset="0.5" stop-color="#C93F5F"/>
+      <stop offset="1" stop-color="#D4A574"/>
+    </linearGradient>
+    <linearGradient id="led" x1="250" y1="250" x2="370" y2="330" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F8D5DE"/>
+      <stop offset="1" stop-color="#F0D9BC"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="300" cy="300" r="220" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#C93F5F" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#C93F5F" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="goldGlow" cx="480" cy="140" r="160" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#D4A574" stop-opacity="0.4"/>
+      <stop offset="1" stop-color="#D4A574" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soft" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="14"/>
+    </filter>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="8" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="600" height="750" fill="url(#bg)"/>
+  <circle cx="300" cy="300" r="220" fill="url(#halo)"/>
+  <circle cx="480" cy="140" r="160" fill="url(#goldGlow)"/>
+
+  <!-- sparkles -->
+  <g fill="#F0D9BC" opacity="0.9">
+    <path d="M90 120l4 14 14 4-14 4-4 14-4-14-14-4 14-4 4-14z"/>
+    <path d="M520 420l3 10 10 3-10 3-3 10-3-10-10-3 10-3 3-10z" opacity="0.7"/>
+    <path d="M120 560l2.5 8 8 2.5-8 2.5-2.5 8-2.5-8-8-2.5 8-2.5 2.5-8z" opacity="0.6"/>
+    <circle cx="150" cy="300" r="2.5" opacity="0.8"/>
+    <circle cx="470" cy="240" r="2" opacity="0.7"/>
+    <circle cx="420" cy="560" r="2.5" opacity="0.6"/>
+  </g>
+
+  <!-- shoulders / body -->
+  <path d="M150 750c10-120 70-190 150-190s140 70 150 190H150z" fill="#C93F5F"/>
+  <path d="M170 750c12-100 60-160 130-160s118 60 130 160H170z" fill="#A32F4A" opacity="0.55"/>
+  <!-- neck -->
+  <path d="M265 470h70v70c0 22-16 38-35 38s-35-16-35-38v-70z" fill="url(#skin)"/>
+
+  <!-- hair back -->
+  <path d="M195 300c0-120 45-190 105-190s105 70 105 190c0 40-8 80-18 110l-20-8c8-30 14-65 14-102 0-95-30-155-81-155s-81 60-81 155c0 37 6 72 14 102l-20 8c-10-30-18-70-18-110z" fill="url(#hair)"/>
+
+  <!-- face -->
+  <ellipse cx="300" cy="330" rx="92" ry="115" fill="url(#skin)"/>
+
+  <!-- ears -->
+  <ellipse cx="210" cy="335" rx="14" ry="22" fill="#E8CDB8"/>
+  <ellipse cx="390" cy="335" rx="14" ry="22" fill="#E8CDB8"/>
+  <!-- earrings -->
+  <g filter="url(#glow)">
+    <circle cx="210" cy="372" r="7" fill="#D4A574"/>
+    <circle cx="390" cy="372" r="7" fill="#D4A574"/>
+  </g>
+
+  <!-- hair front strands -->
+  <path d="M208 300c-4-95 30-165 92-165 28 0 50 12 66 32-38-2-72 22-88 70-12 36-14 82-8 120-30-18-52-40-62-57z" fill="url(#hair)"/>
+  <path d="M392 300c4-95-30-165-92-165-20 0-38 6-52 18 40 8 66 40 78 88 10 40 8 88 2 122 32-20 56-44 64-63z" fill="url(#hair)"/>
+
+  <!-- LED facial mask (brand hero product) -->
+  <g filter="url(#glow)">
+    <path d="M232 268c8-30 36-48 68-48s60 18 68 48c6 22 4 52-2 74-4 16-12 30-22 38-12 10-28 16-44 16s-32-6-44-16c-10-8-18-22-22-38-6-22-8-52-2-74z" fill="url(#maskGlow)" opacity="0.92"/>
+    <path d="M242 275c7-24 30-39 58-39s51 15 58 39c5 18 3 42-2 59-3 13-10 24-18 31-10 8-24 13-38 13s-28-5-38-13c-8-7-15-18-18-31-5-17-7-41-2-59z" fill="url(#led)" opacity="0.35"/>
+    <!-- LED dots -->
+    <g fill="#F8D5DE">
+      <circle cx="268" cy="290" r="4.5"/><circle cx="300" cy="282" r="4.5"/><circle cx="332" cy="290" r="4.5"/>
+      <circle cx="256" cy="318" r="4.5"/><circle cx="280" cy="314" r="4.5"/><circle cx="300" cy="312" r="4.5"/><circle cx="320" cy="314" r="4.5"/><circle cx="344" cy="318" r="4.5"/>
+      <circle cx="266" cy="346" r="4.5"/><circle cx="300" cy="352" r="4.5"/><circle cx="334" cy="346" r="4.5"/>
+    </g>
+    <g fill="#F0D9BC" opacity="0.95">
+      <circle cx="284" cy="300" r="3.5"/><circle cx="316" cy="300" r="3.5"/>
+      <circle cx="300" cy="330" r="3.5"/><circle cx="272" cy="332" r="3.5"/><circle cx="328" cy="332" r="3.5"/>
+    </g>
+  </g>
+
+  <!-- lips below mask -->
+  <path d="M282 418c6 10 12 14 18 14s12-4 18-14c-6 4-12 6-18 6s-12-2-18-6z" fill="#C93F5F"/>
+  <path d="M282 418c6-6 12-9 18-9s12 3 18 9c-6-3-12-4-18-4s-12 1-18 4z" fill="#A32F4A"/>
+
+  <!-- gold hoop earrings accents + chain -->
+  <path d="M270 545c10 18 50 18 60 0" stroke="#D4A574" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
+  <circle cx="300" cy="566" r="5" fill="#D4A574" filter="url(#glow)"/>
+
+  <!-- brand frame -->
+  <rect x="22" y="22" width="556" height="706" rx="28" stroke="#D4A574" stroke-opacity="0.35" stroke-width="2"/>
+  <text x="48" y="700" font-family="Georgia, serif" font-size="26" fill="#F6F1E8" opacity="0.92" font-style="italic">Lun &amp; Lou</text>
+  <text x="48" y="726" font-family="Georgia, serif" font-size="13" fill="#D4A574" letter-spacing="4">GLAM DE SALÓN · EN CASA</text>
+</svg>

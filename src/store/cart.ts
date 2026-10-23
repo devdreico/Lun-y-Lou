@@ -18,11 +18,11 @@ const itemKey = (i: Pick<CartItem, 'productId'>) => i.productId
 
 export const cartKey = itemKey
 
-/** Quita campos legacy size/color de carritos persistidos antes de este refactor. */
+/** Quita campos legacy (size/color/mpPaymentUrl) de carritos persistidos. */
 const migrateLegacyItems = (raw: unknown): CartItem[] => {
   if (!Array.isArray(raw)) return []
   return raw.map((entry) => {
-    const i = entry as CartItem & { size?: string; color?: string }
+    const i = entry as CartItem & { size?: string; color?: string; mpPaymentUrl?: string }
     return {
       productId: i.productId,
       slug: i.slug,
@@ -30,7 +30,6 @@ const migrateLegacyItems = (raw: unknown): CartItem[] => {
       price: i.price,
       image: i.image,
       quantity: i.quantity,
-      mpPaymentUrl: i.mpPaymentUrl,
     }
   })
 }
@@ -66,7 +65,6 @@ export const useCart = create<CartState>()(
             price: product.price,
             image: product.images[0]?.src ?? '',
             quantity,
-            mpPaymentUrl: product.mpPaymentUrl,
           }
 
           return {

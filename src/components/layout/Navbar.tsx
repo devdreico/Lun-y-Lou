@@ -37,31 +37,31 @@ export function Navbar() {
     <>
       <header
         className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
-          scrolled ? 'py-2' : 'py-4'
+          scrolled ? 'py-2' : 'py-3'
         }`}
       >
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-3 sm:px-6">
           <div
-            className={`flex w-full items-center justify-between gap-4 rounded-full px-4 py-2.5 transition-all duration-500 sm:px-5 ${
+            className={`flex w-full items-center justify-between gap-3 rounded-full px-3 py-2 transition-all duration-500 sm:gap-4 sm:px-4 sm:py-2.5 ${
               scrolled
                 ? 'glass shadow-glass-lg'
                 : 'border border-transparent bg-transparent'
             }`}
           >
-            <Link to="/" className="group flex items-center gap-3" aria-label="Lun & Lou inicio">
-              <span className="relative grid size-11 place-items-center overflow-hidden rounded-full bg-gradient-to-br from-rose to-rose-dark text-white shadow-rose transition-transform duration-500 group-hover:scale-105 group-hover:rotate-[-8deg]">
+            <Link to="/" className="group flex items-center gap-2.5 sm:gap-3" aria-label="Lun & Lou inicio">
+              <span className="relative grid size-14 shrink-0 place-items-center overflow-hidden rounded-full bg-gradient-to-br from-rose to-rose-dark text-white shadow-rose transition-transform duration-500 group-hover:scale-105 group-hover:rotate-[-8deg] sm:size-16">
                 <img
                   src="/logo.png"
                   alt=""
-                  className="size-8 object-contain mix-blend-screen brightness-125"
+                  className="size-11 object-contain mix-blend-screen brightness-125 sm:size-12"
                 />
               </span>
               <span className="flex flex-col leading-none">
-                <span className="font-display text-xl font-semibold tracking-tight text-ink">
+                <span className="font-display text-xl font-semibold tracking-tight text-ink sm:text-2xl">
                   Lun <span className="text-gradient-rose italic">&</span> Lou
                 </span>
-                <span className="text-[10px] uppercase tracking-[0.28em] text-ink/50">
-                  Colombia
+                <span className="mt-0.5 text-[9px] uppercase tracking-[0.28em] text-ink/50 sm:text-[10px]">
+                  Glam en casa · Colombia
                 </span>
               </span>
             </Link>
@@ -92,9 +92,17 @@ export function Navbar() {
                   )}
                 </NavLink>
               ))}
+              <a
+                href={SITE.instagram}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-full px-4 py-2 text-sm font-medium text-ink/70 transition-colors hover:text-rose-dark"
+              >
+                {SITE.instagramHandle}
+              </a>
             </nav>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5 sm:gap-2">
               <button
                 type="button"
                 onClick={() => setOpen(true)}
@@ -152,7 +160,7 @@ export function Navbar() {
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -16, opacity: 0 }}
               transition={{ type: 'spring', stiffness: 320, damping: 30 }}
-              className="glass absolute inset-x-4 top-24 rounded-3xl p-4 shadow-glass-lg"
+              className="glass absolute inset-x-4 top-28 rounded-3xl p-4 shadow-glass-lg"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex flex-col gap-1">
@@ -177,7 +185,7 @@ export function Navbar() {
                   rel="noreferrer"
                   className="rounded-2xl px-4 py-3 text-base font-medium text-ink/75 hover:bg-white/50"
                 >
-                  Instagram
+                  Instagram {SITE.instagramHandle}
                 </a>
               </div>
             </motion.nav>

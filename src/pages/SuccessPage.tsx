@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import {
   CheckCircle2,
-  ExternalLink,
+  Clock,
   Home,
   MapPin,
   MessageCircle,
@@ -38,8 +38,8 @@ export function SuccessPage() {
           <ShoppingBag className="mx-auto size-10 text-rose" />
           <h1 className="mt-4 font-display text-2xl font-semibold">Sin pedido que mostrar</h1>
           <p className="mt-2 text-sm text-ink/60">
-            Esta página muestra la confirmación del último pedido. Si acabas de pagar, vuelve
-            desde el botón correspondiente.
+            Esta página muestra la confirmación del último pedido. Si acabas de confirmar,
+            vuelve desde el mensaje de WhatsApp.
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <LinkButton to="/productos">Ver productos</LinkButton>
@@ -52,16 +52,11 @@ export function SuccessPage() {
     )
   }
 
-  const isMp = order.method === 'mp'
   const firstName = order.name?.split(' ')[0]
   const waText = encodeURIComponent(
-    isMp
-      ? `¡Hola ${SITE.name}! Acabo de iniciar el pago con Mercado Pago${
-          firstName ? ` (${firstName})` : ''
-        }. ¿Me confirman el pedido?`
-      : `¡Hola ${SITE.name}! Acabo de confirmar un pedido contraentrega${
-          order.city ? ` para ${order.city}` : ''
-        }${firstName ? ` a nombre de ${firstName}` : ''}. ¿Me confirman los detalles de envío?`,
+    `¡Hola ${SITE.name}! Acabo de confirmar un pedido contraentrega${
+      order.city ? ` para ${order.city}` : ''
+    }${firstName ? ` a nombre de ${firstName}` : ''}. ¿Me confirman los detalles de envío?`,
   )
 
   return (
@@ -93,7 +88,7 @@ export function SuccessPage() {
         transition={{ delay: 0.15 }}
         className="mt-2 font-display text-3xl font-semibold sm:text-4xl"
       >
-        {isMp ? 'Pedido listo para pagar' : '¡Pedido recibido!'}
+        ¡Pedido recibido!
       </motion.h1>
 
       <motion.p
@@ -102,11 +97,9 @@ export function SuccessPage() {
         transition={{ delay: 0.25 }}
         className="mt-3 max-w-md text-ink/60"
       >
-        {isMp
-          ? `${firstName ? firstName + ', ' : ''}revisa el resumen y continúa a Mercado Pago para completar el pago con tarjeta, PSE o Nequi.`
-          : `${firstName ? firstName + ', ' : ''}recibimos tu pedido${
-              order.city ? ` para ${order.city}` : ''
-            }. Te escribimos por WhatsApp para coordinar el despacho y el pago en efectivo al recibir.`}
+        {firstName ? `${firstName}, ` : ''}recibimos tu pedido
+        {order.city ? ` para ${order.city}` : ''}. Te escribimos por WhatsApp para coordinar
+        el despacho y el pago en efectivo al recibir.
       </motion.p>
 
       {order.demo && (
@@ -131,12 +124,8 @@ export function SuccessPage() {
           <span className="text-xs font-semibold uppercase tracking-wider text-ink/50">
             Resumen
           </span>
-          <span
-            className={`rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider ${
-              isMp ? 'bg-rose/12 text-rose-dark' : 'bg-forest/12 text-forest-dark'
-            }`}
-          >
-            {isMp ? 'Mercado Pago' : 'Contraentrega'}
+          <span className="rounded-full bg-forest/12 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-forest-dark">
+            Contraentrega
           </span>
         </div>
 
@@ -166,7 +155,7 @@ export function SuccessPage() {
           </span>
         </div>
 
-        {!isMp && (order.city || order.address || order.phone) ? (
+        {order.city || order.address || order.phone ? (
           <div className="mt-4 space-y-1.5 rounded-2xl bg-white/45 p-3 text-xs text-ink/65 ring-1 ring-ink/8">
             {order.name ? (
               <p className="font-semibold text-ink/80">{order.name}</p>
@@ -184,54 +173,30 @@ export function SuccessPage() {
         ) : null}
 
         <div className="mt-4 space-y-2.5 text-sm text-ink/70">
-          {isMp ? (
-            <>
-              <p className="flex items-center gap-2">
-                <ExternalLink className="size-4 text-rose" /> Continúa en Mercado Pago para
-                pagar
-              </p>
-              <p className="flex items-center gap-2">
-                <MessageCircle className="size-4 text-forest" /> Te confirmamos el pedido por
-                WhatsApp
-              </p>
-            </>
-          ) : (
-            <>
-              <p className="flex items-center gap-2">
-                <Package className="size-4 text-rose" /> Preparamos el paquete
-              </p>
-              <p className="flex items-center gap-2">
-                <MessageCircle className="size-4 text-forest" /> Coordinamos fecha por
-                WhatsApp
-              </p>
-              <p className="flex items-center gap-2">
-                <Home className="size-4 text-gold" /> Pagas en efectivo al recibir
-              </p>
-            </>
-          )}
+          <p className="flex items-center gap-2">
+            <Package className="size-4 text-rose" /> Preparamos el paquete
+          </p>
+          <p className="flex items-center gap-2">
+            <Clock className="size-4 text-gold" /> Envío en 2 días a tu puerta
+          </p>
+          <p className="flex items-center gap-2">
+            <MessageCircle className="size-4 text-forest" /> Coordinamos fecha por WhatsApp
+          </p>
+          <p className="flex items-center gap-2">
+            <Home className="size-4 text-gold" /> Pagas en efectivo al recibir
+          </p>
         </div>
       </motion.div>
 
       <div className="mt-8 flex w-full flex-col items-stretch gap-3 sm:w-auto sm:flex-row sm:items-center">
-        {isMp && order.mpUrl ? (
-          <a
-            href={order.mpUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="btn-dark btn-lg w-full justify-center sm:w-auto"
-          >
-            Continuar a Mercado Pago <ExternalLink className="size-4" />
-          </a>
-        ) : (
-          <a
-            href={`${WHATSAPP_URL}?text=${waText}`}
-            target="_blank"
-            rel="noreferrer"
-            className="btn-dark btn-lg w-full justify-center sm:w-auto"
-          >
-            <MessageCircle className="size-4" /> Confirmar por WhatsApp
-          </a>
-        )}
+        <a
+          href={`${WHATSAPP_URL}?text=${waText}`}
+          target="_blank"
+          rel="noreferrer"
+          className="btn-dark btn-lg w-full justify-center sm:w-auto"
+        >
+          <MessageCircle className="size-4" /> Confirmar por WhatsApp
+        </a>
         <LinkButton to="/productos" variant="ghost" className="w-full justify-center sm:w-auto">
           Seguir comprando
         </LinkButton>

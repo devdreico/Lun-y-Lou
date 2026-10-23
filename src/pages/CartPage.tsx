@@ -1,39 +1,16 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { Minus, Plus, ShoppingBag, Trash2 } from 'lucide-react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Button, LinkButton } from '../components/ui/Button'
 import { formatCOP } from '../lib/format'
 import { cartKey, selectCount, selectTotal, useCart } from '../store/cart'
-import { saveOrderConfirm } from '../lib/orderConfirm'
+import { WHATSAPP_URL } from '../lib/constants'
 
 export function CartPage() {
   const { items, updateQuantity, removeItem, clearCart } = useCart()
-  const navigate = useNavigate()
   const total = selectTotal(items)
   const count = selectCount(items)
   const multi = items.length > 1 || count > 1
-
-  const handleMp = () => {
-    if (multi || !items[0]?.mpPaymentUrl) return
-    const item = items[0]
-    const order = {
-      method: 'mp' as const,
-      items: [
-        {
-          productId: item.productId,
-          name: item.name,
-          quantity: item.quantity,
-          price: item.price,
-          image: item.image,
-        },
-      ],
-      total: item.price * item.quantity,
-      mpUrl: item.mpPaymentUrl,
-      createdAt: new Date().toISOString(),
-    }
-    saveOrderConfirm(order)
-    navigate('/pedido-exitoso', { state: order })
-  }
 
   return (
     <div className="mx-auto min-h-[70vh] max-w-5xl px-4 pb-24 pt-32 sm:px-6">
@@ -47,9 +24,8 @@ export function CartPage() {
         </p>
         <h1 className="mt-2 font-display text-3xl font-semibold sm:text-4xl md:text-5xl">Carrito</h1>
         <p className="mt-2 text-ink/55">
-          {multi
-            ? `${count} productos · Pedidos con varios productos solo a contraentrega`
-            : `${count} producto · Puedes pagar con Mercado Pago o pedir a contraentrega`}
+          {count} {count === 1 ? 'producto' : 'productos'} · Paga en efectivo al recibir
+          (contraentrega)
         </p>
       </motion.header>
 
@@ -141,20 +117,9 @@ export function CartPage() {
                           </button>
                         </div>
 
-                        <div className="flex items-center gap-3">
-                          <span className="font-semibold">
-                            {formatCOP(item.price * item.quantity)}
-                          </span>
-                          {!multi && item.mpPaymentUrl ? (
-                            <button
-                              type="button"
-                              onClick={handleMp}
-                              className="btn-dark btn-sm"
-                            >
-                              Pagar MP
-                            </button>
-                          ) : null}
-                        </div>
+                        <span className="font-semibold">
+                          {formatCOP(item.price * item.quantity)}
+                        </span>
                       </div>
                     </div>
                   </motion.div>
@@ -186,7 +151,7 @@ export function CartPage() {
               </div>
               <div className="flex justify-between text-cream/70">
                 <span>Envío</span>
-                <span>Se coordina</span>
+                <span>Se coordina · 2 días</span>
               </div>
               <div className="border-t border-white/10 pt-3">
                 <div className="flex items-end justify-between">
@@ -210,10 +175,17 @@ export function CartPage() {
                 </span>
               </LinkButton>
               <p className="text-center text-[11px] leading-relaxed text-cream/50">
-                {multi
-                  ? 'Los pedidos con varios productos se piden a contraentrega. Para pagar con Mercado Pago, compra un producto a la vez desde su ficha.'
-                  : 'Con 1 producto puedes pagar con Mercado Pago desde la ficha o continuar a contraentrega.'}
+                Pagas en efectivo al recibir. Envío en 2 días a tu puerta.
+                {multi ? ' Varios productos: un solo pedido contraentrega.' : ''}
               </p>
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="text-center text-xs text-cream/60 underline-offset-4 hover:text-rose-light hover:underline"
+              >
+                ¿Dudas? Escríbenos por WhatsApp
+              </a>
             </div>
           </motion.aside>
         </div>

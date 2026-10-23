@@ -15,8 +15,6 @@ export interface Product {
   compareAtPrice?: number
   category: Category
   images: ProductImage[]
-  /** Link único de pago Mercado Pago (dashboard → Link de pago) */
-  mpPaymentUrl: string
   featured?: boolean
   badge?: string
   stock: number
@@ -29,7 +27,6 @@ export interface CartItem {
   price: number
   image: string
   quantity: number
-  mpPaymentUrl: string
 }
 
 export interface CheckoutFormData {

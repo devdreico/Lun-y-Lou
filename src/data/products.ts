@@ -3,12 +3,11 @@ import type { Product } from '../types'
 /**
  * Catálogo real — precios en COP.
  * Imágenes: public/img/products/ (WebP optimizado desde IMG REAL).
- * mpPaymentUrl: link único de Mercado Pago por producto.
  *
- * Reglas de pago:
- * - Producto individual (ficha): Mercado Pago o contraentrega.
- * - Carrito con 2+ productos: solo contraentrega (Formspree).
- * - Contraentrega (individual o carrito): se envía a Formspree como texto plano.
+ * Reglas de venta:
+ * - Solo producto individual y carrito.
+ * - Todos los pedidos se pagan a contraentrega (efectivo al recibir).
+ * - El pedido se envía a Formspree como texto plano indexable.
  */
 export const products: Product[] = [
   {
@@ -26,7 +25,6 @@ export const products: Product[] = [
       { src: '/img/products/mascara-tratamiento-facial-7-colores-3.webp', alt: 'Máscara facial vista 3' },
       { src: '/img/products/mascara-tratamiento-facial-7-colores-4.webp', alt: 'Máscara facial vista 4' },
     ],
-    mpPaymentUrl: 'https://mpago.li/2mpq2z4',
     featured: true,
     badge: 'Destacado',
     stock: 15,
@@ -46,7 +44,6 @@ export const products: Product[] = [
       { src: '/img/products/masajeador-capilar-electrico-3.webp', alt: 'Masajeador capilar vista 3' },
       { src: '/img/products/masajeador-capilar-electrico-4.webp', alt: 'Masajeador capilar vista 4' },
     ],
-    mpPaymentUrl: 'https://mpago.li/239LYJU',
     featured: true,
     stock: 20,
   },
@@ -64,7 +61,6 @@ export const products: Product[] = [
       { src: '/img/products/plancha-viajera-mini-cabello.webp', alt: 'Plancha Viajera Mini para Cabello' },
       { src: '/img/products/plancha-viajera-mini-cabello-2.webp', alt: 'Plancha mini vista 2' },
     ],
-    mpPaymentUrl: 'https://mpago.li/2ayhmhb',
     badge: 'Oferta',
     stock: 25,
   },
@@ -81,7 +77,6 @@ export const products: Product[] = [
       { src: '/img/products/cepillo-facial-natural-shine.webp', alt: 'Cepillo Facial + Natural Shine' },
       { src: '/img/products/cepillo-facial-natural-shine-2.webp', alt: 'Cepillo facial vista 2' },
     ],
-    mpPaymentUrl: 'https://mpago.li/2Pz7LNF',
     badge: 'Obsequio',
     featured: true,
     stock: 30,
@@ -103,7 +98,6 @@ export const products: Product[] = [
       { src: '/img/products/masajeador-anticelulitis-ultrasonido-4.webp', alt: 'Masajeador anticelulitis vista 4' },
       { src: '/img/products/masajeador-anticelulitis-ultrasonido-5.webp', alt: 'Masajeador anticelulitis vista 5' },
     ],
-    mpPaymentUrl: 'https://mpago.li/24CupnC',
     featured: true,
     badge: 'Oferta',
     stock: 12,
@@ -120,7 +114,6 @@ export const products: Product[] = [
     images: [
       { src: '/img/products/cepillo-secador-5-en-1.webp', alt: 'Cepillo Secador 5 en 1' },
     ],
-    mpPaymentUrl: 'https://mpago.li/2Jb63fU',
     featured: true,
     stock: 18,
   },
@@ -136,7 +129,6 @@ export const products: Product[] = [
     images: [
       { src: '/img/products/mini-pistola-masajeadora-muscular.webp', alt: 'Mini Pistola Masajeadora Muscular' },
     ],
-    mpPaymentUrl: 'https://mpago.li/2ELYZyy',
     stock: 22,
   },
   {
@@ -151,7 +143,6 @@ export const products: Product[] = [
     images: [
       { src: '/img/products/rizador-pelo-portatil-espiral.webp', alt: 'Rizador de Pelo Portátil en Espiral' },
     ],
-    mpPaymentUrl: 'https://mpago.li/2t2kmUk',
     stock: 20,
   },
   {
@@ -170,7 +161,6 @@ export const products: Product[] = [
       { src: '/img/products/masajeador-rodillo-jade-facial-4.webp', alt: 'Rodillo de jade vista 4' },
       { src: '/img/products/masajeador-rodillo-jade-facial-5.webp', alt: 'Rodillo de jade vista 5' },
     ],
-    mpPaymentUrl: 'https://mpago.li/1KeZiqo',
     featured: true,
     stock: 28,
   },
@@ -187,7 +177,6 @@ export const products: Product[] = [
     images: [
       { src: '/img/products/maquina-depiladora-laser-ipl-110v.webp', alt: 'Máquina Depiladora Láser IPL 110V' },
     ],
-    mpPaymentUrl: 'https://mpago.li/2ByMhof',
     badge: 'Oferta',
     featured: true,
     stock: 10,
