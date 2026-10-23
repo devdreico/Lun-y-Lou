@@ -1,5 +1,7 @@
 import { lazy, Suspense } from 'react'
+import { MotionConfig } from 'framer-motion'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { ErrorBoundary } from './components/ErrorBoundary'
 import { Layout } from './components/layout/Layout'
 
 const HomePage = lazy(() => import('./pages/HomePage').then((m) => ({ default: m.HomePage })))
@@ -16,6 +18,7 @@ const CheckoutPage = lazy(() =>
 const SuccessPage = lazy(() =>
   import('./pages/SuccessPage').then((m) => ({ default: m.SuccessPage })),
 )
+const FaqPage = lazy(() => import('./pages/FaqPage').then((m) => ({ default: m.FaqPage })))
 const NotFoundPage = lazy(() =>
   import('./pages/NotFoundPage').then((m) => ({ default: m.NotFoundPage })),
 )
@@ -30,71 +33,79 @@ function PageFallback() {
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          element={
-            <Layout />
-          }
-        >
-          <Route
-            path="/"
-            element={
-              <Suspense fallback={<PageFallback />}>
-                <HomePage />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/productos"
-            element={
-              <Suspense fallback={<PageFallback />}>
-                <CatalogPage />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/producto/:slug"
-            element={
-              <Suspense fallback={<PageFallback />}>
-                <ProductDetailPage />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/carrito"
-            element={
-              <Suspense fallback={<PageFallback />}>
-                <CartPage />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/checkout"
-            element={
-              <Suspense fallback={<PageFallback />}>
-                <CheckoutPage />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/pedido-exitoso"
-            element={
-              <Suspense fallback={<PageFallback />}>
-                <SuccessPage />
-              </Suspense>
-            }
-          />
-          <Route
-            path="*"
-            element={
-              <Suspense fallback={<PageFallback />}>
-                <NotFoundPage />
-              </Suspense>
-            }
-          />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <MotionConfig reducedMotion="user">
+      <BrowserRouter>
+        <ErrorBoundary>
+          <Routes>
+            <Route element={<Layout />}>
+              <Route
+                path="/"
+                element={
+                  <Suspense fallback={<PageFallback />}>
+                    <HomePage />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="/productos"
+                element={
+                  <Suspense fallback={<PageFallback />}>
+                    <CatalogPage />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="/producto/:slug"
+                element={
+                  <Suspense fallback={<PageFallback />}>
+                    <ProductDetailPage />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="/preguntas-frecuentes"
+                element={
+                  <Suspense fallback={<PageFallback />}>
+                    <FaqPage />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="/carrito"
+                element={
+                  <Suspense fallback={<PageFallback />}>
+                    <CartPage />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="/checkout"
+                element={
+                  <Suspense fallback={<PageFallback />}>
+                    <CheckoutPage />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="/pedido-exitoso"
+                element={
+                  <Suspense fallback={<PageFallback />}>
+                    <SuccessPage />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="*"
+                element={
+                  <Suspense fallback={<PageFallback />}>
+                    <NotFoundPage />
+                  </Suspense>
+                }
+              />
+            </Route>
+          </Routes>
+        </ErrorBoundary>
+      </BrowserRouter>
+    </MotionConfig>
   )
 }

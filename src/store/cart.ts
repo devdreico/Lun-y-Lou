@@ -5,18 +5,18 @@ import type { CartItem, Product } from '../types'
 interface CartState {
   items: CartItem[]
   isOpen: boolean
-  lastAddedId: string | null
   addItem: (product: Product, opts: { quantity?: number }) => void
   removeItem: (key: string) => void
   updateQuantity: (key: string, quantity: number) => void
   clearCart: () => void
   setOpen: (open: boolean) => void
-  markAdded: (id: string | null) => void
 }
 
 const itemKey = (i: Pick<CartItem, 'productId'>) => i.productId
 
 export const cartKey = itemKey
+
+const MAX_QTY_FALLBACK = 20
 
 /** Quita campos legacy (size/color/mpPaymentUrl) de carritos persistidos. */
 const migrateLegacyItems = (raw: unknown): CartItem[] => {
@@ -39,22 +39,21 @@ export const useCart = create<CartState>()(
     (set) => ({
       items: [],
       isOpen: false,
-      lastAddedId: null,
 
       addItem: (product, { quantity = 1 }) =>
         set((state) => {
           const key = itemKey({ productId: product.id })
           const existing = state.items.find((i) => itemKey(i) === key)
+          const max = product.stock || MAX_QTY_FALLBACK
 
           if (existing) {
             return {
               items: state.items.map((i) =>
                 itemKey(i) === key
-                  ? { ...i, quantity: Math.min(i.quantity + quantity, 20) }
+                  ? { ...i, quantity: Math.min(i.quantity + quantity, max), stock: max }
                   : i,
               ),
               isOpen: true,
-              lastAddedId: product.id,
             }
           }
 
@@ -64,14 +63,11 @@ export const useCart = create<CartState>()(
             name: product.name,
             price: product.price,
             image: product.images[0]?.src ?? '',
-            quantity,
+            quantity: Math.min(quantity, max),
+            stock: max,
           }
 
-          return {
-            items: [...state.items, next],
-            isOpen: true,
-            lastAddedId: product.id,
-          }
+          return { items: [...state.items, next], isOpen: true }
         }),
 
       removeItem: (key) =>
@@ -83,13 +79,14 @@ export const useCart = create<CartState>()(
             quantity <= 0
               ? state.items.filter((i) => itemKey(i) !== key)
               : state.items.map((i) =>
-                  itemKey(i) === key ? { ...i, quantity: Math.min(quantity, 20) } : i,
+                  itemKey(i) === key
+                    ? { ...i, quantity: Math.min(quantity, i.stock ?? MAX_QTY_FALLBACK) }
+                    : i,
                 ),
         })),
 
       clearCart: () => set({ items: [] }),
       setOpen: (isOpen) => set({ isOpen }),
-      markAdded: (lastAddedId) => set({ lastAddedId }),
     }),
     {
       name: 'lunylou-cart',

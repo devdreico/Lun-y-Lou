@@ -2,7 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { motion } from 'framer-motion'
 import { Banknote, Loader2, Lock, ShieldCheck } from 'lucide-react'
 import { useMemo, useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { useForm, useWatch } from 'react-hook-form'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { z } from 'zod'
 import { Button } from '../components/ui/Button'
@@ -12,6 +12,8 @@ import { buildOrderPayload, submitOrder } from '../lib/formspree'
 import { formatCOP } from '../lib/format'
 import { selectTotal, useCart } from '../store/cart'
 import { saveOrderConfirm } from '../lib/orderConfirm'
+import { SITE } from '../lib/constants'
+import { useSeo } from '../lib/seo'
 import type { CheckoutFormData } from '../types'
 
 const schema = z.object({
@@ -39,15 +41,22 @@ export function CheckoutPage() {
   const {
     register,
     handleSubmit,
-    watch,
+    control,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(schema),
     defaultValues: { notes: '' },
   })
 
-  const department = watch('department')
+  const department = useWatch({ control, name: 'department' })
   const cities = useMemo(() => citiesOf(department), [department])
+
+  useSeo({
+    title: `Checkout | ${SITE.name}`,
+    description: 'Confirma tu pedido y paga en efectivo al recibir.',
+    path: '/checkout',
+    noindex: true,
+  })
 
   if (items.length === 0 && !sending && !submitted) {
     return <Navigate to="/carrito" replace />
@@ -125,7 +134,7 @@ export function CheckoutPage() {
 
             <div className="grid gap-4 sm:grid-cols-2">
               <div className={fieldCls(errors.fullName?.message)}>
-                <label htmlFor="fullName" className="text-xs font-semibold uppercase tracking-wider text-ink/50">
+                <label htmlFor="fullName" className="text-xs font-semibold uppercase tracking-wider text-ink/65">
                   Nombre completo
                 </label>
                 <input id="fullName" {...register('fullName')} className="input-glass" placeholder="Maria Perez" />
@@ -135,7 +144,7 @@ export function CheckoutPage() {
               </div>
 
               <div className={fieldCls(errors.phone?.message)}>
-                <label htmlFor="phone" className="text-xs font-semibold uppercase tracking-wider text-ink/50">
+                <label htmlFor="phone" className="text-xs font-semibold uppercase tracking-wider text-ink/65">
                   Celular
                 </label>
                 <input id="phone" {...register('phone')} className="input-glass" placeholder="300 123 4567" inputMode="tel" />
@@ -143,7 +152,7 @@ export function CheckoutPage() {
               </div>
 
               <div className={`sm:col-span-2 ${fieldCls(errors.email?.message)}`}>
-                <label htmlFor="email" className="text-xs font-semibold uppercase tracking-wider text-ink/50">
+                <label htmlFor="email" className="text-xs font-semibold uppercase tracking-wider text-ink/65">
                   Correo
                 </label>
                 <input id="email" type="email" {...register('email')} className="input-glass" placeholder="tucorreo@email.com" />
@@ -162,7 +171,7 @@ export function CheckoutPage() {
 
             <div className="grid gap-4 sm:grid-cols-2">
               <div className={fieldCls(errors.department?.message)}>
-                <label htmlFor="department" className="text-xs font-semibold uppercase tracking-wider text-ink/50">
+                <label htmlFor="department" className="text-xs font-semibold uppercase tracking-wider text-ink/65">
                   Departamento
                 </label>
                 <select id="department" {...register('department')} className="input-glass appearance-none">
@@ -179,7 +188,7 @@ export function CheckoutPage() {
               </div>
 
               <div className={fieldCls(errors.city?.message)}>
-                <label htmlFor="city" className="text-xs font-semibold uppercase tracking-wider text-ink/50">
+                <label htmlFor="city" className="text-xs font-semibold uppercase tracking-wider text-ink/65">
                   Ciudad / Municipio
                 </label>
                 <select
@@ -199,7 +208,7 @@ export function CheckoutPage() {
               </div>
 
               <div className={`sm:col-span-2 ${fieldCls(errors.address?.message)}`}>
-                <label htmlFor="address" className="text-xs font-semibold uppercase tracking-wider text-ink/50">
+                <label htmlFor="address" className="text-xs font-semibold uppercase tracking-wider text-ink/65">
                   Dirección con barrio
                 </label>
                 <input
@@ -214,7 +223,7 @@ export function CheckoutPage() {
               </div>
 
               <div className="sm:col-span-2">
-                <label htmlFor="notes" className="text-xs font-semibold uppercase tracking-wider text-ink/50">
+                <label htmlFor="notes" className="text-xs font-semibold uppercase tracking-wider text-ink/65">
                   Notas (opcional)
                 </label>
                 <textarea
@@ -245,7 +254,7 @@ export function CheckoutPage() {
                   <strong>efectivo</strong> cuando recibas el paquete.
                 </span>
               </p>
-              <p className="mt-2 flex items-start gap-2 text-ink/55">
+              <p className="mt-2 flex items-start gap-2 text-ink/70">
                 <ShieldCheck className="mt-0.5 size-4 shrink-0 text-rose" />
                 <span>
                   Sin anticipos ni datos de tarjeta. <strong>Envío en 2 días</strong> a tu
@@ -274,7 +283,7 @@ export function CheckoutPage() {
               )}
             </Button>
 
-            <p className="flex items-center justify-center gap-1.5 text-xs text-ink/45">
+            <p className="flex items-center justify-center gap-1.5 text-xs text-ink/65">
               <Lock className="size-3" /> Tus datos solo se usan para la entrega
             </p>
           </section>
@@ -295,7 +304,7 @@ export function CheckoutPage() {
                 </div>
                 <div className="min-w-0 flex-1">
                   <p className="truncate text-sm font-semibold">{item.name}</p>
-                  <p className="text-xs text-ink/50">
+                  <p className="text-xs text-ink/65">
                     {item.quantity}×
                   </p>
                 </div>
@@ -305,11 +314,11 @@ export function CheckoutPage() {
           </ul>
 
           <div className="mt-5 space-y-2 border-t border-ink/10 pt-4 text-sm">
-            <div className="flex justify-between text-ink/55">
+            <div className="flex justify-between text-ink/70">
               <span>Subtotal</span>
               <span>{formatCOP(total)}</span>
             </div>
-            <div className="flex justify-between text-ink/55">
+            <div className="flex justify-between text-ink/70">
               <span>Envío</span>
               <span>2 días · se coordina</span>
             </div>
@@ -323,7 +332,7 @@ export function CheckoutPage() {
 
           <Link
             to="/carrito"
-            className="mt-5 block text-center text-sm text-ink/50 underline-offset-4 hover:text-rose-dark hover:underline"
+            className="mt-5 block text-center text-sm text-ink/65 underline-offset-4 hover:text-rose-dark hover:underline"
           >
             ← Volver al carrito
           </Link>

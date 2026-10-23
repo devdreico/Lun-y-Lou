@@ -2,14 +2,16 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/logo.png" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/logo.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
       content="Lun & Lou — Máscaras LED, masajeadores y dispositivos de belleza para el cuidado en casa. Envío en 2 días a tu puerta. Paga en efectivo al recibir (contraentrega) en toda Colombia."
     />
     <meta name="theme-color" content="#C93F5F" />
+    <link rel="canonical" href="https://lunylou.com/" />
     <meta property="og:title" content="Lun & Lou | Glam de salón, en casa" />
     <meta
       property="og:description"
@@ -17,13 +19,68 @@
     />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="es_CO" />
+    <meta property="og:site_name" content="Lun & Lou" />
+    <meta property="og:url" content="https://lunylou.com/" />
+    <meta
+      property="og:image"
+      content="https://images.pexels.com/photos/7216285/pexels-photo-7216285.jpeg?auto=compress&cs=tinysrgb&w=1200"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Lun & Lou | Glam de salón, en casa" />
+    <meta
+      name="twitter:description"
+      content="Dispositivos de belleza para rostro, cabello y cuerpo. Envío en 2 días. Contraentrega en toda Colombia."
+    />
+    <meta
+      name="twitter:image"
+      content="https://images.pexels.com/photos/7216285/pexels-photo-7216285.jpeg?auto=compress&cs=tinysrgb&w=1200"
+    />
     <title>Lun & Lou | Glam de salón, en casa</title>
+    <link
+      rel="preload"
+      as="image"
+      href="https://images.pexels.com/photos/7216285/pexels-photo-7216285.jpeg?auto=compress&cs=tinysrgb&w=1600"
+      imagesrcset="https://images.pexels.com/photos/7216285/pexels-photo-7216285.jpeg?auto=compress&cs=tinysrgb&w=640 640w, https://images.pexels.com/photos/7216285/pexels-photo-7216285.jpeg?auto=compress&cs=tinysrgb&w=960 960w, https://images.pexels.com/photos/7216285/pexels-photo-7216285.jpeg?auto=compress&cs=tinysrgb&w=1280 1280w, https://images.pexels.com/photos/7216285/pexels-photo-7216285.jpeg?auto=compress&cs=tinysrgb&w=1920 1920w"
+      imagesizes="100vw"
+      fetchpriority="high"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Outfit:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "OnlineStore",
+        "name": "Lun & Lou",
+        "url": "https://lunylou.com/",
+        "logo": "https://lunylou.com/logo.png",
+        "image": "https://lunylou.com/logo.png",
+        "description": "Dispositivos de belleza para rostro, cabello y cuerpo. Envío en 2 días a tu puerta. Paga en efectivo al recibir (contraentrega) en toda Colombia.",
+        "slogan": "Glam de salón, en casa",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Sábana Occidental",
+          "addressCountry": "CO"
+        },
+        "areaServed": { "@type": "Country", "name": "Colombia" },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+573144572008",
+          "contactType": "customer service",
+          "areaServed": "CO",
+          "availableLanguage": ["Spanish"]
+        },
+        "sameAs": ["https://instagram.com/lunylouco", "https://tiktok.com/@lunylou"],
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://lunylou.com/productos?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

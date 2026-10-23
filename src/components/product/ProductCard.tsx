@@ -40,7 +40,10 @@ export function ProductCard({ product, index = 0 }: Props) {
             <img
               src={img}
               alt={product.images[0]?.alt ?? product.name}
+              width={600}
+              height={750}
               loading="lazy"
+              decoding="async"
               className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110 group-hover:rotate-[1.5deg]"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-ink/55 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 md:group-hover:opacity-100" />
@@ -63,6 +66,7 @@ export function ProductCard({ product, index = 0 }: Props) {
               type="button"
               onClick={quickAdd}
               className="flex flex-1 items-center justify-center gap-2 rounded-full bg-white/95 px-3 py-2.5 text-xs font-semibold text-ink backdrop-blur-md transition hover:bg-rose hover:text-white active:scale-95"
+              aria-label={`Agregar ${product.name} al carrito`}
             >
               <ShoppingBag className="size-3.5" /> Agregar
             </button>
@@ -96,7 +100,7 @@ export function ProductCard({ product, index = 0 }: Props) {
             <div>
               <p className="text-lg font-semibold text-ink">{formatCOP(product.price)}</p>
               {product.compareAtPrice && (
-                <p className="text-xs text-ink/40 line-through">
+                <p className="text-xs text-ink/65 line-through">
                   {formatCOP(product.compareAtPrice)}
                 </p>
               )}

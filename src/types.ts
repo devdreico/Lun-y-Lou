@@ -27,6 +27,8 @@ export interface CartItem {
   price: number
   image: string
   quantity: number
+  /** Stock disponible al momento de agregar (para limitar cantidades). */
+  stock?: number
 }
 
 export interface CheckoutFormData {

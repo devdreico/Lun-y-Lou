@@ -5,6 +5,8 @@ import { useSearchParams } from 'react-router-dom'
 import { categoryList, products } from '../data/products'
 import { formatCOP } from '../lib/format'
 import { ProductCard } from '../components/product/ProductCard'
+import { SITE } from '../lib/constants'
+import { useSeo } from '../lib/seo'
 
 type SortKey = 'featured' | 'price-asc' | 'price-desc' | 'name'
 
@@ -15,6 +17,17 @@ export function CatalogPage() {
   const [maxPrice, setMaxPrice] = useState(300000)
 
   const activeCat = params.get('cat') ?? ''
+
+  const activeCatLabel =
+    (categoryList.find((c) => c.slug === activeCat)?.label ?? '') || 'Productos'
+
+  useSeo({
+    title: activeCat
+      ? `${activeCatLabel} | ${SITE.name}`
+      : `Productos | ${SITE.name}`,
+    description: `Catálogo de ${activeCatLabel.toLowerCase()}: ${products.length} dispositivos de belleza con envío en 2 días y pago contraentrega en Colombia.`,
+    path: activeCat ? `/productos?cat=${activeCat}` : '/productos',
+  })
 
   const setCat = (cat: string) => {
     const next = new URLSearchParams(params)
@@ -78,7 +91,7 @@ export function CatalogPage() {
       <div className="glass grain mb-8 rounded-3xl p-4 md:p-5">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center">
           <label className="relative flex-1">
-            <Search className="pointer-events-none absolute left-4 top-1/2 size-4 -translate-y-1/2 text-ink/40" />
+            <Search className="pointer-events-none absolute left-4 top-1/2 size-4 -translate-y-1/2 text-ink/65" />
             <input
               type="search"
               value={query}
@@ -94,14 +107,14 @@ export function CatalogPage() {
                 className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full p-1 hover:bg-ink/8"
                 aria-label="Limpiar"
               >
-                <X className="size-4 text-ink/50" />
+                <X className="size-4 text-ink/65" />
               </button>
             )}
           </label>
 
           <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
             <div className="flex items-center gap-2 rounded-2xl border border-ink/10 bg-white/50 px-3 py-2">
-              <SlidersHorizontal className="size-4 text-ink/45" />
+              <SlidersHorizontal className="size-4 text-ink/65" />
               <select
                 value={sort}
                 onChange={(e) => setSort(e.target.value as SortKey)}
@@ -116,7 +129,7 @@ export function CatalogPage() {
             </div>
 
             <div className="flex flex-1 items-center gap-3 rounded-2xl border border-ink/10 bg-white/50 px-3 py-2 text-sm sm:flex-none">
-              <span className="text-ink/50">Hasta</span>
+              <span className="text-ink/65">Hasta</span>
               <input
                 type="range"
                 min={50000}
@@ -164,7 +177,7 @@ export function CatalogPage() {
       {filtered.length === 0 ? (
         <div className="glass grain rounded-3xl py-20 text-center">
           <p className="font-display text-2xl font-semibold">Sin resultados</p>
-          <p className="mt-2 text-ink/55">Quita la búsqueda o cambia de categoría.</p>
+          <p className="mt-2 text-ink/70">Quita la búsqueda o cambia de categoría.</p>
         </div>
       ) : (
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 xl:grid-cols-4">

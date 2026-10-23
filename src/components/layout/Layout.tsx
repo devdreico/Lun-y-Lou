@@ -16,9 +16,15 @@ export function Layout() {
 
   return (
     <div className="relative min-h-screen">
+      <a
+        href="#contenido"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[90] focus:rounded-full focus:bg-rose focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white"
+      >
+        Saltar al contenido
+      </a>
       <ScrollProgress />
       <Navbar />
-      <main className="relative">
+      <main id="contenido" className="relative" tabIndex={-1}>
         <div key={pathname} className="page-enter">
           <Outlet />
         </div>

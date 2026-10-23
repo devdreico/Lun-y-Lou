@@ -1,15 +1,34 @@
 import { AnimatePresence, motion } from 'framer-motion'
-import { Minus, Plus, ShoppingBag, Trash2, X } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { ShoppingBag, X } from 'lucide-react'
+import { useCallback, useEffect, useRef } from 'react'
 import { cartKey, selectCount, selectTotal, useCart } from '../../store/cart'
 import { formatCOP } from '../../lib/format'
 import { Button, LinkButton } from '../ui/Button'
+import { useFocusTrap } from '../../lib/useFocusTrap'
 import { WHATSAPP_URL } from '../../lib/constants'
+import { CartItemRow } from './CartItemRow'
 
 export function CartDrawer() {
-  const { items, isOpen, setOpen, updateQuantity, removeItem, clearCart } = useCart()
+  const { items, isOpen, setOpen, clearCart } = useCart()
   const count = selectCount(items)
   const total = selectTotal(items)
+  const panelRef = useRef<HTMLElement | null>(null)
+
+  const close = useCallback(() => setOpen(false), [setOpen])
+  useFocusTrap({ active: isOpen, containerRef: panelRef, onEscape: close })
+
+  useEffect(() => {
+    if (!isOpen) return
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = prev
+    }
+  }, [isOpen])
+
+  const confirmClear = () => {
+    if (window.confirm('¿Vaciar todo el carrito?')) clearCart()
+  }
 
   return (
     <AnimatePresence>
@@ -19,16 +38,21 @@ export function CartDrawer() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => setOpen(false)}
+            onClick={close}
             className="fixed inset-0 z-[70] bg-ink/40 backdrop-blur-sm"
+            aria-hidden="true"
           />
           <motion.aside
+            ref={panelRef}
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', stiffness: 320, damping: 34 }}
             className="fixed right-0 top-0 z-[80] flex h-full w-[min(420px,100vw)] flex-col border-l border-white/40 bg-cream/85 shadow-2xl backdrop-blur-2xl"
+            role="dialog"
+            aria-modal="true"
             aria-label="Carrito de compras"
+            tabIndex={-1}
           >
             <header className="flex items-center justify-between border-b border-ink/8 px-5 py-4">
               <div className="flex items-center gap-2">
@@ -40,9 +64,9 @@ export function CartDrawer() {
               </div>
               <button
                 type="button"
-                onClick={() => setOpen(false)}
+                onClick={close}
                 className="grid size-10 place-items-center rounded-full border border-ink/10 bg-white/60 transition hover:bg-white hover:rotate-90"
-                aria-label="Cerrar"
+                aria-label="Cerrar carrito"
               >
                 <X className="size-4" />
               </button>
@@ -55,11 +79,9 @@ export function CartDrawer() {
                 </div>
                 <div>
                   <p className="font-display text-xl font-semibold">Carrito vacío</p>
-                  <p className="mt-1 text-sm text-ink/55">
-                    Agrega productos desde el catálogo.
-                  </p>
+                  <p className="mt-1 text-sm text-ink/70">Agrega productos desde el catálogo.</p>
                 </div>
-                <LinkButton to="/productos" onClick={() => setOpen(false)}>
+                <LinkButton to="/productos" onClick={close}>
                   Ver productos
                 </LinkButton>
               </div>
@@ -67,102 +89,37 @@ export function CartDrawer() {
               <>
                 <div className="flex-1 space-y-3 overflow-y-auto px-4 py-4">
                   <AnimatePresence initial={false}>
-                    {items.map((item) => {
-                      const key = cartKey(item)
-                      return (
-                        <motion.div
-                          key={key}
-                          layout
-                          initial={{ opacity: 0, x: 30 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          exit={{ opacity: 0, x: 40, height: 0, marginBottom: 0 }}
-                          className="glass flex gap-3 rounded-2xl p-3"
-                        >
-                          <Link
-                            to={`/producto/${item.slug}`}
-                            onClick={() => setOpen(false)}
-                            className="size-20 shrink-0 overflow-hidden rounded-xl bg-cream-dark"
-                          >
-                            <img
-                              src={item.image}
-                              alt={item.name}
-                              className="h-full w-full object-cover"
-                            />
-                          </Link>
-                          <div className="flex min-w-0 flex-1 flex-col">
-                            <div className="flex items-start justify-between gap-2">
-                              <Link
-                                to={`/producto/${item.slug}`}
-                                onClick={() => setOpen(false)}
-                                className="truncate text-sm font-semibold hover:text-rose-dark"
-                              >
-                                {item.name}
-                              </Link>
-                              <button
-                                type="button"
-                                onClick={() => removeItem(key)}
-                                className="text-ink/40 transition hover:text-rose"
-                                aria-label="Quitar"
-                              >
-                                <Trash2 className="size-4" />
-                              </button>
-                            </div>
-                            <div className="mt-auto flex items-center justify-between gap-2 pt-2">
-                              <div className="flex items-center rounded-full border border-ink/10 bg-white/70">
-                                <button
-                                  type="button"
-                                  onClick={() => updateQuantity(key, item.quantity - 1)}
-                                  className="grid size-8 place-items-center rounded-full transition hover:bg-rose/10 active:scale-90"
-                                  aria-label="Menos"
-                                >
-                                  <Minus className="size-3.5" />
-                                </button>
-                                <span className="w-6 text-center text-sm font-semibold">
-                                  {item.quantity}
-                                </span>
-                                <button
-                                  type="button"
-                                  onClick={() => updateQuantity(key, item.quantity + 1)}
-                                  className="grid size-8 place-items-center rounded-full transition hover:bg-rose/10 active:scale-90"
-                                  aria-label="Más"
-                                >
-                                  <Plus className="size-3.5" />
-                                </button>
-                              </div>
-                              <p className="text-sm font-semibold">
-                                {formatCOP(item.price * item.quantity)}
-                              </p>
-                            </div>
-                          </div>
-                        </motion.div>
-                      )
-                    })}
+                    {items.map((item) => (
+                      <motion.div
+                        key={cartKey(item)}
+                        layout
+                        initial={{ opacity: 0, x: 30 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: 40, height: 0, marginBottom: 0 }}
+                      >
+                        <CartItemRow item={item} onNavigate={close} />
+                      </motion.div>
+                    ))}
                   </AnimatePresence>
 
                   <div className="rounded-2xl border border-dashed border-rose/30 bg-rose/5 p-3 text-xs text-ink/65">
-                    Paga en <strong>efectivo al recibir</strong> · Envío en 2 días a tu
-                    puerta.
+                    Paga en <strong>efectivo al recibir</strong> · Envío en 2 días a tu puerta.
                   </div>
                 </div>
 
                 <footer className="space-y-3 border-t border-ink/8 px-5 py-4">
-                  <div className="flex items-center justify-between text-sm text-ink/60">
+                  <div className="flex items-center justify-between text-sm text-ink/70">
                     <span>Subtotal</span>
                     <span className="font-display text-2xl font-semibold text-ink">
                       {formatCOP(total)}
                     </span>
                   </div>
-                  <p className="text-xs text-ink/45">
+                  <p className="text-xs text-ink/65">
                     Envío se coordina al confirmar. Contraentrega en toda Colombia.
                   </p>
 
                   <div className="grid gap-2">
-                    <LinkButton
-                      to="/checkout"
-                      onClick={() => setOpen(false)}
-                      className="w-full"
-                      size="lg"
-                    >
+                    <LinkButton to="/checkout" onClick={close} className="w-full" size="lg">
                       Pedir a contraentrega
                     </LinkButton>
 
@@ -170,7 +127,7 @@ export function CartDrawer() {
                       <Button
                         variant="ghost"
                         size="sm"
-                        onClick={() => setOpen(false)}
+                        onClick={close}
                         className="w-full"
                       >
                         Seguir comprando
@@ -178,7 +135,7 @@ export function CartDrawer() {
                       <Button
                         variant="ghost"
                         size="sm"
-                        onClick={clearCart}
+                        onClick={confirmClear}
                         className="w-full !text-rose-dark"
                       >
                         Vaciar
@@ -189,7 +146,7 @@ export function CartDrawer() {
                       href={WHATSAPP_URL}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-center text-xs text-ink/50 underline-offset-4 hover:text-rose-dark hover:underline"
+                      className="text-center text-xs text-ink/65 underline-offset-4 hover:text-rose-dark hover:underline"
                     >
                       ¿Dudas? Escríbenos por WhatsApp
                     </a>

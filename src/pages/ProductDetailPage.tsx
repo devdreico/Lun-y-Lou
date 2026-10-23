@@ -1,19 +1,63 @@
 import { motion } from 'framer-motion'
 import { ChevronRight, Heart, Package, RotateCcw, ShieldCheck, Truck } from 'lucide-react'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import { ProductActions } from '../components/product/ProductActions'
 import { ProductCard } from '../components/product/ProductCard'
 import { SectionHeading } from '../components/ui/SectionHeading'
 import { getProductBySlug, products } from '../data/products'
 import { formatCOP } from '../lib/format'
-import { CATEGORIES_LABEL, WHATSAPP_URL } from '../lib/constants'
+import { CATEGORIES_LABEL, SITE, WHATSAPP_URL } from '../lib/constants'
+import { absoluteUrl } from '../lib/constants'
+import { breadcrumbLd, useSeo } from '../lib/seo'
 
 export function ProductDetailPage() {
   const { slug } = useParams<{ slug: string }>()
   const product = slug ? getProductBySlug(slug) : undefined
   const [activeImg, setActiveImg] = useState(0)
   const [wishlist, setWishlist] = useState(false)
+
+  const jsonLd = useMemo(() => {
+    if (!product) return undefined
+    return [
+      breadcrumbLd([
+        { name: 'Inicio', path: '/' },
+        { name: 'Tienda', path: '/productos' },
+        { name: CATEGORIES_LABEL[product.category], path: `/productos?cat=${product.category}` },
+        { name: product.name, path: `/producto/${product.slug}` },
+      ]),
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Product',
+        name: product.name,
+        description: product.description,
+        image: absoluteUrl(product.images[0]?.src ?? '/logo.png'),
+        brand: { '@type': 'Brand', name: SITE.name },
+        offers: {
+          '@type': 'Offer',
+          url: absoluteUrl(`/producto/${product.slug}`),
+          priceCurrency: 'COP',
+          price: product.price,
+          availability:
+            product.stock > 0
+              ? 'https://schema.org/InStock'
+              : 'https://schema.org/OutOfStock',
+        },
+      },
+    ]
+  }, [product])
+
+  useSeo({
+    title: product ? `${product.name} | ${SITE.name}` : `Producto | ${SITE.name}`,
+    description: product
+      ? `${product.tagline}. ${formatCOP(product.price)} · Envío en 2 días y pago contraentrega en toda Colombia.`
+      : undefined,
+    path: product ? `/producto/${product.slug}` : '/productos',
+    image: product?.images[0]?.src?.startsWith('http')
+      ? product.images[0].src
+      : absoluteUrl(product?.images[0]?.src ?? '/logo.png'),
+    jsonLd,
+  })
 
   if (!product) return <Navigate to="/productos" replace />
 
@@ -23,7 +67,7 @@ export function ProductDetailPage() {
 
   return (
     <div className="mx-auto max-w-7xl px-4 pb-24 pt-28 sm:px-6">
-      <nav className="mb-6 flex flex-wrap items-center gap-1.5 text-sm text-ink/50">
+      <nav className="mb-6 flex flex-wrap items-center gap-1.5 text-sm text-ink/65">
         <Link to="/" className="transition hover:text-rose-dark">
           Inicio
         </Link>
@@ -94,7 +138,7 @@ export function ProductDetailPage() {
           <div className="grid grid-cols-1 gap-2 sm:grid-cols-3 sm:gap-3">
             {[
               { icon: Truck, t: 'Envío en 2 días' },
-              { icon: RotateCcw, t: 'Cambios 7 días' },
+              { icon: RotateCcw, t: 'Cambios y garantías' },
               { icon: ShieldCheck, t: 'Contraentrega segura' },
             ].map((f) => (
               <div
@@ -130,18 +174,18 @@ export function ProductDetailPage() {
             <h1 className="mt-3 font-display text-2xl font-semibold leading-tight sm:text-3xl md:text-4xl">
               {product.name}
             </h1>
-            <p className="mt-1 text-ink/55 italic">{product.tagline}</p>
+            <p className="mt-1 text-ink/70 italic">{product.tagline}</p>
 
             <div className="mt-5 flex flex-wrap items-end gap-3">
               <span className="font-display text-3xl font-semibold text-gradient-rose">
                 {formatCOP(product.price)}
               </span>
               {product.compareAtPrice && (
-                <span className="text-lg text-ink/40 line-through">
+                <span className="text-lg text-ink/65 line-through">
                   {formatCOP(product.compareAtPrice)}
                 </span>
               )}
-              <span className="rounded-full bg-white/60 px-3 py-1 text-xs font-medium text-ink/55 ring-1 ring-ink/8">
+              <span className="rounded-full bg-white/60 px-3 py-1 text-xs font-medium text-ink/70 ring-1 ring-ink/8">
                 Stock: {product.stock}
               </span>
             </div>
@@ -161,11 +205,11 @@ export function ProductDetailPage() {
               rel="noreferrer"
               className="text-forest underline underline-offset-4 hover:text-rose-dark"
             >
-              Escríbenos al 314 457 2008 y coordinamos tu entrega a contraentrega →
+              Escríbenos al {SITE.phoneDisplay} y coordinamos tu entrega a contraentrega →
             </a>
           </div>
 
-          <div className="flex items-start gap-3 text-xs text-ink/50">
+          <div className="flex items-start gap-3 text-xs text-ink/65">
             <Package className="mt-0.5 size-4 shrink-0 text-rose" />
             <p>
               Envío en 2 días a tu puerta. Pagas en efectivo al recibir. Envíos a toda

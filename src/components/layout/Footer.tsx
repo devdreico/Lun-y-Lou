@@ -31,10 +31,10 @@ export function Footer() {
                 </p>
               </div>
             </div>
-            <p className="mt-5 max-w-md text-sm leading-relaxed text-cream/70">
-              Dispositivos de belleza para rostro, cabello y cuerpo.{' '}
-              <strong className="text-cream">{SITE.shippingPromise}</strong> y pagas en
-              efectivo al recibir: así de simple, en toda Colombia.
+            <p className="mt-5 max-w-md text-sm leading-relaxed text-cream/80">
+              Dispositivos de belleza para rostro, cabello y cuerpo — para él y para ella.{' '}
+              <strong className="text-cream">{SITE.shippingPromise}</strong> y pagas en efectivo
+              al recibir, en toda Colombia.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <a
@@ -97,7 +97,12 @@ export function Footer() {
 
           <div>
             <p className="font-display text-lg font-semibold">Ayuda</p>
-            <ul className="mt-4 space-y-2 text-sm text-cream/70">
+            <ul className="mt-4 space-y-2 text-sm text-cream/80">
+              <li>
+                <Link to="/preguntas-frecuentes" className="transition hover:text-rose-light">
+                  Preguntas frecuentes
+                </Link>
+              </li>
               <li>
                 <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 transition hover:text-rose-light">
                   <MessageCircle className="size-3.5" /> WhatsApp {SITE.phoneDisplay}
@@ -119,13 +124,12 @@ export function Footer() {
               <li className="inline-flex items-center gap-2 text-gold-light">
                 <Clock className="size-3.5" /> Envío en 2 días a tu puerta
               </li>
-              <li className="text-cream/55">Contraentrega: pago en efectivo al recibir</li>
-              <li className="text-cream/55">Cambios en 7 días</li>
+              <li className="text-cream/70">Contraentrega: pago en efectivo al recibir</li>
             </ul>
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 text-xs text-cream/50 sm:flex-row">
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 text-xs text-cream/70 sm:flex-row">
           <p>© {year} Lun & Lou. Todos los derechos reservados.</p>
           <p>Contraentrega · Envío en 2 días · {SITE.instagramHandle} · Sábana Occidental, Colombia</p>
         </div>

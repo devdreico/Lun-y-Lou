@@ -1,16 +1,28 @@
 import { AnimatePresence, motion } from 'framer-motion'
-import { Minus, Plus, ShoppingBag, Trash2 } from 'lucide-react'
-import { Link } from 'react-router-dom'
-import { Button, LinkButton } from '../components/ui/Button'
+import { ShoppingBag } from 'lucide-react'
+import { LinkButton } from '../components/ui/Button'
+import { CartItemRow } from '../components/cart/CartItemRow'
 import { formatCOP } from '../lib/format'
 import { cartKey, selectCount, selectTotal, useCart } from '../store/cart'
-import { WHATSAPP_URL } from '../lib/constants'
+import { SITE, WHATSAPP_URL } from '../lib/constants'
+import { useSeo } from '../lib/seo'
 
 export function CartPage() {
-  const { items, updateQuantity, removeItem, clearCart } = useCart()
+  const { items, clearCart } = useCart()
   const total = selectTotal(items)
   const count = selectCount(items)
   const multi = items.length > 1 || count > 1
+
+  const confirmClear = () => {
+    if (window.confirm('¿Vaciar todo el carrito?')) clearCart()
+  }
+
+  useSeo({
+    title: `Carrito | ${SITE.name}`,
+    description: 'Revisa tu pedido antes de confirmarlo.',
+    path: '/carrito',
+    noindex: true,
+  })
 
   return (
     <div className="mx-auto min-h-[70vh] max-w-5xl px-4 pb-24 pt-32 sm:px-6">
@@ -23,7 +35,7 @@ export function CartPage() {
           Carrito de compra
         </p>
         <h1 className="mt-2 font-display text-3xl font-semibold sm:text-4xl md:text-5xl">Carrito</h1>
-        <p className="mt-2 text-ink/55">
+        <p className="mt-2 text-ink/70">
           {count} {count === 1 ? 'producto' : 'productos'} · Paga en efectivo al recibir
           (contraentrega)
         </p>
@@ -40,7 +52,7 @@ export function CartPage() {
           </div>
           <div>
             <p className="font-display text-2xl font-semibold">Tu carrito está vacío</p>
-            <p className="mt-2 max-w-sm text-ink/55">
+            <p className="mt-2 max-w-sm text-ink/70">
               Carrito vacío. Agrega un producto desde el catálogo.
             </p>
           </div>
@@ -52,88 +64,31 @@ export function CartPage() {
         <div className="grid gap-8 lg:grid-cols-[1fr_340px]">
           <div className="space-y-4">
             <AnimatePresence initial={false}>
-              {items.map((item) => {
-                const key = cartKey(item)
-                return (
-                  <motion.div
-                    key={key}
-                    layout
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, x: -30, height: 0, margin: 0 }}
-                    className="glass grain flex gap-4 rounded-3xl p-4"
-                  >
-                    <Link
-                      to={`/producto/${item.slug}`}
-                      className="size-24 shrink-0 overflow-hidden rounded-2xl bg-cream-dark sm:size-28"
-                    >
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        className="h-full w-full object-cover transition-transform duration-500 hover:scale-110"
-                      />
-                    </Link>
-
-                    <div className="flex min-w-0 flex-1 flex-col">
-                      <div className="flex items-start justify-between gap-3">
-                        <div>
-                          <Link
-                            to={`/producto/${item.slug}`}
-                            className="font-display text-base font-semibold leading-snug hover:text-rose-dark sm:text-lg"
-                          >
-                            {item.name}
-                          </Link>
-                        </div>
-                        <button
-                          type="button"
-                          onClick={() => removeItem(key)}
-                          className="rounded-full p-2 text-ink/40 transition hover:bg-rose/10 hover:text-rose"
-                          aria-label="Eliminar"
-                        >
-                          <Trash2 className="size-4" />
-                        </button>
-                      </div>
-
-                      <div className="mt-auto flex flex-wrap items-center justify-between gap-3 pt-3">
-                        <div className="flex items-center rounded-full border border-ink/10 bg-white/60">
-                          <button
-                            type="button"
-                            onClick={() => updateQuantity(key, item.quantity - 1)}
-                            className="grid size-9 place-items-center rounded-full transition hover:bg-rose/10 active:scale-90"
-                            aria-label="Restar"
-                          >
-                            <Minus className="size-3.5" />
-                          </button>
-                          <span className="w-8 text-center text-sm font-semibold">
-                            {item.quantity}
-                          </span>
-                          <button
-                            type="button"
-                            onClick={() => updateQuantity(key, item.quantity + 1)}
-                            className="grid size-9 place-items-center rounded-full transition hover:bg-rose/10 active:scale-90"
-                            aria-label="Sumar"
-                          >
-                            <Plus className="size-3.5" />
-                          </button>
-                        </div>
-
-                        <span className="font-semibold">
-                          {formatCOP(item.price * item.quantity)}
-                        </span>
-                      </div>
-                    </div>
-                  </motion.div>
-                )
-              })}
+              {items.map((item) => (
+                <motion.div
+                  key={cartKey(item)}
+                  layout
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, x: -30, height: 0, margin: 0 }}
+                  className="grain"
+                >
+                  <CartItemRow item={item} />
+                </motion.div>
+              ))}
             </AnimatePresence>
 
             <div className="flex flex-wrap gap-3 pt-2">
               <LinkButton to="/productos" variant="ghost" size="sm">
                 Seguir comprando
               </LinkButton>
-              <Button variant="ghost" size="sm" onClick={clearCart} className="!text-rose-dark">
+              <button
+                type="button"
+                onClick={confirmClear}
+                className="text-sm font-semibold text-rose-dark underline-offset-4 hover:underline"
+              >
                 Vaciar carrito
-              </Button>
+              </button>
             </div>
           </div>
 
@@ -174,7 +129,7 @@ export function CartPage() {
                   Contraentrega · {formatCOP(total)}
                 </span>
               </LinkButton>
-              <p className="text-center text-[11px] leading-relaxed text-cream/50">
+              <p className="text-center text-[11px] leading-relaxed text-cream/70">
                 Pagas en efectivo al recibir. Envío en 2 días a tu puerta.
                 {multi ? ' Varios productos: un solo pedido contraentrega.' : ''}
               </p>
@@ -182,7 +137,7 @@ export function CartPage() {
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noreferrer"
-                className="text-center text-xs text-cream/60 underline-offset-4 hover:text-rose-light hover:underline"
+                className="text-center text-xs text-cream/75 underline-offset-4 hover:text-rose-light hover:underline"
               >
                 ¿Dudas? Escríbenos por WhatsApp
               </a>

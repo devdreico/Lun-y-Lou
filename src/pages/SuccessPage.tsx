@@ -13,6 +13,7 @@ import { LinkButton } from '../components/ui/Button'
 import { formatCOP } from '../lib/format'
 import { WHATSAPP_URL, SITE } from '../lib/constants'
 import { readOrderConfirm, type OrderConfirm } from '../lib/orderConfirm'
+import { useSeo } from '../lib/seo'
 
 function isOrderConfirm(value: unknown): value is OrderConfirm {
   return Boolean(
@@ -30,6 +31,13 @@ export function SuccessPage() {
   const order: OrderConfirm | null = isOrderConfirm(fromNav)
     ? fromNav
     : readOrderConfirm()
+
+  useSeo({
+    title: `Pedido confirmado | ${SITE.name}`,
+    description: 'Tu pedido quedó registrado. Te escribimos por WhatsApp para coordinar.',
+    path: '/pedido-exitoso',
+    noindex: true,
+  })
 
   if (!order) {
     return (
@@ -121,7 +129,7 @@ export function SuccessPage() {
         className="glass grain mt-8 w-full rounded-3xl p-5 text-left sm:p-6"
       >
         <div className="flex items-center justify-between gap-3 border-b border-ink/10 pb-3">
-          <span className="text-xs font-semibold uppercase tracking-wider text-ink/50">
+          <span className="text-xs font-semibold uppercase tracking-wider text-ink/65">
             Resumen
           </span>
           <span className="rounded-full bg-forest/12 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-forest-dark">
@@ -139,7 +147,7 @@ export function SuccessPage() {
               </div>
               <div className="min-w-0 flex-1">
                 <p className="truncate text-sm font-semibold">{item.name}</p>
-                <p className="text-xs text-ink/50">{item.quantity}×</p>
+                <p className="text-xs text-ink/65">{item.quantity}×</p>
               </div>
               <p className="text-sm font-semibold">
                 {formatCOP(item.price * item.quantity)}
@@ -149,7 +157,7 @@ export function SuccessPage() {
         </ul>
 
         <div className="mt-4 flex items-end justify-between border-t border-ink/10 pt-3">
-          <span className="text-sm text-ink/55">Total</span>
+          <span className="text-sm text-ink/70">Total</span>
           <span className="font-display text-2xl font-semibold text-gradient-rose">
             {formatCOP(order.total)}
           </span>
@@ -204,7 +212,7 @@ export function SuccessPage() {
 
       <Link
         to="/"
-        className="mt-4 text-sm text-ink/45 underline-offset-4 hover:text-rose-dark hover:underline"
+        className="mt-4 text-sm text-ink/65 underline-offset-4 hover:text-rose-dark hover:underline"
       >
         Volver al inicio
       </Link>

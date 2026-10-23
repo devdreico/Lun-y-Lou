@@ -31,14 +31,19 @@ export function ProductActions({ product }: Props) {
   return (
     <div className="space-y-5 sm:space-y-6">
       <div>
-        <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-ink/45">
+        <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-ink/65">
           Cantidad
         </p>
-        <div className="inline-flex items-center rounded-full border border-ink/10 bg-white/60 p-1 backdrop-blur">
+        <div
+          className="inline-flex items-center rounded-full border border-ink/10 bg-white/60 p-1 backdrop-blur"
+          role="group"
+          aria-label="Cantidad"
+        >
           <button
             type="button"
             onClick={() => setQty((q) => Math.max(1, q - 1))}
             className="grid size-11 place-items-center rounded-full text-lg transition hover:bg-rose/10 active:scale-90"
+            aria-label="Quitar uno"
           >
             −
           </button>
@@ -47,17 +52,25 @@ export function ProductActions({ product }: Props) {
             initial={{ y: -8, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             className="w-10 text-center font-display text-lg font-semibold"
+            aria-live="polite"
           >
             {qty}
           </motion.span>
           <button
             type="button"
-            onClick={() => setQty((q) => Math.min(20, q + 1))}
-            className="grid size-11 place-items-center rounded-full text-lg transition hover:bg-rose/10 active:scale-90"
+            onClick={() => setQty((q) => Math.min(product.stock, q + 1))}
+            disabled={qty >= product.stock}
+            className="grid size-11 place-items-center rounded-full text-lg transition hover:bg-rose/10 active:scale-90 disabled:cursor-not-allowed disabled:opacity-40"
+            aria-label="Agregar uno"
           >
             +
           </button>
         </div>
+        {product.stock <= 5 && (
+          <p className="mt-2 text-xs font-semibold text-rose-dark">
+            Quedan {product.stock} unidades
+          </p>
+        )}
       </div>
 
       <div className="grid gap-3">
@@ -89,7 +102,7 @@ export function ProductActions({ product }: Props) {
           </p>
         </div>
 
-        <p className="flex items-center justify-center gap-2 text-center text-xs text-ink/50">
+        <p className="flex items-center justify-center gap-2 text-center text-xs text-ink/65">
           <Truck className="size-3.5 shrink-0 text-forest" /> Envíos a toda Colombia ·
           Sábana Occidental
         </p>

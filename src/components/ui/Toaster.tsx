@@ -18,7 +18,11 @@ export function ToastHost() {
   if (typeof document === 'undefined') return null
 
   return createPortal(
-    <div className="pointer-events-none fixed bottom-6 right-4 z-[100] flex w-[min(360px,calc(100vw-2rem))] flex-col gap-3">
+    <div
+      role="status"
+      aria-live="polite"
+      className="pointer-events-none fixed bottom-6 right-4 z-[100] flex w-[min(360px,calc(100vw-2rem))] flex-col gap-3"
+    >
       <AnimatePresence>
         {items.map((t) => (
           <motion.div

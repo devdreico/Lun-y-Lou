@@ -190,6 +190,6 @@ export const featuredProducts = products.filter((p) => p.featured)
 
 export const categoryList = [
   { slug: 'facial', label: 'Facial', emoji: '✨' },
-  { slug: 'cabello', label: 'Cabello', emoji: '💇‍♀️' },
-  { slug: 'corporal', label: 'Corporal', emoji: '💆‍♀️' },
+  { slug: 'cabello', label: 'Cabello', emoji: '💇' },
+  { slug: 'corporal', label: 'Corporal', emoji: '💆' },
 ] as const

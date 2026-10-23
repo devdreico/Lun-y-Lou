@@ -20,7 +20,7 @@ export function FeaturedSection() {
                 Productos <span className="text-gradient-rose italic">destacados</span>
               </>
             }
-            description={`${SITE.shippingPromise}. Paga en efectivo al recibir.`}
+            description={`${SITE.shippingPromise}, paga en efectivo al recibir y elige a tu ritmo: aquí no hay membresías ni suscripciones.`}
           />
           <Link
             to="/productos"
@@ -45,21 +45,21 @@ const perks = [
   {
     icon: Clock,
     title: 'Envío en 2 días',
-    text: 'Despachamos a toda Colombia desde la Sábana Occidental. Tu paquete llega en 2 días a tu puerta.',
+    text: 'Despachamos desde la Sábana Occidental a cualquier ciudad de Colombia. En 2 días hábiles el paquete está en tu puerta y coordinamos la entrega por WhatsApp.',
     accent: 'text-rose',
     ring: 'from-rose/25',
   },
   {
     icon: Sparkles,
     title: 'Contraentrega',
-    text: 'Sin tarjetas ni anticipos: ves el paquete y pagas en efectivo al recibir. Cero riesgo.',
+    text: 'Sin tarjetas ni anticipos: ves el paquete en la puerta y pagas en efectivo al recibir. Si no lo quieres, no lo aceptas. Cero riesgo.',
     accent: 'text-gold',
     ring: 'from-gold/30',
   },
   {
     icon: MessageCircle,
     title: 'Atención personal',
-    text: `Te atendemos por WhatsApp ${SITE.phoneDisplay} y ${SITE.instagramHandle}: una persona real, no un bot.`,
+    text: `Escríbenos al ${SITE.phoneDisplay} y te contesta una persona real: te ayudamos a elegir según tu piel, tu cabello y tu presupuesto.`,
     accent: 'text-forest',
     ring: 'from-forest/25',
   },
@@ -105,10 +105,11 @@ export function PerksSection() {
           </span>
           <div>
             <p className="font-display text-lg font-semibold text-cream sm:text-xl">
-              Valor Lun &amp; Lou
+              El valor Lun &amp; Lou
             </p>
-            <p className="mt-0.5 text-sm text-cream/65">
-              Belleza de calidad, precio honesto y entrega sin complicaciones.
+            <p className="mt-0.5 text-sm text-cream/75">
+              Belleza de calidad, precio honesto y entrega sin complicaciones — para pieles y
+              cabellos de todo tipo, para él y para ella.
             </p>
           </div>
         </div>

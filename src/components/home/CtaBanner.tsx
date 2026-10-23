@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { ArrowRight, Clock, Heart, MessageCircle } from 'lucide-react'
+import { ArrowRight, Heart, MessageCircle } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { LinkButton } from '../ui/Button'
 import { SITE, WHATSAPP_URL } from '../../lib/constants'
@@ -25,9 +25,9 @@ export function CtaBanner() {
             Paga en efectivo{' '}
             <span className="italic text-gradient-rose">al recibir</span>
           </h2>
-          <p className="mt-4 text-sm leading-relaxed text-cream/70 md:text-base">
-            Sin tarjetas, sin anticipos, sin sorpresas. Eliges tus productos, llegan en 2
-            días a tu puerta y pagas solo cuando el paquete esté en tus manos.
+          <p className="mt-4 text-sm leading-relaxed text-cream/80 md:text-base">
+            Sin tarjetas, sin anticipos, sin sorpresas: eliges tus productos, llegan en 2 días a
+            tu puerta y pagas solo cuando los tienes en tus manos.
           </p>
           <div className="mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
             <LinkButton to="/productos" size="lg" className="group">
@@ -49,8 +49,9 @@ export function CtaBanner() {
               Ver carrito
             </Link>
           </div>
-          <p className="mt-6 inline-flex items-center gap-2 text-xs text-cream/55">
-            <Clock className="size-3.5 text-gold" /> Pedidos confirmados hoy salen hoy mismo
+          <p className="mt-6 inline-flex items-center gap-2 text-xs text-cream/70">
+            <MessageCircle className="size-3.5 text-gold" /> ¿Dudas antes de pedir? Te responde
+            una persona real por WhatsApp, no un bot
           </p>
         </div>
       </motion.div>

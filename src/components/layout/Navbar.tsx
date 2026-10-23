@@ -33,6 +33,15 @@ export function Navbar() {
     }
   }, [mobileOpen])
 
+  useEffect(() => {
+    if (!mobileOpen) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMobileOpen(false)
+    }
+    document.addEventListener('keydown', onKey)
+    return () => document.removeEventListener('keydown', onKey)
+  }, [mobileOpen])
+
   return (
     <>
       <header
@@ -45,7 +54,7 @@ export function Navbar() {
             className={`flex w-full items-center justify-between gap-3 rounded-full px-3 py-2 transition-all duration-500 sm:gap-4 sm:px-4 sm:py-2.5 ${
               scrolled
                 ? 'glass shadow-glass-lg'
-                : 'border border-transparent bg-transparent'
+                : 'glass shadow-glass'
             }`}
           >
             <Link to="/" className="group flex items-center gap-2.5 sm:gap-3" aria-label="Lun & Lou inicio">
@@ -60,7 +69,7 @@ export function Navbar() {
                 <span className="font-display text-xl font-semibold tracking-tight text-ink sm:text-2xl">
                   Lun <span className="text-gradient-rose italic">&</span> Lou
                 </span>
-                <span className="mt-0.5 text-[9px] uppercase tracking-[0.28em] text-ink/50 sm:text-[10px]">
+                <span className="mt-0.5 text-[9px] uppercase tracking-[0.28em] text-ink/65 sm:text-[10px]">
                   Glam en casa · Colombia
                 </span>
               </span>
@@ -137,7 +146,9 @@ export function Navbar() {
                 type="button"
                 className="grid size-11 place-items-center rounded-full border border-ink/10 bg-white/50 backdrop-blur-md transition hover:bg-white/80 md:hidden"
                 onClick={() => setMobileOpen((v) => !v)}
-                aria-label="Menú"
+                aria-label="Menú de navegación"
+                aria-expanded={mobileOpen}
+                aria-controls="mobile-nav"
               >
                 {mobileOpen ? <X className="size-5" /> : <Menu className="size-5" />}
               </button>
@@ -156,12 +167,14 @@ export function Navbar() {
             onClick={() => setMobileOpen(false)}
           >
             <motion.nav
+              id="mobile-nav"
               initial={{ y: -24, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -16, opacity: 0 }}
               transition={{ type: 'spring', stiffness: 320, damping: 30 }}
               className="glass absolute inset-x-4 top-28 rounded-3xl p-4 shadow-glass-lg"
               onClick={(e) => e.stopPropagation()}
+              aria-label="Menú"
             >
               <div className="flex flex-col gap-1">
                 {links.map((l) => (

@@ -1,8 +1,15 @@
 import { motion } from 'framer-motion'
 import { LinkButton } from '../components/ui/Button'
 import { DecorScene } from '../components/three/DecorScene'
+import { SITE } from '../lib/constants'
+import { useSeo } from '../lib/seo'
 
 export function NotFoundPage() {
+  useSeo({
+    title: `Página no encontrada | ${SITE.name}`,
+    path: '/404',
+    noindex: true,
+  })
   return (
     <div className="relative mx-auto flex min-h-[85vh] max-w-3xl flex-col items-center justify-center px-4 pt-24 text-center">
       <div className="absolute inset-x-4 top-28 bottom-24 overflow-hidden rounded-[2.5rem] opacity-70">
